@@ -1,2 +1,2 @@
-# kodokura
+# Kodokura
 Senior project CC13
