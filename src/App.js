@@ -77,6 +77,7 @@ function App() {
         <PrivateRoute
           path="/chatroom"
           authenticated={authentication}
+          // needs to be "Home" for the real implementation
           component={ChatRoom}
         />
         <PrivateRoute
