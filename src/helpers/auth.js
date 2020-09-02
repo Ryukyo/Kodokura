@@ -1,11 +1,11 @@
 import { auth } from "../services/firebase";
 
 export function signUp(email, password) {
-  return auth().createUserWithEmailAndPassword(email, password);
+  return auth().createUserWithEmailAndPassword(email.trim(), password);
 }
 
 export function signIn(email, password) {
-  return auth().signInWithEmailAndPassword(email, password);
+  return auth().signInWithEmailAndPassword(email.trim(), password);
 }
 
 export function signInWithGoogle() {

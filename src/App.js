@@ -73,10 +73,11 @@ function App() {
   ) : (
     <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Main} />
         <PrivateRoute
           path="/chatroom"
           authenticated={authentication}
+          // needs to be "Home" for the real implementation
           component={ChatRoom}
         />
         <PublicRoute
