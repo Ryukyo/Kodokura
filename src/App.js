@@ -9,8 +9,8 @@ import LogIn from './components/LogIn/LogIn';
 import FriendList from './components/FriendList/FriendList';
 import BlockList from './components/BlockList/BlockList';
 import AvatarSelector from './components/AvatarSelector/AvatarSelector'
-import Avatar from './components/AvatarSelector/AvatarSelector';
 import Profile from './components/Profile/Profile';
+import Questions from './components/Questions/Questions'
 
 function App() {
   return (
@@ -34,6 +34,11 @@ function App() {
       <AvatarSelector />
       <br/>
       <Profile/>
+      <br/>
+      <Questions />
+      <br/>
+  
+
     </div>
 
   );

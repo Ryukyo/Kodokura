@@ -9,6 +9,7 @@ export default function Main() {
                 <h1>Main | KodoKura</h1>
                 <img src={logo} alt=""/>
             </header>
+            
             <button>Create Account</button>
             <button>Sign In</button>
         </>
