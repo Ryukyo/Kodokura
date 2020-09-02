@@ -29,9 +29,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Deployment
 
-The deployment is done via Firebase.
+The deployment is done via Firebase. 
 
-Make sure you are logged in by running `firebase login`.
+After installing the firebase tools through `yarn global add firebase-tools`, make sure you are logged in by running `firebase login`.
 
 With the firebase.json alrady in your project, make sure to build the most recent version of the application by running `yarn build`.
 
