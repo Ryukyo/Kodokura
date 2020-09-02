@@ -1,11 +1,5 @@
-import React from 'react';
+import React from "react";
 
-
-export default function ChatrRoom() {
-
-    return (
-        <>
-           
-        </>
-    )
+export default function ChatRoom() {
+  return <div></div>;
 }
