@@ -43,7 +43,7 @@ export default function LogIn() {
         <h1>
           Login to
           <Link className="title ml-2" to="/">
-            Kudokura
+            Kodokura
           </Link>
         </h1>
         <p className="lead">Fill in the form below to login to your account.</p>
@@ -54,7 +54,7 @@ export default function LogIn() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-            /* value={this.state.email} */
+          /* value={this.state.email} */
           />
         </div>
         <div className="form-group">
