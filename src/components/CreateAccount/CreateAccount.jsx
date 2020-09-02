@@ -63,9 +63,7 @@ export default function CreateAccount() {
             type="password"
           ></input>
         </div>
-        {/*      <div className="form-group">
-              <input className="form-control" placeholder="Password confirmation" name="password-confirmation" onChange={this.handleChange} value={password} type="password"></input>
-            </div> */}
+        
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
           <button className="btn btn-primary px-5" type="submit">
@@ -81,6 +79,9 @@ export default function CreateAccount() {
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </form>
+      <Link to="/">
+        <button>Go back</button>
+      </Link>
     </div>
   );
 }

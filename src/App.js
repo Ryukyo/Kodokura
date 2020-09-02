@@ -80,6 +80,11 @@ function App() {
           // needs to be "Home" for the real implementation
           component={ChatRoom}
         />
+        <PrivateRoute
+          path="/home"
+          authenticated={authentication}
+          component={Home}
+        />
         <PublicRoute
           path="/signup"
           authenticated={authentication}
@@ -90,6 +95,7 @@ function App() {
           authenticated={authentication}
           component={LogIn}
         />
+
       </Switch>
     </Router>
   );
