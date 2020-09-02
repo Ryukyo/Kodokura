@@ -1,5 +1,7 @@
 import React from 'react';
-
+import {
+    Link,
+  } from 'react-router-dom'
 
 export default function LogIn() {
 
@@ -8,7 +10,12 @@ export default function LogIn() {
             <header>Login</header>
             <input type="text" placeholder="Email address / username"/>
             <input type="text" placeholder="Password"/>
-            <button>Login</button>
+            <Link to="/home">
+                <button>Login</button>
+            </Link>
+            <Link to="/">
+                <button>Go back</button>
+            </Link>
         </>
     )
 }
