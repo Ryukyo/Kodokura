@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp, signInWithGoogle } from "../../helpers/auth";
+import { signIn, signInWithGoogle } from "../../helpers/auth";
 
 export default function LogIn() {
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export default function LogIn() {
     event.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signIn(email, password);
     } catch (err) {
       setError(err.message);
     }
@@ -43,7 +43,7 @@ export default function LogIn() {
         <h1>
           Login to
           <Link className="title ml-2" to="/">
-            Kudokura
+            Kodokura
           </Link>
         </h1>
         <p className="lead">Fill in the form below to login to your account.</p>
