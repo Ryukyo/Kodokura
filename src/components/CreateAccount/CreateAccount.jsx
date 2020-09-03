@@ -6,6 +6,11 @@ export default function CreateAccount() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  function handleNameChange(event) {
+    setName(event.target.value);
+  }
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -19,7 +24,7 @@ export default function CreateAccount() {
     event.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signUp(email, password, name);
     } catch (err) {
       setError(err.message);
     }
@@ -43,6 +48,16 @@ export default function CreateAccount() {
           </Link>
         </h1>
         <p className="lead">Fill in the form below to create an account.</p>
+        <div className="form-group">
+          <input
+            className="form-control"
+            placeholder="Name"
+            name="name"
+            type="text"
+            onChange={handleNameChange}
+            // value={email}
+          ></input>
+        </div>
         <div className="form-group">
           <input
             className="form-control"
