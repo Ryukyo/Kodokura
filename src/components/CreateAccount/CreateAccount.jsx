@@ -50,7 +50,7 @@ export default function CreateAccount() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-          // value={email}
+            // value={email}
           ></input>
         </div>
         <div className="form-group">
@@ -66,11 +66,11 @@ export default function CreateAccount() {
 
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
-          <Link to="/questions">
-            <button className="btn btn-primary px-5" type="submit">
-              Sign up
-            </button>
-          </Link>
+          {/* <Link to="/questions"> */}
+          <button className="btn btn-primary px-5" type="submit">
+            Sign up
+          </button>
+          {/* </Link> */}
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
