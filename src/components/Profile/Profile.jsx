@@ -3,7 +3,7 @@ import avatar from '../Home/nw.png'
 import { Link } from "react-router-dom";
 
 
-export default function Profile() {
+export default function Profile({}) {
 
     return (
         <>
@@ -12,7 +12,7 @@ export default function Profile() {
                 <button>Back</button>
             </Link>
             <div>
-                <img src={avatar} alt="avata" style={{ width: "50px" }}></img>
+                <img src={avatar} alt="avatar" style={{ width: "50px" }}></img>
             </div>
             <div>
                 <Link to='/avatar'>

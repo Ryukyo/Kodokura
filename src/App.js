@@ -17,6 +17,7 @@ import Profile from "./components/Profile/Profile";
 import { auth } from "./services/firebase";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Questions from "./components/Questions/Questions";
+import QuestionCard from './components/Questions/QuestionCard';
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -89,6 +90,11 @@ function App() {
             path="/questions"
             authenticated={authentication}
             component={Questions}
+          />
+          <PrivateRoute
+            path="/questioncard"
+            authenticated={authentication}
+            component={QuestionCard}
           />
           <PrivateRoute
             path="/profile"
