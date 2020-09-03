@@ -13,10 +13,11 @@ import LogIn from "./components/LogIn/LogIn";
 import FriendList from "./components/FriendList/FriendList";
 import BlockList from "./components/BlockList/BlockList";
 import AvatarSelector from "./components/AvatarSelector/AvatarSelector";
-import Avatar from "./components/AvatarSelector/AvatarSelector";
 import Profile from "./components/Profile/Profile";
 import { auth } from "./services/firebase";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
+import Questions from "./components/Questions/Questions";
+import QuestionCard from './components/Questions/QuestionCard';
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -30,10 +31,10 @@ function App() {
           authenticated === true ? (
             <Component {...props} />
           ) : (
-            <Redirect
-              to={{ pathname: "/login", state: { from: props.location } }}
-            />
-          )
+              <Redirect
+                to={{ pathname: "/login", state: { from: props.location } }}
+              />
+            )
         }
       />
     );
@@ -47,8 +48,8 @@ function App() {
           authenticated === false ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/home" />
-          )
+              <Redirect to="/home" />
+            )
         }
       />
     );
@@ -71,34 +72,54 @@ function App() {
       <span className="sr-only">Loading...</span>
     </div>
   ) : (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Main} />
-        <PrivateRoute
-          path="/home"
-          authenticated={authentication}
-          // needs to be "Home" for the real implementation
-          component={Home}
-        />
-        {/* <PrivateRoute
-          path="/home"
-          authenticated={authentication}
-          component={Home}
-        /> */}
-        <PublicRoute
-          path="/signup"
-          authenticated={authentication}
-          component={CreateAccount}
-        />
-        <PublicRoute
-          path="/login"
-          authenticated={authentication}
-          component={LogIn}
-        />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <PrivateRoute
+            path="/chatroom"
+            authenticated={authentication}
+            // needs to be "Home" for the real implementation
+            component={ChatRoom}
+          />
+          <PrivateRoute
+            path="/home"
+            authenticated={authentication}
+            component={Home}
+          />
+          <PrivateRoute
+            path="/questions"
+            authenticated={authentication}
+            component={Questions}
+          />
+          <PrivateRoute
+            path="/questioncard"
+            authenticated={authentication}
+            component={QuestionCard}
+          />
+          <PrivateRoute
+            path="/profile"
+            authenticated={authentication}
+            component={Profile}
+          />
+          <PrivateRoute
+            path="/avatar"
+            authenticated={authentication}
+            component={AvatarSelector}
+          />
+          <PublicRoute
+            path="/signup"
+            authenticated={authentication}
+            component={CreateAccount}
+          />
+          <PublicRoute
+            path="/login"
+            authenticated={authentication}
+            component={LogIn}
+          />
 
-      </Switch>
-    </Router>
-  );
+        </Switch>
+      </Router>
+    );
 }
 
 export default App;
