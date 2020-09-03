@@ -54,7 +54,7 @@ export default function LogIn() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-            /* value={this.state.email} */
+          /* value={this.state.email} */
           />
         </div>
         <div className="form-group">
