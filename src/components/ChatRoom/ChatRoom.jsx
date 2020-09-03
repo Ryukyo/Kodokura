@@ -1,117 +1,158 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../helpers/Header";
-import { auth, db, firestore } from "../../services/firebase";
+import { useHistory, useParams } from "react-router-dom";
+import { Container, Row, Col, Card, CardBody, CardSubtitle, Button, Form, InputGroup, Input, InputGroupAddon } from "reactstrap";
+import Moment from "moment";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { db, auth } from "../../services/firebase";
+//import css file;
 
 export default function ChatRoom(props) {
-  const [user, setUser] = useState(auth().currentUser);
-  const [chats, setChats] = useState([]);
-  const [content, setContent] = useState("");
-  const [readError, setReadError] = useState(null);
-  const [writeError, setWriteError] = useState(null);
-  const [loadingChats, setLoadingChats] = useState(true);
+    const [chats, setChats] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [nickname, setNickname] = useState('');
+    const [roomname, setRoomname] = useState('');
+    const [newchat, setNewchat] = useState({ roomname: '', nickname: '', message: '', date: '', type: '' });
+    const history = useHistory();
+    const { room } = useParams();
 
-  const myRef = React.createRef();
+    useEffect(() => {
+        const fetchData = async () => {
+            setNickname(auth().currentUser.uid);
+            await db.ref("chats").on("value", resp => {
+              setChats([]);
+              setChats(snapshotToArray(resp));
+            }, (error) =>  {console.log("error in fetch chats", error)});
+        };
+      
+        fetchData();
+    }, [room, roomname]);
 
-  useEffect(() => {
-    setReadError(null);
-    setLoadingChats(true);
-    const chatArea = myRef.current;
-    try {
-      db.ref("chats").on("value", (snapshot) => {
-        let chats = [];
-        snapshot.forEach((snap) => {
-          chats.push(snap.val());
+    useEffect(() => {
+        const fetchData = async () => {
+            setNickname(auth().currentUser.uid);
+            setRoomname(room);
+            await db.ref("roomusers").on('value', (resp2) => {
+              setUsers([]);
+              const roomusers = snapshotToArray(resp2);
+              setUsers(roomusers.filter(x => x.status === 'online'));
+            }, (error) => console.log("error in fetch roomusers", error));
+        };
+      
+        fetchData();
+    }, [room, roomname]);
+
+    const snapshotToArray = (snapshot) => {
+        const returnArr = [];
+
+        snapshot.forEach((childSnapshot) => {
+            const item = childSnapshot.val();
+            item.key = childSnapshot.key;
+            returnArr.push(item);
         });
-        chats.sort(function (a, b) {
-          return a.timestamp - b.timestamp;
+
+        return returnArr;
+    }
+
+    const submitMessage = (e) => {
+        e.preventDefault();
+        const chat = newchat;
+        // chat.roomname = roomname;
+        chat.nickname = nickname;
+        chat.date = Moment(new Date()).format(' DD/MM/YYYY HH:mm:ss');
+        chat.type = 'message';
+        const newMessage = db.ref("chats").push();
+        newMessage.set(chat);
+        setNewchat({ roomname: '', nickname: '', message: '', date: '', type: '' });
+    };
+
+    const onChange = (e) => {
+        e.persist();
+        setNewchat({...newchat, [e.target.name]: e.target.value});
+    }
+
+    const exitChat = (e) => {
+        const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
+        // chat.roomname = roomname;
+        chat.nickname = nickname;
+        chat.date = Moment(new Date()).format('DD/MM/YYYY HH:mm:ss ');
+        chat.message = `${nickname} leave the room`;
+        chat.type = 'exit';
+        const newMessage = db.ref("chats").push();
+        newMessage.set(chat);
+    
+        db.ref("roomusers").once('value', (resp) => {
+          let roomuser = [];
+          roomuser = snapshotToArray(resp);
+          const user = roomuser.find(x => x.nickname === nickname);
+          if (user !== undefined) {
+            const userRef = db.ref("roomusers" + user.key);
+            userRef.update({status: 'offline'});
+          }
         });
-        setChats(chats);
-        chatArea.scrollBy(0, chatArea.scrollHeight);
-        setLoadingChats(false);
-      });
-    } catch (error) {
-      setReadError(error.message);
-      setLoadingChats(false);
+    
+        history.goBack();
     }
-  }, chats);
 
-  function handleChange(event) {
-    setContent(event.target.value);
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setWriteError(null);
-    const chatArea = myRef.current;
-    try {
-      await db.ref("chats").push({
-        content: content,
-        timestamp: Date.now(),
-        uid: user.uid,
-      });
-      setContent("");
-      chatArea.scrollBy(0, chatArea.scrollHeight);
-    } catch (error) {
-      setWriteError(error.message);
-    }
-  }
-
-  function formatTime(timestamp) {
-    const d = new Date(timestamp);
-    const time = `${d.getDate()}/${
-      d.getMonth() + 1
-    }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
-    return time;
-  }
-
-  return (
-    <div>
-      <Header />
-
-      <div className="chat-area" ref={myRef}>
-        {/* loading indicator */}
-        {loadingChats ? (
-          <div className="spinner-border text-success" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        ) : (
-          ""
-        )}
-        {/* chat area */}
-        {chats.map((chat) => {
-          return (
-            <p
-              key={chat.timestamp}
-              className={
-                "chat-bubble " + (user.uid === chat.uid ? "current-user" : "")
-              }
-            >
-              {chat.content}
-              <br />
-              <span className="chat-time float-right">
-                {formatTime(chat.timestamp)}
-              </span>
-              <br />
-              <span className="chat-user float-right">{user.email}</span>
-            </p>
-          );
-        })}
-      </div>
-      <form onSubmit={handleSubmit} className="mx-3">
-        <textarea
-          className="form-control"
-          name="content"
-          onChange={handleChange}
-          /* value={this.state.content} */
-        ></textarea>
-        {readError ? <p className="text-danger">{readError}</p> : null}
-        <button type="submit" className="btn btn-submit px-5 mt-4">
-          Send
-        </button>
-      </form>
-      <div className="py-5 mx-3">
-        Login in as: <strong className="text-info">{user.email}</strong>
-      </div>
-    </div>
-  );
+    return (
+        <div className="Container">
+            <Container>
+                <Row>
+                    <Col xs="4">
+                        <div>
+                            <Card className="UsersCard">
+                                <CardBody>
+                                    <CardSubtitle>
+                                        <Button variant="primary" type="button" onClick={() => { exitChat() }}>
+                                            Exit Chat
+                                        </Button>
+                                    </CardSubtitle>
+                                </CardBody>
+                            </Card>
+                            {users.map((item, idx) => (
+                                <Card key={idx} className="UsersCard">
+                                    <CardBody>
+                                        <CardSubtitle>{item.nickname}</CardSubtitle>
+                                    </CardBody>
+                                </Card>
+                            ))}
+                        </div>
+                    </Col>
+                    <Col xs="8">
+                        <ScrollToBottom className="ChatContent">
+                            {chats.map((item, idx) => (
+                                <div key={idx} className="MessageBox">
+                                    {item.type ==='join'||item.type === 'exit'?
+                                        <div className="ChatStatus">
+                                            <span className="ChatDate">{item.date}</span>
+                                            <span className="ChatContentCenter">{item.message}</span>
+                                        </div>:
+                                        <div className="ChatMessage">
+                                            <div className={`${item.nickname === nickname? "RightBubble":"LeftBubble"}`}>
+                                            {item.nickname === nickname ? 
+                                                <span className="MsgName"> Me</span>:<span className="MsgName"> {item.nickname} <button> Block ! </button></span>
+                                            }
+                                            <span className="MsgDate"> at {item.date}</span>
+                                            <p>{item.message}</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            ))}
+                        </ScrollToBottom>
+                        <footer className="StickyFooter">
+                            <Form className="MessageForm" onSubmit={submitMessage}>
+                                <InputGroup>
+                                <Input type="text" name="message" id="message" placeholder="Enter message here" value={newchat.message} onChange={onChange} />
+                                    <InputGroupAddon addonType="append">
+                                        <Button variant="primary" type="submit">Send</Button>
+                                    </InputGroupAddon>
+                                </InputGroup>
+                            </Form>
+                        </footer>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    )
 }
+                           
