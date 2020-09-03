@@ -47,7 +47,7 @@ function App() {
           authenticated === false ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/chatroom" />
+            <Redirect to="/home" />
           )
         }
       />
@@ -75,16 +75,16 @@ function App() {
       <Switch>
         <Route exact path="/" component={Main} />
         <PrivateRoute
-          path="/chatroom"
+          path="/home"
           authenticated={authentication}
           // needs to be "Home" for the real implementation
-          component={ChatRoom}
+          component={Home}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path="/home"
           authenticated={authentication}
           component={Home}
-        />
+        /> */}
         <PublicRoute
           path="/signup"
           authenticated={authentication}
