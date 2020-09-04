@@ -70,12 +70,16 @@ export default function ChatRoom(props) {
         setNewchat({...newchat, [e.target.name]: e.target.value});
     }
 
+    // const displayPopupAB = (e) => {
+
+    // }
+
     const exitChat = (e) => {
         const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
         // chat.roomname = roomname;
         chat.nickname = nickname;
-        chat.date = Moment(new Date()).format('DD/MM/YYYY HH:mm:ss ');
-        chat.message = `${nickname} leave the room`;
+        chat.date = Moment(new Date()).format('DD/MM/YYYY HH:mm:ss');
+        chat.message = ` <u>${nickname}</u> leave the room`;
         chat.type = 'exit';
         const newMessage = db.ref("chats").push();
         newMessage.set(chat);
@@ -129,10 +133,10 @@ export default function ChatRoom(props) {
                                         <div className="ChatMessage">
                                             <div className={`${item.nickname === nickname? "RightBubble":"LeftBubble"}`}>
                                             {item.nickname === nickname ? 
-                                                <span className="MsgName"> Me</span>:<span className="MsgName"> {item.nickname} <button> Block ! </button></span>
+                                                <span className="MsgName"> Me</span>:<span className="MsgName" /*onClick={displayPopupAB}*/> <u>{item.nickname}</u> </span>
                                             }
-                                            <span className="MsgDate"> at {item.date}</span>
-                                            <p>{item.message}</p>
+                                            <span className="MsgDate"> at {item.date} </span>
+                                            <p> {item.message} </p>
                                             </div>
                                         </div>
                                     }
