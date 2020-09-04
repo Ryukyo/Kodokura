@@ -20,9 +20,11 @@ export default function Profile() {
       <Link to="/questions">
         <button>Tell us about you again</button>
       </Link>
-      <div>
-        <button>Change language</button>
-      </div>
+      <Link to="/language">
+        <div>
+          <button>Change language</button>
+        </div>
+      </Link>
       <div>
         <button>Delete account</button>
       </div>
