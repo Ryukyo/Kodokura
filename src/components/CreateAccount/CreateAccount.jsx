@@ -6,6 +6,11 @@ export default function CreateAccount() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  function handleNameChange(event) {
+    setName(event.target.value);
+  }
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -19,7 +24,7 @@ export default function CreateAccount() {
     event.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signUp(email, password, name);
     } catch (err) {
       setError(err.message);
     }
@@ -46,11 +51,21 @@ export default function CreateAccount() {
         <div className="form-group">
           <input
             className="form-control"
+            placeholder="Name"
+            name="name"
+            type="text"
+            onChange={handleNameChange}
+            // value={email}
+          ></input>
+        </div>
+        <div className="form-group">
+          <input
+            className="form-control"
             placeholder="Email"
             name="email"
             type="email"
             onChange={handleEmailChange}
-          // value={email}
+            // value={email}
           ></input>
         </div>
         <div className="form-group">
@@ -66,11 +81,11 @@ export default function CreateAccount() {
 
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
-          <Link to="/questions">
-            <button className="btn btn-primary px-5" type="submit">
-              Sign up
-            </button>
-          </Link>
+          {/* <Link to="/questions"> */}
+          <button className="btn btn-primary px-5" type="submit">
+            Sign up
+          </button>
+          {/* </Link> */}
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
