@@ -24,30 +24,6 @@ app.get("/", (req, res) => {
   res.status(404).send("Not Found");
 });
 
-app.get("/timestamp", (req, res) => {
-  functions.logger.log("GET /timestamp");
-
-  res.json({
-    result: `${Date.now()}`,
-  });
-});
-
-app.get("/data", async (req, res) => {
-  functions.logger.log("GET /data");
-
-  const docs = db
-    .collection("test")
-    .get()
-    .then((doc) => {
-      functions.logger.log("success, ", doc.docs[0].data());
-      return res.json(doc.docs[0].data());
-    })
-    .catch((e) => {
-      functions.logger.log("error, ", e);
-      return res.status(500).send();
-    });
-});
-
 app.post("/users", async (req, res) => {
   functions.logger.log("POST /users");
 
@@ -55,14 +31,14 @@ app.post("/users", async (req, res) => {
     .collection("users")
     .add(
       {
-        name: "name",
-        email: "email",
-        avatar_url: "avatar_url",
-        answers: [true, false],
+        name: req.body.name,
+        email: req.body.email,
+        avatar_url: "",
+        answers: [],
         status: "ACTIVE",
         lang: "en",
-        friendlist: ["name1", "name2"],
-        blocklist: ["name3"],
+        friendlist: [],
+        blocklist: [],
       },
       { merge: true }
     )
