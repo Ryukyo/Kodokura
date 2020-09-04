@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../services/firebase";
 
-function Header() {
+function Header({ avatar }) {
   return (
     <header>
       <nav className="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-        <Link className="navbar-brand" to="/">
+        {/* <Link className="navbar-brand" to="/">
           Kodokura
         </Link>
         <button
@@ -19,15 +19,17 @@ function Header() {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button>
+        </button> */}
         <div
           className="collapse navbar-collapse justify-content-end"
           id="navbarNavAltMarkup"
         >
           {auth().currentUser ? (
             <div className="navbar-nav">
-              <Link className="nav-item nav-link mr-3" to="/chatroom">
-                Profile
+              <Link to="/profile">
+                <a href="#">
+                  <img src={avatar} alt="avatar" style={{ width: "50px" }} />
+                </a>
               </Link>
               <button
                 className="btn btn-primary mr-3"
