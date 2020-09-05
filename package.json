@@ -17,7 +17,9 @@
     "devDependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
-        "@testing-library/user-event": "^7.1.2"
+        "@testing-library/user-event": "^7.1.2",
+        "cypress": "^5.1.0",
+        "cypress-react-selector": "^2.0.3"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -25,7 +27,9 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "emulate:func": "firebase emulators:start --only functions",
-        "deploy:func": "firebase deploy --only functions"
+        "deploy:func": "firebase deploy --only functions",
+        "test:e2e": "cypress run",
+        "test:e2e-gui": "cypress open"
     },
     "eslintConfig": {
         "extends": "react-app"
