@@ -23,7 +23,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "emulate:func": "firebase emulators:start --only functions",
+        "deploy:func": "firebase deploy --only functions"
     },
     "eslintConfig": {
         "extends": "react-app"
