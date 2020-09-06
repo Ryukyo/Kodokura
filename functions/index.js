@@ -57,7 +57,7 @@ app.get("/users/:email", async(req, res) => {
         .get();
     if (snapshot.empty) {
         functions.logger.log("No matching documents");
-        return res.status(404).send();
+        return res.status(404).send({ message: "Not Found" });
     }
 
     const docs = [];
