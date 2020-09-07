@@ -128,6 +128,14 @@ useEffect(() => {
             
             history.goBack();
         };
+
+        const addFriend = (e) => {
+
+        }
+
+        const addBlock = (e) => {
+            
+        }
         
         console.log("nickname", newchat.nickname);
         
@@ -147,8 +155,8 @@ useEffect(() => {
                     </Button>
                     <p><b> Partner:  {chats.map(item => <p>{item.nickname}</p>)}</b></p> 
                     
-                    <Button> AddFriend </Button>
-                    <Button> Block ! </Button>
+                    <Button onClick={() => {addFriend()}}> AddFriend </Button>
+                    <Button onClick={() => {addBlock()}}> Block ! </Button>
                  
             </div>
           
