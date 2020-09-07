@@ -166,21 +166,54 @@ app.post("/chatqueue", async (req, res) => {
 
 app.get("/chatqueue/:userId", async (req, res) => {
   functions.logger.log("GET /chatqueue/:userId");
-  const userId = req.params.id;
+  const userId = req.params.userId;
 
-  const snapshot = await db.collection("users").get();
+  const snapshot = await db
+    .collection("chatqueue")
+    .where("queueStatus", "==", "Waiting")
+    .get();
   if (snapshot.empty) {
     functions.logger.log("No matching documents");
-    return res.status(404).send();
+    return res.status(404).send({ message: "Not Found" });
   }
 
-  const docs = [];
+  // TODO take blocklist and language into account when calculating score
+  const calculateMatchingScore = (user1, user2) => {
+    let matchingScore = 0;
+
+    for (let i = 0; i < user1.answers.length; i++) {
+      if (user1.answers[i] === user2.answers[i]) matchingScore++;
+    }
+    return matchingScore;
+  };
+
+  let user1Data = {};
+  const checkUserMatching = [];
+
   snapshot.forEach((doc) => {
-    functions.logger.log("doc, ", doc);
-    functions.logger.log("doc id, ", doc.id);
-    docs.push({ id: doc.id, ...doc.data() });
+    const data = doc.data();
+    if (data.id === userId) {
+      user1Data = data;
+    } else {
+      checkUserMatching.push({ ...data });
+    }
   });
-  functions.logger.log(docs);
-  return res.status(200).json(docs);
+
+  // TODO Return those who have waited too long first.
+  // TODO Return the same result to two users.
+  // TODO Once a match is made, you are removed from the waiting list for a match.
+  // TODO It returns an error or something until a match is made.
+
+  let matchedUser;
+  checkUserMatching.forEach((waitingUser) => {
+    const currentScore = calculateMatchingScore(user1Data, waitingUser);
+    if (!matchedUser || matchedUser.score < currentScore) {
+      matchedUser = { score: currentScore, ...waitingUser };
+    }
+  });
+
+  functions.logger.log("matchedUser", matchedUser);
+
+  return res.status(200).json({ user1: user1Data, user2: matchedUser });
 });
 exports.app = functions.https.onRequest(app);
