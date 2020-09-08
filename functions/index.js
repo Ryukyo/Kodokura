@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const admin = require("firebase-admin");
+const uuid = require("uuid");
 
 // init express server
 const app = express();
@@ -212,8 +213,13 @@ app.get("/chatqueue/:userId", async (req, res) => {
     }
   });
 
+  const chatroom = {
+    id: uuid.v4(),
+  };
   functions.logger.log("matchedUser", matchedUser);
 
-  return res.status(200).json({ user1: user1Data, user2: matchedUser });
+  return res
+    .status(200)
+    .json({ chatroom, user1: user1Data, user2: matchedUser });
 });
 exports.app = functions.https.onRequest(app);
