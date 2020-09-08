@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
+import Clouds from '../Clouds/Clouds';
 
 
 import axios from 'axios';
@@ -67,47 +68,50 @@ export default function CreateAccount() {
   takeToQuestions();
 
   return (
-    <div className="container">
+    <div className="CreateAccount">
       <form className="mt-5 py-5 px-5" onSubmit={handleSubmit}>
         <h1>
-          Sign Up to
+          Sign Up to 
           <Link className="title ml-2" to="/">
-            Kodokura
+             Kodokura 
           </Link>
         </h1>
         <p className="lead">Fill in the form below to create an account.</p>
         <div className="form-group">
           <input
-            className="form-control"
-            placeholder="Name"
+            type="input"
+            className="form-field"
+            placeholder="Username"
             name="name"
-            type="text"
             onChange={handleNameChange}
             value={name}
           ></input>
+          <label for="name" className="form-label">Username</label>
         </div>
         <div className="form-group">
           <input
-            className="form-control"
+            className="form-field"
             placeholder="Email"
             name="email"
             type="email"
             onChange={handleEmailChange}
             value={email}
           ></input>
+          <label for="name" className="form-label">Email</label>
         </div>
         <div className="form-group">
           <input
-            className="form-control"
+            className="form-field"
             placeholder="Password"
             name="password"
             onChange={handlePasswordChange}
             // value={password}
             type="password"
           ></input>
+          <label for="name" className="form-label">Password</label>
         </div>
 
-        <div className="form-group">
+        <div className="form-groupe">
           {error ? <p className="text-danger">{error}</p> : null}
           
             <button className="btn btn-primary px-5" type="submit" onClick={() => {
@@ -129,6 +133,7 @@ export default function CreateAccount() {
       <Link to="/">
         <button>Go back</button>
       </Link>
+      <Clouds/>
     </div>
   );
 }

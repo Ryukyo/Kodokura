@@ -2,6 +2,7 @@
     "name": "kodokura",
     "version": "0.1.0",
     "private": true,
+    "main": "index.js",
     "proxy": "https://us-central1-kodokura-eb787.cloudfunctions.net/app",
     "dependencies": {
         "axios": "^0.20.0",
@@ -10,6 +11,7 @@
         "firebase-functions": "^3.11.0",
         "lodash": "^4.17.20",
         "moment": "^2.27.0",
+        "node-sass": "^4.14.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",

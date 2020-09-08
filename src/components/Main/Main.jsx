@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './kodokura-logo.png'
+import logo from './kodokura-logo.png';
+import Clouds from '../Clouds/Clouds';
 
 import {
     Route,
@@ -12,10 +13,10 @@ import {
 export default function Main() {
 
     return (
-        <>
+        <div className="Main">
             <header>
-                <h1>Main | KodoKura</h1>
-                <img src={logo} alt=""/>
+                <h1 className="main_title">Main | KodoKura</h1>
+                <img className="logo" src={logo} alt=""/>
             </header>
             <Link to="/signup">
                 <button>Create Account</button>
@@ -23,7 +24,7 @@ export default function Main() {
             <Link to="/login">
                 <button>Login</button>
             </Link>
-            
-        </>
+            <Clouds/>
+        </div>
     )
 }    

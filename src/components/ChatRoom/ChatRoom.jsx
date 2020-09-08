@@ -133,7 +133,7 @@ useEffect(() => {
 
         }
 
-        const addBlock = (e) => {
+        const addBlock = (e) => {   
             
         }
         
@@ -187,7 +187,7 @@ useEffect(() => {
                           </span>
                         )}
                         <span className="MsgDate"> at {item.date}</span>
-                        <p>{item.message}</p>
+                        <p className="message">{item.message}</p>
                       </div>
                     </div>
                   )}

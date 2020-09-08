@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
+import Clouds from '../Clouds/Clouds';
 import axios from 'axios';
 import { auth } from '../../services/firebase';
 
@@ -38,7 +39,7 @@ export default function LogIn() {
       } */
 
   return (
-    <div className="container">
+    <div className="LogIn">
       <form
         className="mt-5 py-5 px-5"
         autoComplete="off"
@@ -53,23 +54,25 @@ export default function LogIn() {
         <p className="lead">Fill in the form below to login to your account.</p>
         <div className="form-group">
           <input
-            className="form-control"
+            className="form-field"
             placeholder="Email"
             name="email"
             type="email"
             onChange={handleEmailChange}
           /* value={this.state.email} */
           />
+          <label for="name" className="form-label">Email</label>
         </div>
         <div className="form-group">
           <input
-            className="form-control"
+            className="form-field"
             placeholder="Password"
             name="password"
             onChange={handlePasswordChange}
             /* value={this.state.password} */
             type="password"
           />
+          <label for="name" className="form-label">Password</label>
         </div>
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
@@ -90,6 +93,7 @@ export default function LogIn() {
       <Link to="/">
         <button>Go back</button>
       </Link>
+      <Clouds/>
     </div>
   );
 }
