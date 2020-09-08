@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function LanguageSelector() {
     return (
         <>
-            <h1>Language</h1>
+            <h1>Languange</h1>
             <Link to="/profile">
                 <button>Back</button>
             </Link>

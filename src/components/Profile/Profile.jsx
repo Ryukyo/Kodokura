@@ -55,23 +55,21 @@ export default function Profile() {
         <button>Back</button>
       </Link>
       <div>
-        <img src={avatar} alt="avatar" style={{ width: "100px" }}></img>
+        <img src={avatar} alt="avatar" style={{ width: "50px" }}></img>
       </div>
       <div>
         <Link to="/avatar">
-          <button>Change Avatar</button>
+          <button>Change Profile picture</button>
         </Link>
       </div>
-      <div>
       <Link to="/questions">
         <button onClick={() => updateAnswers([])}>Tell us about you again</button>
       </Link>
-      </div>
-        <div>
       <Link to="/language">
+        <div>
           <button>Change language</button>
-        </Link>
-      </div>
+        </div>
+      </Link>
       <div>
         <button onClick={() => deleteUser()}>Delete account</button>
       </div>
