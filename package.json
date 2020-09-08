@@ -2,7 +2,9 @@
     "name": "kodokura",
     "version": "0.1.0",
     "private": true,
+    "proxy": "https://us-central1-kodokura-eb787.cloudfunctions.net/app",
     "dependencies": {
+        "axios": "^0.20.0",
         "firebase": "^7.19.1",
         "firebase-admin": "^9.1.1",
         "firebase-functions": "^3.11.0",

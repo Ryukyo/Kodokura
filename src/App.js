@@ -19,7 +19,7 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Questions from "./components/Questions/Questions";
 import QuestionCard from './components/Questions/QuestionCard';
 import LanguageSelector from './components/Profile/Languages';
-
+import Loading from './components/Utility/Loading';
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -30,7 +30,7 @@ function App() {
       <Route
         {...rest}
         render={(props) =>
-          authenticated === true ? (
+          authenticated === true ?  (
             <Component {...props} />
           ) : (
               <Redirect
@@ -50,7 +50,7 @@ function App() {
           authenticated === false ? (
             <Component {...props} />
           ) : (
-              <Redirect to="/home" />
+              <Redirect to="/loading" />
             )
         }
       />
@@ -84,14 +84,14 @@ function App() {
             component={ChatRoom}
           />
           <PrivateRoute
-            path="/home"
-            authenticated={authentication}
-            component={Home}
-          />
-          <PrivateRoute
             path="/questions"
             authenticated={authentication}
             component={Questions}
+          />
+          <PrivateRoute
+            path="/home"
+            authenticated={authentication}
+            component={Home}
           />
           <PrivateRoute
             path="/questioncard"
@@ -112,6 +112,11 @@ function App() {
             path="/language"
             authenticated={authentication}
             component={LanguageSelector}
+          />
+          <PrivateRoute
+            path="/loading"
+            authenticated={authentication}
+            component={Loading}
           />
           <PublicRoute
             path="/signup"
