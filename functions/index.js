@@ -16,14 +16,14 @@ admin.initializeApp();
 const db = admin.firestore();
 
 // TODO need JWT token(issued by firebase auth) check before apis are used with middleware
-// TODO need to access firestore
 
 app.get("/", (req, res) => {
   functions.logger.log("GET /");
 
-  res.status(404).send("Not Found");
+  res.status(404).json({ message: "Not Found" });
 });
 
+// USER RELATED ENDPOINTS
 app.post("/users", async (req, res) => {
   functions.logger.log("POST /users");
 
@@ -44,10 +44,11 @@ app.post("/users", async (req, res) => {
     )
     .catch((err) => {
       functions.logger.log("err, ", err);
-      return res.status(500).send("failed");
+      return res.status(500).send({
+        message: "failed",
+      });
     });
 
-  functions.logger.log("stored, ", doc.id);
   return res.status(201).json({ id: doc.id });
 });
 
@@ -60,6 +61,23 @@ app.get("/users/:email", async (req, res) => {
     .get();
   if (snapshot.empty) {
     functions.logger.log("No matching documents");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  const docs = [];
+  snapshot.forEach((doc) => {
+    docs.push({ id: doc.id, ...doc.data() });
+  });
+  functions.logger.log(docs[0]);
+  return res.status(200).json(docs[0]);
+});
+
+app.get("/users", async (req, res) => {
+  functions.logger.log("GET /users");
+
+  const snapshot = await db.collection("users").get();
+  if (snapshot.empty) {
+    functions.logger.log("No matching documents");
     return res.status(404).send();
   }
 
@@ -69,7 +87,133 @@ app.get("/users/:email", async (req, res) => {
     functions.logger.log("doc id, ", doc.id);
     docs.push({ id: doc.id, ...doc.data() });
   });
-  functions.logger.log(docs[0]);
-  return res.status(200).json(docs[0]);
+  functions.logger.log(docs);
+  return res.status(200).json(docs);
+});
+
+app.delete("/users/:id", async (req, res) => {
+  functions.logger.log("DELETE /users/:id", req.params.id);
+
+  const userId = req.params.id;
+
+  const targetUserDoc = db.collection("users").doc(userId).delete();
+
+  if (!targetUserDoc) {
+    functions.logger.log("No matching entity");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  functions.logger.log(`User id ${userId} was deleted`);
+  return res.status(200).send({ message: `User id ${userId} was deleted` });
+});
+
+app.put("/users/:id", async (req, res) => {
+  functions.logger.log("PUT /users/", req.params.id);
+
+  const userId = req.params.id;
+  let body = req.body;
+
+  const targetUserDoc = db.collection("users").doc(userId);
+
+  const ref = await targetUserDoc.get();
+  if (!ref.exists) {
+    functions.logger.log("No matching entity");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  const updatedUser = { ...ref.data(), ...body };
+  await targetUserDoc.set(updatedUser);
+
+  const result = await targetUserDoc.get();
+  return res.status(200).send({ id: userId, ...result.data() });
+});
+
+// MATCHMAKING RELATED ENDPOINTS
+app.post("/chatqueue", async (req, res) => {
+  functions.logger.log("POST /chatqueue");
+
+  const targetUserDoc = db.collection("users").doc(req.body.id);
+
+  const ref = await targetUserDoc.get();
+  if (!ref.exists) {
+    functions.logger.log("No matching entity");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  functions.logger.log("doc.data", ref.data());
+
+  const doc = await db
+    .collection("chatqueue")
+    .add(
+      {
+        id: req.body.id,
+        createdAt: Date.now(),
+        queueStatus: "Waiting",
+        ...ref.data(),
+      },
+      { merge: true }
+    )
+    .catch((err) => {
+      functions.logger.log("err, ", err);
+      return res.status(500).send({
+        message: "failed",
+      });
+    });
+
+  functions.logger.log("chatqueue doc", doc);
+  return res.status(201).json({ message: "success" });
+});
+
+app.get("/chatqueue/:userId", async (req, res) => {
+  functions.logger.log("GET /chatqueue/:userId");
+  const userId = req.params.userId;
+
+  const snapshot = await db
+    .collection("chatqueue")
+    .where("queueStatus", "==", "Waiting")
+    .get();
+  if (snapshot.empty) {
+    functions.logger.log("No matching documents");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  // TODO take blocklist and language into account when calculating score
+  const calculateMatchingScore = (user1, user2) => {
+    let matchingScore = 0;
+
+    for (let i = 0; i < user1.answers.length; i++) {
+      if (user1.answers[i] === user2.answers[i]) matchingScore++;
+    }
+    return matchingScore;
+  };
+
+  let user1Data = {};
+  const checkUserMatching = [];
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.id === userId) {
+      user1Data = data;
+    } else {
+      checkUserMatching.push({ ...data });
+    }
+  });
+
+  // TODO Return those who have waited too long first.
+  // TODO Return the same result to two users.
+  // TODO Once a match is made, you are removed from the waiting list for a match.
+  // TODO It returns an error or something until a match is made.
+
+  let matchedUser;
+  checkUserMatching.forEach((waitingUser) => {
+    const currentScore = calculateMatchingScore(user1Data, waitingUser);
+    if (!matchedUser || matchedUser.score < currentScore) {
+      matchedUser = { score: currentScore, ...waitingUser };
+    }
+  });
+
+  functions.logger.log("matchedUser", matchedUser);
+
+  return res.status(200).json({ user1: user1Data, user2: matchedUser });
 });
 exports.app = functions.https.onRequest(app);

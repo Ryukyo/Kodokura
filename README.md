@@ -2,20 +2,50 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Set up
 
+### Prerequisites
+Install firebase cli tools
+
 ```
 yarn global add firebase-tools
 ```
+
+Login to firebase
 
 ```
 firebase login
 ```
 
-```
-firebase emulators:start
-```
+### Emulator
+Run cloud function with emulator
 
 ```
-firebase deploy --only functions
+yarn emulate:func
+```
+
+### Testing
+
+Run cypress test with cli mode
+
+```
+yarn test:e2e
+```
+
+Run cypress test with gui mode
+
+```
+yarn test:e2e-gui
+```
+
+### Deployment
+Deploy cloud function to firebase
+
+```
+yarn deploy:func
+```
+
+Deploy everything (including hosting) to firebase (after yarn build)
+```
+yarn deploy
 ```
 
 ## Available Scripts
@@ -44,13 +74,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### Deployment
-
-The deployment is done via Firebase.
-
-After installing the firebase tools through `yarn global add firebase-tools`, make sure you are logged in by running `firebase login`.
-
-With the firebase.json alrady in your project, make sure to build the most recent version of the application by running `yarn build`.
-
-After building the project, use `firebase deploy` to publish the most recent version of the application.
