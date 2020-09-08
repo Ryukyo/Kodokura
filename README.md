@@ -2,20 +2,40 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Set up
 
+install firebase cli tools
+
 ```
 yarn global add firebase-tools
 ```
+
+login to firebase
 
 ```
 firebase login
 ```
 
-```
-firebase emulators:start
-```
+run cloud function with emulator
 
 ```
-firebase deploy --only functions
+yarn emulate:func
+```
+
+deploy cloud function to firebase
+
+```
+yarn deploy:func
+```
+
+run cypress test with cli mode
+
+```
+yarn test:e2e
+```
+
+run cypress test with gui mode
+
+```
+yarn test:e2e-gui
 ```
 
 ## Available Scripts

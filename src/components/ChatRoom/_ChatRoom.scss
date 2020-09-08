@@ -1,0 +1,127 @@
+.LeftBubble{
+    background-color:#fff;
+    color: black;
+    font-size: x-small;
+    padding:20px;
+    border-radius:30px;
+    min-width:200px;
+    max-width:500px;
+    min-height:40px;
+    margin:40px;
+    position:relative;
+    align-items:center;
+    justify-content:left;
+    text-align:left;
+  
+  :before,
+  :after {
+    content:"";
+    background-color:#fff;
+    border-radius:50%;
+    display:block;
+    position:absolute;
+    z-index:-1;
+    transition: all 1s ease-in-out;
+    animation: clouds 10s infinite;
+  }
+  :before {
+    width:44px;
+    height:44px;
+    top:-12px;
+    right:28px;
+    box-shadow:-50px 30px 0 -12px #fff;
+    transition: all 1s ease-in-out;
+    animation: clouds 10s infinite;
+  }
+  :after {
+    bottom:-10px;
+    left:26px;
+    width:30px;
+    height:30px;
+    box-shadow:40px -34px 0 0 #fff,
+               -28px -6px 0 -2px #fff,
+               -24px 17px 0 -6px #fff,
+               -5px 25px 0 -10px #fff;
+    transition: all 1s ease-in-out;
+    animation: clouds 10s infinite;
+    
+  }
+}
+
+.RightBubble {
+        background-color:#fff;
+        color: black;
+        font-size: x-small;
+        padding:20px;
+        border-radius:30px;
+        min-width:200px;
+        max-width:500px;
+        min-height:40px;
+        margin:40px;
+        position:relative;
+        
+        align-items:center;
+        justify-content: right;;
+        text-align: right;;
+      
+      :before,
+      :after {
+        content:"";
+        background-color:#fff;
+        border-radius:50%;
+        display:block;
+        position:absolute;
+        z-index:-1;
+        transition: all 1s ease-in-out;
+        animation: clouds 8s infinite;
+      }
+      :before {
+        width:44px;
+        height:44px;
+        top:-12px;
+        left:28px;
+        box-shadow:-50px 30px 0 -12px #fff;
+        transition: all 1s ease-in-out;
+        animation: clouds 8s infinite;
+      }
+      :after {
+        bottom:-10px;
+        right:26px;
+        width:30px;
+        height:30px;
+        box-shadow:40px -34px 0 0px #fff,
+                   -28px -6px 0 -2px #fff,
+                   -24px 17px 0 -6px #fff,
+                   -5px 25px 0 -10px #fff;
+        transition: all 1s ease-in-out;
+        animation: clouds 8s infinite;
+      }
+}
+
+@keyframes clouds {
+    0%{
+        box-shadow:40px -34px 0 0px #fff,
+                   -28px -6px 0 -2px #fff,
+                   -24px 17px 0 -6px #fff,
+                   -5px 25px 0 -10px #fff,
+                   -50px 30px 0 -12px #fff;
+    }
+    50% {
+        box-shadow:40px -34px 0 5px #fff,
+                   -28px -6px 0 0px #fff,
+                   -24px 17px 0 -2px #fff,
+                   -5px 25px 0 -6px #fff,
+                   -50px 30px 0 -8px #fff;
+    }
+    100%{
+        box-shadow:40px -34px 0 0px #fff,
+                   -28px -6px 0 -2px #fff,
+                   -24px 17px 0 -6px #fff,
+                   -5px 25px 0 -10px #fff,
+                   -50px 30px 0 -12px #fff;
+    }
+}
+
+.message {
+    font-size: large;
+}
