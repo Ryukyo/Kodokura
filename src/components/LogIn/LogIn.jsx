@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
-<<<<<<< HEAD
 import Clouds from '../Clouds/Clouds';
-=======
 import axios from 'axios';
 import { auth } from '../../services/firebase';
->>>>>>> d61447f665e7ab5afae000bfc62b6383073409be
 
 export default function LogIn() {
   const [error, setError] = useState(null);

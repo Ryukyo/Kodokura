@@ -30,13 +30,8 @@ export default function Home() {
 
 
   return (
-<<<<<<< HEAD
     <div className="Home">
       <Header avatar={avatar} />
-=======
-    <>
-      <Header avatar={avatar}/>
->>>>>>> d61447f665e7ab5afae000bfc62b6383073409be
       <h2>Home page</h2>
       <Link to="/chatroom">
         <button>Find someone to talk to.</button>

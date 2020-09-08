@@ -62,21 +62,13 @@ export default function Profile() {
           <button>Change Avatar</button>
         </Link>
       </div>
-<<<<<<< HEAD
       <div>
-        <Link to="/questions">
-          <button>Tell us about you again</button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/language">
-=======
       <Link to="/questions">
         <button onClick={() => updateAnswers([])}>Tell us about you again</button>
       </Link>
-      <Link to="/language">
+      </div>
         <div>
->>>>>>> d61447f665e7ab5afae000bfc62b6383073409be
+      <Link to="/language">
           <button>Change language</button>
         </Link>
       </div>
