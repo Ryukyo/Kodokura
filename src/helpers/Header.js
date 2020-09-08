@@ -33,14 +33,18 @@ function Header({ avatar }) {
           {auth().currentUser ? (
             <div className="navbar-nav">
               <Link to={{pathname:"/profile", query:{avatar:avatar}}}>
-                <img src={avatar} alt="avatar" style={{ width: "50px" }} />
+                <a href="#">
+                  <img className="homeavatar" src={avatar} alt="avatar" />
+                </a>
               </Link>
+              <div>
               <button
-                className="btn btn-primary mr-3"
+                className="btn"
                 onClick={() => auth().signOut()}
-              >
+                >
                 Logout
               </button>
+                </div>
             </div>
           ) : (
             <div className="navbar-nav">
