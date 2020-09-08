@@ -14,9 +14,9 @@ export default function Main() {
 
     return (
         <div className="Main">
-            <header>
-                <h1 className="main_title">Main | KodoKura</h1>
-                <img className="logo" src={logo} alt=""/>
+            <header className="main-header">
+                <Clouds/>
+                <h1><img className="logo" src={logo} alt=""/></h1>
             </header>
             <Clouds/>
             <div className="underclouds">
