@@ -14,9 +14,9 @@ export default function Main() {
 
     return (
         <div className="Main">
-            <header>
-                <h1 className="main_title">Main | KodoKura</h1>
-                <img className="logo" src={logo} alt=""/>
+            <header className="main-header">
+                <Clouds/>
+                <h1><img className="logo" src={logo} alt=""/></h1>
             </header>
             <Link to="/signup">
                 <button>Create Account</button>
@@ -24,7 +24,6 @@ export default function Main() {
             <Link to="/login">
                 <button>Login</button>
             </Link>
-            <Clouds/>
         </div>
     )
 }    
