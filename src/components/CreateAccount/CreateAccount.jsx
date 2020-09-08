@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
 import Clouds from '../Clouds/Clouds';
 
+
+import axios from 'axios';
+
 export default function CreateAccount() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  console.log(email)
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -39,6 +44,29 @@ export default function CreateAccount() {
         }
       } */
 
+  async function createUser(name, email) {
+
+    const params = {
+      name: name,
+      email: email
+    };
+    let res = await axios.post('/users', params);
+  }
+
+  async function getUser(email) {
+
+    let req = await axios.get(`/users/${email}`);
+    let data = req.data;
+
+    return data;
+
+  }
+
+  function takeToQuestions() {
+    console.log(email);
+  }
+  takeToQuestions();
+
   return (
     <div className="CreateAccount">
       <form className="mt-5 py-5 px-5" onSubmit={handleSubmit}>
@@ -56,7 +84,7 @@ export default function CreateAccount() {
             placeholder="Username"
             name="name"
             onChange={handleNameChange}
-            // value={email}
+            value={name}
           ></input>
           <label for="name" className="form-label">Username</label>
         </div>
@@ -67,7 +95,7 @@ export default function CreateAccount() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-            // value={email}
+            value={email}
           ></input>
           <label for="name" className="form-label">Email</label>
         </div>
@@ -85,11 +113,13 @@ export default function CreateAccount() {
 
         <div className="form-groupe">
           {error ? <p className="text-danger">{error}</p> : null}
-          {/* <Link to="/questions"> */}
-          <button className="btn btn-primary px-5" type="submit">
-            Sign up
-          </button>
-          {/* </Link> */}
+          
+            <button className="btn btn-primary px-5" type="submit" onClick={() => {
+              createUser(name, email);
+              }}>
+              Sign up
+            </button>
+            
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>

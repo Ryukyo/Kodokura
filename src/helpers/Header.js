@@ -2,7 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../services/firebase";
 
+import Profile from '../components/Profile/Profile'
+
+
+
 function Header({ avatar }) {
+
+
   return (
     <header>
       <nav className="navbar navbar-expand-sm fixed-top navbar-light bg-light">
@@ -26,10 +32,15 @@ function Header({ avatar }) {
         >
           {auth().currentUser ? (
             <div className="navbar-nav">
+<<<<<<< HEAD
               <Link to="/profile">
                 <a href="#">
                   <img className="homeavatar" src={avatar} alt="avatar" />
                 </a>
+=======
+              <Link to={{pathname:"/profile", query:{avatar:avatar}}}>
+                <img src={avatar} alt="avatar" style={{ width: "50px" }} />
+>>>>>>> d61447f665e7ab5afae000bfc62b6383073409be
               </Link>
               <div>
               <button

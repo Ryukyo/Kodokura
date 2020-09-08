@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
+<<<<<<< HEAD
 import Clouds from '../Clouds/Clouds';
+=======
+import axios from 'axios';
+import { auth } from '../../services/firebase';
+>>>>>>> d61447f665e7ab5afae000bfc62b6383073409be
 
 export default function LogIn() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -72,9 +79,10 @@ export default function LogIn() {
         </div>
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
-          <button className="btn btn-primary px-5" type="submit">
-            Login
-          </button>
+            <button className="btn btn-primary px-5" type="submit">
+              Login
+            </button>
+
         </div>
         {/* <p>You can also log in with any of these services</p>
         <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
