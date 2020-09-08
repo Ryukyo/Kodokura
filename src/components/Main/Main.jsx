@@ -18,13 +18,15 @@ export default function Main() {
                 <h1 className="main_title">Main | KodoKura</h1>
                 <img className="logo" src={logo} alt=""/>
             </header>
+            <Clouds/>
+            <div className="underclouds">
             <Link to="/signup">
                 <button>Create Account</button>
             </Link>
             <Link to="/login">
                 <button>Login</button>
             </Link>
-            <Clouds/>
+            </div>
         </div>
     )
 }    

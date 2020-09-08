@@ -16,6 +16,7 @@ import {
 import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { db, auth } from "../../services/firebase";
+import _ from "lodash";
 
 //import css file;
 
@@ -142,8 +143,7 @@ useEffect(() => {
         return (
             <div className="Container">
       
-            <div>
-              
+            <div className="ChatNav">
                     <Button
                       variant="primary"
                       type="button"
@@ -153,11 +153,10 @@ useEffect(() => {
                     >
                       Exit Chat
                     </Button>
-                    <p><b> Partner:  {chats.map(item => <p>{item.nickname}</p>)}</b></p> 
+                    <p className="partner"><b> Partner:  {_.uniqBy(chats, "nickname").map(item => <p>{item.nickname}</p>)}</b></p> 
                     
                     <Button onClick={() => {addFriend()}}> AddFriend </Button>
                     <Button onClick={() => {addBlock()}}> Block ! </Button>
-                 
             </div>
           
           
@@ -196,15 +195,17 @@ useEffect(() => {
             </ScrollToBottom>
             <footer className="StickyFooter">
               <Form className="MessageForm" onSubmit={submitMessage}>
-                
+                <div className="form-group">
                   <Input
                     type="text"
                     name="message"
-                    id="message"
+                    className="form-field"
                     placeholder="Enter message here"
                     value={newchat.message}
                     onChange={onChange}
-                  />
+                    />
+                  <label for="message" className="form-label">Enter message here</label>
+                </div>
                   
                     <Button variant="primary" type="submit">
                       Send

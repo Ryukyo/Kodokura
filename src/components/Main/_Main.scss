@@ -7,8 +7,8 @@
         text-align:center;
         
         display: flex;
-        justify-content: space-between;
-        align-content: space-between;
+        // justify-content: space-between;
+        // align-content: space-between;
         flex-direction: column;
     
 }
@@ -19,4 +19,11 @@
     border-radius: 70px;
 }
 
-
+.underclouds {
+    height: 54.5vh;
+    background: linear-gradient(white, lightgray);
+    display: flex;
+    justify-content: space-around;
+        align-content: space-around;
+    flex-direction: column;
+}
