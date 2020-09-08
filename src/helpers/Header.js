@@ -33,7 +33,7 @@ function Header({ avatar }) {
           {auth().currentUser ? (
             <div className="navbar-nav">
               <Link to={{pathname:"/profile", query:{avatar:avatar}}}>
-                <img className="homeavatar" src={avatar} alt="avatar" />
+                  <img className="homeavatar" src={avatar} alt="avatar" />
               </Link>
               <div>
               <button
