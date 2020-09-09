@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const admin = require("firebase-admin");
+const uuid = require("uuid");
 
 // init express server
 const app = express();
@@ -168,6 +169,30 @@ app.get("/chatqueue/:userId", async (req, res) => {
   functions.logger.log("GET /chatqueue/:userId");
   const userId = req.params.userId;
 
+  const snapshotByUserId = await db
+    .collection("chatqueue")
+    .where("id", "==", userId)
+    .get();
+
+  if (snapshotByUserId.empty) {
+    functions.logger.log("No matching entity");
+    return res.status(404).send({ message: "Not Found" });
+  }
+
+  let matchingResult;
+  snapshotByUserId.forEach((doc) => {
+    let data = doc.data();
+    if (data.matchingResult) {
+      matchingResult = data.matchingResult;
+    }
+  });
+  if (matchingResult) {
+    return res.status(200).json(matchingResult);
+  }
+
+  // TODO check if alrealy have active chatroom
+  // if true just return chatroom and matched user info
+
   const snapshot = await db
     .collection("chatqueue")
     .where("queueStatus", "==", "Waiting")
@@ -194,8 +219,9 @@ app.get("/chatqueue/:userId", async (req, res) => {
     const data = doc.data();
     if (data.id === userId) {
       user1Data = data;
+      user1Data["chatqueueId"] = doc.id;
     } else {
-      checkUserMatching.push({ ...data });
+      checkUserMatching.push({ ...data, chatqueueId: doc.id });
     }
   });
 
@@ -203,6 +229,7 @@ app.get("/chatqueue/:userId", async (req, res) => {
   // TODO Return the same result to two users.
   // TODO Once a match is made, you are removed from the waiting list for a match.
   // TODO It returns an error or something until a match is made.
+  // TODO should have expire or disable feature for chatroom / waiting list
 
   let matchedUser;
   checkUserMatching.forEach((waitingUser) => {
@@ -212,8 +239,30 @@ app.get("/chatqueue/:userId", async (req, res) => {
     }
   });
 
+  const chatroom = {
+    id: uuid.v4(),
+  };
   functions.logger.log("matchedUser", matchedUser);
 
-  return res.status(200).json({ user1: user1Data, user2: matchedUser });
+  // TODO store chatroom and matched user information
+  matchingResult = { chatroom, user1: user1Data, user2: matchedUser };
+  await db
+    .collection("chatqueue")
+    .doc(user1Data.chatqueueId)
+    .set(
+      {
+        matchingResult,
+      },
+      { merge: true }
+    )
+    .catch((err) => {
+      functions.logger.log("err, ", err);
+      return res.status(500).send({
+        message: "failed",
+      });
+    });
+
+  return res.status(200).json(matchingResult);
 });
+exports.app = functions.https.onRequest(app);
 exports.app = functions.https.onRequest(app);
