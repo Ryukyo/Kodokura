@@ -15,7 +15,6 @@ export default function Main() {
     return (
         <div className="Main">
             <header className="main-header">
-                <Clouds/>
                 <h1><img className="logo" src={logo} alt=""/></h1>
             </header>
             <Link to="/signup">
@@ -24,6 +23,7 @@ export default function Main() {
             <Link to="/login">
                 <button>Login</button>
             </Link>
+            <Clouds/>
         </div>
     )
 }    

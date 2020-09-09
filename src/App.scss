@@ -139,11 +139,10 @@ button{
   .waves {
     // margin: 0;
     width: 100%;
-    height:1000px;
+    height: 50vh;
     margin-bottom:-7px; /*Fix for safari gap*/
     min-height:150px;
     max-height:50vh;
-    transform: scaleY(-1)
 }
 
 .content {
