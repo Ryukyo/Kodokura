@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardSubtitle,
-  Button,
-  Form,
-  InputGroup,
-  Input,
-  InputGroupAddon,
-} from "reactstrap";
+import { Button, Form, Input } from "reactstrap";
 import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { db, auth } from "../../services/firebase";
 import _ from "lodash";
 
-//import css file;
 export default function ChatRoom(props) {
   // TODO replace this name to chat room id from props
-  const roomId = "testRoom2";
+  const roomId = "testRoom3";
 
   const [chats, setChats] = useState([]);
-  const [users, setUsers] = useState([]);
+  //const [users, setUsers] = useState([]);
   const [nickname, setNickname] = useState("");
   const [roomname, setRoomname] = useState(roomId);
   const [newchat, setNewchat] = useState({
@@ -59,6 +46,7 @@ export default function ChatRoom(props) {
     fetchData();
   }, [room, roomname]);
 
+  /*
   useEffect(() => {
     const fetchData = async () => {
       console.log("displayname in chat", auth().currentUser.displayName);
@@ -77,7 +65,7 @@ export default function ChatRoom(props) {
 
     fetchData();
   }, [room, roomname]);
-
+*/
   const snapshotToArray = (snapshot) => {
     const returnArr = [];
 
@@ -121,7 +109,7 @@ export default function ChatRoom(props) {
       date: "",
       type: "",
     };
-    // chat.roomname = roomname;
+    chat.roomname = roomId;
     chat.nickname = nickname;
     chat.date = Moment(new Date()).format("DD/MM/YYYY HH:mm:ss ");
     chat.message = `${nickname} left the room`;
@@ -129,6 +117,7 @@ export default function ChatRoom(props) {
     const newMessage = db.ref("chats").push();
     newMessage.set(chat);
 
+    /*
     db.ref("roomusers").once("value", (resp) => {
       let roomuser = [];
       roomuser = snapshotToArray(resp);
@@ -138,6 +127,7 @@ export default function ChatRoom(props) {
         userRef.update({ status: "offline" });
       }
     });
+    */
 
     history.goBack();
   };
