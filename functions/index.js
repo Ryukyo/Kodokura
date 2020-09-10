@@ -233,7 +233,6 @@ app.get("/chatqueue/:userId", async (req, res) => {
 
     // TODO Return those who have waited too long first.
     // TODO It returns an error or something until a match is made.
-    // TODO should have disable feature for chatroom
 
     if (checkUserMatching.length < 1) {
       functions.logger.log("No matching User");
