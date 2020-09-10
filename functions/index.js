@@ -167,6 +167,7 @@ app.post("/chatqueue", async (req, res) => {
 
 app.get("/chatqueue/:userId", async (req, res) => {
   functions.logger.log("GET /chatqueue/:userId");
+  const batch = db.batch();
   const userId = req.params.userId;
 
   const snapshotByUserId = await db
@@ -226,7 +227,6 @@ app.get("/chatqueue/:userId", async (req, res) => {
   });
 
   // TODO Return those who have waited too long first.
-  // TODO Return the same result to two users.
   // TODO Once a match is made, you are removed from the waiting list for a match.
   // TODO It returns an error or something until a match is made.
   // TODO should have expire or disable feature for chatroom / waiting list
@@ -244,25 +244,35 @@ app.get("/chatqueue/:userId", async (req, res) => {
   };
   functions.logger.log("matchedUser", matchedUser);
 
-  // TODO store chatroom and matched user information
   matchingResult = { chatroom, user1: user1Data, user2: matchedUser };
-  await db
-    .collection("chatqueue")
-    .doc(user1Data.chatqueueId)
-    .set(
-      {
-        matchingResult,
-      },
-      { merge: true }
-    )
-    .catch((err) => {
-      functions.logger.log("err, ", err);
-      return res.status(500).send({
-        message: "failed",
-      });
+
+  const user1Ref = db.collection("chatqueue").doc(user1Data.chatqueueId);
+  const user2Ref = db.collection("chatqueue").doc(matchedUser.chatqueueId);
+
+  batch.set(
+    user1Ref,
+    {
+      matchingResult,
+    },
+    { merge: true }
+  );
+
+  batch.set(
+    user2Ref,
+    {
+      matchingResult,
+    },
+    { merge: true }
+  );
+
+  await batch.commit().catch((err) => {
+    functions.logger.log("err, ", err);
+    return res.status(500).send({
+      message: "failed",
     });
+  });
 
   return res.status(200).json(matchingResult);
 });
-exports.app = functions.https.onRequest(app);
+
 exports.app = functions.https.onRequest(app);
