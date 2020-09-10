@@ -18,7 +18,7 @@ export default function Avatar() {
         let req = await axios.get(`/users/${user.email}`)
         let data = req.data;
         let id = data.id;
-        console.log(data)
+        console.log(data.avatar_url)
         return id;
     };
 
