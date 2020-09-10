@@ -10,6 +10,8 @@
 @import "./components/Questions/Questions";
 @import "./components/Settings/Settings";
 
+@import './style/colors';
+
 
 $height:50;
 $depth:6;
@@ -18,6 +20,11 @@ $text-color:darken($color,15%);
 $lighten-on-hover:7%;
 $button-speed:.06;
 $timing-function: ease-out;
+
+$primary: #ff2e63;
+$secondary: #543AB7;
+$white: #fff;
+$gray: #9b9b9b;
 
 
 html {
@@ -50,8 +57,8 @@ body, #root {
 
 button{
   
-  border: 2px solid white;
-  color: white;
+  border: 2px solid $color;
+  color: $color;
   width: 180px;
   height: 80px;
   outline: none;
@@ -64,17 +71,13 @@ button{
   &:hover{
     border: none;
     background-color: white;
-    color: $color;
+    color: $primary;
     font-size: 28px;
     transition: all 0.3s ease-in-out;
-    transform:scale(1.1);
+    transform:scale(1.05);
     }
   }
 
-  $primary: #00ACC1;
-  $secondary: #543AB7;
-  $white: #fff;
-  $gray: #9b9b9b;
   .form-group {
     position: relative;
     padding: 15px 0 0;
@@ -139,15 +142,15 @@ button{
   .waves {
     // margin: 0;
     width: 100%;
-    height: 50vh;
+    height:20vh;
     margin-bottom:-7px; /*Fix for safari gap*/
     min-height:150px;
-    max-height:50vh;
+    // max-height:300px;
 }
 
 .content {
     // position:relative;
-    height:20vh;
+    height:30vh;
     text-align:center;
     background-color: white;
   }
@@ -185,8 +188,8 @@ button{
   @media (max-width: 768px) {
     .waves {
         width: 200%;
-      height:40vh;
-      min-height:40vh;
+      height:auto;
+      min-height:10vh;
     }
     .content {
       height:30vh;

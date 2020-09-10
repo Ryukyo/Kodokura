@@ -7,16 +7,33 @@
         text-align:center;
         
         display: flex;
-        justify-content: space-between;
-        align-content: space-between;
+        // justify-content: space-between;
+        // align-content: space-between;
         flex-direction: column;
     
+}
+
+.main-header {
+    height: 50vh;
 }
 
 .logo {
     padding: 20px;
     height: 100px;
     border-radius: 70px;
+    
+}
+
+.custom-shape-divider-top-1599705101 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: -1;
+
 }
 
 

@@ -1,3 +1,22 @@
+
+.ChatNav {
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    
+}
+
+.partner {
+    color: #ff2e63;
+}
+
+.ChatContent {
+    z-index: -1;
+}
+
 .LeftBubble{
     background-color:#fff;
     color: black;
@@ -5,9 +24,9 @@
     padding:20px;
     border-radius:30px;
     min-width:200px;
-    max-width:500px;
+    max-width:600px;
     min-height:40px;
-    margin:40px;
+    margin:50px auto 50px 50px;
     position:relative;
     align-items:center;
     justify-content:left;
@@ -55,9 +74,9 @@
         padding:20px;
         border-radius:30px;
         min-width:200px;
-        max-width:500px;
+        max-width:600px;
         min-height:40px;
-        margin:40px;
+        margin:50px 50px 50px auto;
         position:relative;
         
         align-items:center;
@@ -124,4 +143,9 @@
 
 .message {
     font-size: large;
+}
+
+.StickyFooter {
+    position: sticky;
+    bottom: 0;
 }
