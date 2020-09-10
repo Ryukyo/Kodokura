@@ -40,6 +40,7 @@ app.post("/users", async (req, res) => {
         lang: "en",
         friendlist: [],
         blocklist: [],
+        userScore: 0,
       },
       { merge: true }
     )
