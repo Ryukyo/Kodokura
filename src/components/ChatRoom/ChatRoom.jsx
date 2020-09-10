@@ -136,8 +136,6 @@ export default function ChatRoom(props) {
 
   const addBlock = (e) => {};
 
-  console.log("nickname", newchat.nickname);
-
   return (
     <div className="Container">
       <div className="ChatNav">
