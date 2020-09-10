@@ -323,4 +323,3 @@ app.delete("/chatqueue/:chatroomId", async (req, res) => {
   }
 });
 exports.app = functions.https.onRequest(app);
-exports.app = functions.https.onRequest(app);
