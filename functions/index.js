@@ -288,4 +288,39 @@ app.get("/chatqueue/:userId", async (req, res) => {
     return res.status(500).json({ message: "failed to get users" });
   }
 });
+
+app.delete("/chatqueue/:chatroomId", async (req, res) => {
+  functions.logger.log("DELETE /chatqueue/:chatroomId", req.params.chatroomId);
+  const batch = db.batch();
+  const chatroomId = req.params.chatroomId;
+
+  try {
+    const snapshot = await db
+      .collection("chatqueue")
+      .where("matchingResult.chatroom.id", "==", chatroomId)
+      .get();
+
+    if (snapshot.empty) {
+      functions.logger.log("No matching documents");
+      return res
+        .status(200)
+        .send({ message: `Chatroom id ${chatroomId} was deleted` });
+    }
+    snapshot.forEach((doc) => {
+      functions.logger.log(`doc ${doc.id} ${doc.ref}`);
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+
+    functions.logger.log(`Chatroom id ${chatroomId} was deleted`);
+    return res
+      .status(200)
+      .send({ message: `Chatroom id ${chatroomId} was deleted` });
+  } catch (error) {
+    functions.logger.log("Chatroom deletion error, ", error);
+    return res.status(500).send({ message: "Server error" });
+  }
+});
+exports.app = functions.https.onRequest(app);
 exports.app = functions.https.onRequest(app);
