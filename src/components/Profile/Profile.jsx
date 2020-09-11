@@ -15,19 +15,13 @@ export default function Profile() {
     return id;
   };
 
-  async function updateAnswers(answer) {
-    const userId = await getUserId();
-    axios.put(`/users/${userId}`, { 'answers': answer });
-    console.log();
-  };
-
   async function deleteUser() {
     console.log('deleted')
     const userId = await getUserId();
     axios.delete(`/users/${userId}`);
     let user = auth().currentUser;
     user.delete()
-      .then(function () { })
+      .then(function () {})
       .catch(function (error) {
       });
   };
@@ -44,9 +38,7 @@ export default function Profile() {
     setAvatar(avatar);
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  getData();
 
 
   return (
