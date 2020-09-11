@@ -14,20 +14,26 @@
 }
 
 .main-header {
-    display: flex;
+    height: 50vh;
 }
 
 .logo {
     padding: 20px;
     height: 100px;
     border-radius: 70px;
+    
 }
 
-.underclouds {
-    height: 54.5vh;
-    background: linear-gradient(white, lightgray);
-    display: flex;
-    justify-content: space-around;
-        align-content: space-around;
-    flex-direction: column;
+.custom-shape-divider-top-1599705101 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: -1;
+
 }
+
+

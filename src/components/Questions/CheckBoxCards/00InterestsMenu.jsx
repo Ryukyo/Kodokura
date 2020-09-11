@@ -6,20 +6,21 @@ import { auth } from "../../../services/firebase";
 
 export default function InterestsMenu() {
 
-    const [hasAvatar, setHasAvatar] = useState('');
     const user = auth().currentUser;
+    const [hasAvatar, setHasAvatar] = useState(getAvatar());
 
     async function getAvatar() {
         let req = await axios.get(`/users/${user.email}`);
         let data = req.data;
         let avatar = data.avatar_url;
-        console.log(data);
+        console.log('urlll', data.avatar_url);
         setHasAvatar(avatar);
+        return avatar
     }
-
+    
     useEffect(() => {
-        getAvatar()
-    }, []);
+        getAvatar();
+    });
 
     console.log(hasAvatar)
 

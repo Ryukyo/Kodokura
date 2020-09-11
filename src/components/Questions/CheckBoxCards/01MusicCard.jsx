@@ -19,10 +19,15 @@ export default function MusicCard() {
         return id;
     };
     getUserId();
-
     async function updateAnswers() {
         const userId = await getUserId();
         axios.put(`/users/${userId}`, { answers: music });
+    };
+
+    async function checkBox(i) {
+        let req = await axios.get(`/users/${user.email}`)
+        let data = req.data;
+        music.music[i] = !data.answers.music[i];
     };
 
     async function checkBox(i) {
