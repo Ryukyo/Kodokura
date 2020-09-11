@@ -12,6 +12,7 @@
         "lodash": "^4.17.20",
         "moment": "^2.27.0",
         "react": "^16.13.1",
+        "react-chatbot-kit": "^1.0.6",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",
