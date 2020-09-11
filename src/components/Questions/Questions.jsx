@@ -45,8 +45,8 @@ export default function Questions() {
                 <Link to='/interestsmenu'>
                     <button onClick={() => updateAnswers()}>Get started</button>
                 </Link>
-                <Link to='/home'>
-                    <button>Skip questions</button>
+                <Link to='/avatar'>
+                    <button onClick={() => updateAnswers()}>Skip questions</button>
                 </Link>
             </section>
         </>
