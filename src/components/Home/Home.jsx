@@ -39,28 +39,42 @@ export default function Home(props) {
         }
       })
       .catch(async (err) => {
-        console.log(id);
         setLoading(true);
         await axios.post("/chatqueue", id);
-        //startMatchmaking(id.id);
+        startMatchmaking(id.id);
       });
   }
 
   async function startMatchmaking(userId) {
-    let response = await axios.get(`/chatqueue/${userId}`);
     let waitTime = 10000;
+    let threshold = waitTime * 60;
+    let count = 0;
     // wait until get 200
     while (true) {
-      if (response.status === 200) {
-        console.log("entering if block", response);
-        return props.history.push({
-          pathname: "/chatroom",
-          state: { detail: response.data },
+      console.log("started matchmaking, ", count);
+      await axios
+        .get(`/chatqueue/${userId}`)
+        .then((res) => {
+          console.log("entering if block", res);
+          return props.history.push({
+            pathname: "/chatroom",
+            state: { detail: res.data },
+          });
+        })
+        .catch(async (err) => {
+          console.error("error during matchmaking", err);
         });
-      }
+
       // wait for 10 seconds
       await sleep(waitTime);
+
       // break if wait for so long
+      count += waitTime;
+      if (threshold <= count) {
+        // TODO message for unmatch
+        setLoading(false);
+        break;
+      }
     }
   }
 

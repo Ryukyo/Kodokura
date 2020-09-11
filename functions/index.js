@@ -210,13 +210,13 @@ app.get("/chatqueue/:userId", async (req, res) => {
 
     // TODO take blocklist and language into account when calculating score
     const calculateMatchingScore = (user1, user2) => {
-      functions.logger.log("user1 ", user1);
-      functions.logger.log("user2 ", user2);
-      let matchingScore = 0;
-
-      for (let i = 0; i < user1.answers.length; i++) {
-        if (user1.answers[i] === user2.answers[i]) matchingScore++;
-      }
+      // functions.logger.log("user1 ", user1);
+      // functions.logger.log("user2 ", user2);
+      let matchingScore = Math.floor(Math.random() * Math.floor(100));
+      // TEMPORARILY DISABLED; NEEDS TO BE ADJUSTED TO NEW ANSWERS STRUCTURE
+      /* for (let i = 0; i < user1.answers.length; i++) {
+              if (user1.answers[i] === user2.answers[i]) matchingScore++;
+            } */
       return matchingScore;
     };
     let user1Data = {};
