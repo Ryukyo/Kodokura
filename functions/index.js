@@ -142,8 +142,6 @@ app.post("/chatqueue", async (req, res) => {
     return res.status(404).send({ message: "Not Found" });
   }
 
-  functions.logger.log("doc.data", ref.data());
-
   const doc = await db
     .collection("chatqueue")
     .add(
@@ -173,8 +171,8 @@ app.get("/chatqueue/:userId", async (req, res) => {
 
   const currentTimestamp = Date.now();
   let threshold = currentTimestamp - 900000; // 15 min
-  functions.logger.log("date now, ", currentTimestamp);
-  functions.logger.log("threshold, ", threshold);
+  // functions.logger.log("date now, ", currentTimestamp);
+  // functions.logger.log("threshold, ", threshold);
 
   try {
     const snapshotByUserId = await db
@@ -208,17 +206,6 @@ app.get("/chatqueue/:userId", async (req, res) => {
       return res.status(404).send({ message: "Not Found" });
     }
 
-    // TODO take blocklist and language into account when calculating score
-    const calculateMatchingScore = (user1, user2) => {
-      // functions.logger.log("user1 ", user1);
-      // functions.logger.log("user2 ", user2);
-      let matchingScore = Math.floor(Math.random() * Math.floor(100));
-      // TEMPORARILY DISABLED; NEEDS TO BE ADJUSTED TO NEW ANSWERS STRUCTURE
-      /* for (let i = 0; i < user1.answers.length; i++) {
-              if (user1.answers[i] === user2.answers[i]) matchingScore++;
-            } */
-      return matchingScore;
-    };
     let user1Data = {};
     const checkUserMatching = [];
 
@@ -233,25 +220,63 @@ app.get("/chatqueue/:userId", async (req, res) => {
     });
 
     // TODO Return those who have waited too long first.
-    // TODO It returns an error or something until a match is made.
 
     if (checkUserMatching.length < 1) {
       functions.logger.log("No matching User");
       return res.status(404).send({ message: "Not Found" });
     }
 
+    const canBeMatched = (accessUser, targetUser) => {
+      // Blocklist
+      //{ name: foo, id: egawegawe }
+      for (let block of accessUser.blocklist) {
+        if (block.id === targetUser.id) return false;
+      }
+
+      // Language
+      if (accessUser.lang !== targetUser.lang) return false;
+
+      // User Status
+      if (targetUser.status !== "ACTIVE") return false;
+
+      return true;
+    };
+
+    // matched recently? (opt)
+    const calculateMatchingScore = (user1, user2) => {
+      let matchingScore = 0;
+
+      for (let key in user1.answers) {
+        for (let i = 0; i < user1.answers[key].length; i++) {
+          if (
+            user1.answers[key][i] === true &&
+            user2.answers[key][i] === true
+          ) {
+            matchingScore++;
+          }
+        }
+      }
+      return matchingScore;
+    };
+
     let matchedUser;
     checkUserMatching.forEach((waitingUser) => {
-      const currentScore = calculateMatchingScore(user1Data, waitingUser);
-      if (!matchedUser || matchedUser.score < currentScore) {
-        matchedUser = { score: currentScore, ...waitingUser };
+      if (canBeMatched(user1Data, waitingUser)) {
+        const currentScore = calculateMatchingScore(user1Data, waitingUser);
+        if (!matchedUser || matchedUser.score < currentScore) {
+          matchedUser = { score: currentScore, ...waitingUser };
+        }
       }
     });
+
+    if (!matchedUser) {
+      functions.logger.log("No matching User");
+      return res.status(404).send({ message: "Not Found" });
+    }
 
     const chatroom = {
       id: uuid.v4(),
     };
-    functions.logger.log("matchedUser", matchedUser);
 
     matchingResult = { chatroom, user1: user1Data, user2: matchedUser };
 

@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
-import Clouds from '../Clouds/Clouds';
+import Clouds from "../Clouds/Clouds";
 
-
-import axios from 'axios';
+import axios from "axios";
 
 export default function CreateAccount() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-
-  console.log(email)
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -45,35 +42,27 @@ export default function CreateAccount() {
       } */
 
   async function createUser(name, email) {
-
     const params = {
       name: name,
-      email: email
+      email: email,
     };
-    let res = await axios.post('/users', params);
+    let res = await axios.post("/users", params);
   }
 
   async function getUser(email) {
-
     let req = await axios.get(`/users/${email}`);
     let data = req.data;
 
     return data;
-
   }
-
-  function takeToQuestions() {
-    console.log(email);
-  }
-  takeToQuestions();
 
   return (
     <div className="CreateAccount">
       <form className="mt-5 py-5 px-5" onSubmit={handleSubmit}>
         <h1>
-          Sign Up to 
+          Sign Up to
           <Link className="title ml-2" to="/">
-             Kodokura 
+            Kodokura
           </Link>
         </h1>
         <p className="lead">Fill in the form below to create an account.</p>
@@ -86,7 +75,9 @@ export default function CreateAccount() {
             onChange={handleNameChange}
             value={name}
           ></input>
-          <label for="name" className="form-label">Username</label>
+          <label for="name" className="form-label">
+            Username
+          </label>
         </div>
         <div className="form-group">
           <input
@@ -97,7 +88,9 @@ export default function CreateAccount() {
             onChange={handleEmailChange}
             value={email}
           ></input>
-          <label for="name" className="form-label">Email</label>
+          <label for="name" className="form-label">
+            Email
+          </label>
         </div>
         <div className="form-group">
           <input
@@ -105,21 +98,26 @@ export default function CreateAccount() {
             placeholder="Password"
             name="password"
             onChange={handlePasswordChange}
-            // value={password}
             type="password"
+            value={password}
           ></input>
-          <label for="name" className="form-label">Password</label>
+          <label for="name" className="form-label">
+            Password
+          </label>
         </div>
 
         <div className="form-groupe">
           {error ? <p className="text-danger">{error}</p> : null}
-          
-            <button className="btn btn-primary px-5" type="submit" onClick={() => {
+
+          <button
+            className="btn btn-primary px-5"
+            type="submit"
+            onClick={() => {
               createUser(name, email);
-              }}>
-              Sign up
-            </button>
-            
+            }}
+          >
+            Sign up
+          </button>
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
@@ -133,7 +131,7 @@ export default function CreateAccount() {
       <Link to="/">
         <button>Go back</button>
       </Link>
-      <Clouds/>
+      <Clouds />
     </div>
   );
 }
