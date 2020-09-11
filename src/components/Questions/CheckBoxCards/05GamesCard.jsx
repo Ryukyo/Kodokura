@@ -61,7 +61,7 @@ export default function GamesCard() {
     return (
         <>
             <h3> What kind of games do you like to play? </h3>
-            {/* test */}
+
             {renderCheckBox('FPS', 'RPG', 'Survival-horror', 'Action', 'Puzzle', 'Simulation', 'Strategy', 'Sports', 'Adventure', 'Multiplayer')}
 
             <Link to="/interestsmenu">
