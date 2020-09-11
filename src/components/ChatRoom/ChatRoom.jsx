@@ -3,20 +3,25 @@ import { useHistory, useParams } from "react-router-dom";
 import { Button, Form, Input } from "reactstrap";
 import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { db, auth } from "../../services/firebase";
-import _ from "lodash";
+import { db } from "../../services/firebase";
+import axios from "axios";
 
 export default function ChatRoom(props) {
-  // TODO replace this name to chat room id from props
-  const roomId = "testRoom3";
+  const matchResult = props.location.state.detail;
+  const roomId = matchResult.chatroom.id;
+
+  const currentUserId = props.location.state.userId;
+  let currentUser = matchResult.user1;
+  if (currentUser.id !== currentUserId) {
+    currentUser = matchResult.user2;
+  }
 
   const [chats, setChats] = useState([]);
-  //const [users, setUsers] = useState([]);
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState(currentUser.name);
   const [roomname, setRoomname] = useState(roomId);
   const [newchat, setNewchat] = useState({
     roomname: roomId,
-    nickname: "",
+    nickname: currentUser.name,
     message: "",
     date: "",
     type: "",
@@ -26,7 +31,7 @@ export default function ChatRoom(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      setNickname(auth().currentUser.displayName);
+      setNickname(currentUser.name);
       await db
         .ref("chats")
         .orderByChild("roomname")
@@ -46,26 +51,6 @@ export default function ChatRoom(props) {
     fetchData();
   }, [room, roomname]);
 
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log("displayname in chat", auth().currentUser.displayName);
-      setNickname(auth().currentUser.displayName);
-      setRoomname(room);
-      await db.ref("roomusers").on(
-        "value",
-        (resp2) => {
-          setUsers([]);
-          const roomusers = snapshotToArray(resp2);
-          setUsers(roomusers.filter((x) => x.status === "online"));
-        },
-        (error) => console.log("error in fetch roomusers", error)
-      );
-    };
-
-    fetchData();
-  }, [room, roomname]);
-*/
   const snapshotToArray = (snapshot) => {
     const returnArr = [];
 
@@ -117,19 +102,9 @@ export default function ChatRoom(props) {
     const newMessage = db.ref("chats").push();
     newMessage.set(chat);
 
-    /*
-    db.ref("roomusers").once("value", (resp) => {
-      let roomuser = [];
-      roomuser = snapshotToArray(resp);
-      const user = roomuser.find((x) => x.nickname === nickname);
-      if (user !== undefined) {
-        const userRef = db.ref("roomusers" + user.key);
-        userRef.update({ status: "offline" });
-      }
-    });
-    */
+    axios.delete(`/chatqueue/${roomId}`);
 
-    history.goBack();
+    history.push("/home");
   };
 
   const addFriend = (e) => {};
@@ -152,9 +127,10 @@ export default function ChatRoom(props) {
           <b>
             {" "}
             Partner:{" "}
-            {_.uniqBy(chats, "nickname").map((item) => (
-              <p>{item.nickname}</p>
-            ))}
+            <div>
+              <p>{matchResult.user1.name}</p>
+              <p>{matchResult.user2.name}</p>
+            </div>
           </b>
         </p>
 

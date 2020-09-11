@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Header from "../../helpers/Header";
 import Clouds from "../Clouds/Clouds";
 
@@ -23,6 +22,8 @@ export default function Home(props) {
   }, []);
 
   async function queueUp() {
+    setLoading(true);
+
     let req = await axios.get(`/users/${user.email}`);
 
     let userData = req.data;
@@ -33,13 +34,12 @@ export default function Home(props) {
     axios
       .get(`/chatqueue/${id.id}`)
       .then((res) => {
-        if (res.status === 200) {
-          console.log("if block in queue", res.status);
-          props.history.push("/chatroom");
-        }
+        props.history.push({
+          pathname: "/chatroom",
+          state: { detail: res.data, userId: id.id },
+        });
       })
       .catch(async (err) => {
-        setLoading(true);
         await axios.post("/chatqueue", id);
         startMatchmaking(id.id);
       });
@@ -49,16 +49,17 @@ export default function Home(props) {
     let waitTime = 10000;
     let threshold = waitTime * 60;
     let count = 0;
+    let flag = true;
     // wait until get 200
-    while (true) {
-      console.log("started matchmaking, ", count);
+    while (flag) {
       await axios
         .get(`/chatqueue/${userId}`)
         .then((res) => {
           console.log("entering if block", res);
+          flag = false;
           return props.history.push({
             pathname: "/chatroom",
-            state: { detail: res.data },
+            state: { detail: res.data, userId: userId },
           });
         })
         .catch(async (err) => {
@@ -73,7 +74,7 @@ export default function Home(props) {
       if (threshold <= count) {
         // TODO message for unmatch
         setLoading(false);
-        break;
+        flag = false;
       }
     }
   }
@@ -90,7 +91,6 @@ export default function Home(props) {
       ) : (
         <button onClick={queueUp}>Find someone to talk to.</button>
       )}
-      {/* </Link> */}
       <Clouds />
     </div>
   );
