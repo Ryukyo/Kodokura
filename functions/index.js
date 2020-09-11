@@ -40,6 +40,7 @@ app.post("/users", async (req, res) => {
         lang: "en",
         friendlist: [],
         blocklist: [],
+        userScore: 0,
       },
       { merge: true }
     )
@@ -167,102 +168,158 @@ app.post("/chatqueue", async (req, res) => {
 
 app.get("/chatqueue/:userId", async (req, res) => {
   functions.logger.log("GET /chatqueue/:userId");
+  const batch = db.batch();
   const userId = req.params.userId;
 
-  const snapshotByUserId = await db
-    .collection("chatqueue")
-    .where("id", "==", userId)
-    .get();
+  const currentTimestamp = Date.now();
+  let threshold = currentTimestamp - 900000; // 15 min
+  functions.logger.log("date now, ", currentTimestamp);
+  functions.logger.log("threshold, ", threshold);
 
-  if (snapshotByUserId.empty) {
-    functions.logger.log("No matching entity");
-    return res.status(404).send({ message: "Not Found" });
-  }
+  try {
+    const snapshotByUserId = await db
+      .collection("chatqueue")
+      .where("id", "==", userId)
+      .get();
 
-  let matchingResult;
-  snapshotByUserId.forEach((doc) => {
-    let data = doc.data();
-    if (data.matchingResult) {
-      matchingResult = data.matchingResult;
+    if (snapshotByUserId.empty) {
+      functions.logger.log("No matching entity");
+      return res.status(404).send({ message: "Not Found" });
     }
-  });
-  if (matchingResult) {
-    return res.status(200).json(matchingResult);
-  }
 
-  // TODO check if alrealy have active chatroom
-  // if true just return chatroom and matched user info
-
-  const snapshot = await db
-    .collection("chatqueue")
-    .where("queueStatus", "==", "Waiting")
-    .get();
-  if (snapshot.empty) {
-    functions.logger.log("No matching documents");
-    return res.status(404).send({ message: "Not Found" });
-  }
-
-  // TODO take blocklist and language into account when calculating score
-  const calculateMatchingScore = (user1, user2) => {
-    let matchingScore = 0;
-
-    for (let i = 0; i < user1.answers.length; i++) {
-      if (user1.answers[i] === user2.answers[i]) matchingScore++;
+    let matchingResult;
+    snapshotByUserId.forEach((doc) => {
+      let data = doc.data();
+      if (data.matchingResult) {
+        matchingResult = data.matchingResult;
+      }
+    });
+    if (matchingResult) {
+      return res.status(200).json(matchingResult);
     }
-    return matchingScore;
-  };
 
-  let user1Data = {};
-  const checkUserMatching = [];
-
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    if (data.id === userId) {
-      user1Data = data;
-      user1Data["chatqueueId"] = doc.id;
-    } else {
-      checkUserMatching.push({ ...data, chatqueueId: doc.id });
+    const snapshot = await db
+      .collection("chatqueue")
+      .where("queueStatus", "==", "Waiting")
+      .where("createdAt", ">", threshold)
+      .get();
+    if (snapshot.empty) {
+      functions.logger.log("No matching documents");
+      return res.status(404).send({ message: "Not Found" });
     }
-  });
 
-  // TODO Return those who have waited too long first.
-  // TODO Return the same result to two users.
-  // TODO Once a match is made, you are removed from the waiting list for a match.
-  // TODO It returns an error or something until a match is made.
-  // TODO should have expire or disable feature for chatroom / waiting list
+    // TODO take blocklist and language into account when calculating score
+    const calculateMatchingScore = (user1, user2) => {
+      // functions.logger.log("user1 ", user1);
+      // functions.logger.log("user2 ", user2);
+      let matchingScore = Math.floor(Math.random() * Math.floor(100));
+      // TEMPORARILY DISABLED; NEEDS TO BE ADJUSTED TO NEW ANSWERS STRUCTURE
+      /* for (let i = 0; i < user1.answers.length; i++) {
+              if (user1.answers[i] === user2.answers[i]) matchingScore++;
+            } */
+      return matchingScore;
+    };
+    let user1Data = {};
+    const checkUserMatching = [];
 
-  let matchedUser;
-  checkUserMatching.forEach((waitingUser) => {
-    const currentScore = calculateMatchingScore(user1Data, waitingUser);
-    if (!matchedUser || matchedUser.score < currentScore) {
-      matchedUser = { score: currentScore, ...waitingUser };
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.id === userId) {
+        user1Data = data;
+        user1Data["chatqueueId"] = doc.id;
+      } else {
+        checkUserMatching.push({ ...data, chatqueueId: doc.id });
+      }
+    });
+
+    // TODO Return those who have waited too long first.
+    // TODO It returns an error or something until a match is made.
+
+    if (checkUserMatching.length < 1) {
+      functions.logger.log("No matching User");
+      return res.status(404).send({ message: "Not Found" });
     }
-  });
 
-  const chatroom = {
-    id: uuid.v4(),
-  };
-  functions.logger.log("matchedUser", matchedUser);
+    let matchedUser;
+    checkUserMatching.forEach((waitingUser) => {
+      const currentScore = calculateMatchingScore(user1Data, waitingUser);
+      if (!matchedUser || matchedUser.score < currentScore) {
+        matchedUser = { score: currentScore, ...waitingUser };
+      }
+    });
 
-  // TODO store chatroom and matched user information
-  matchingResult = { chatroom, user1: user1Data, user2: matchedUser };
-  await db
-    .collection("chatqueue")
-    .doc(user1Data.chatqueueId)
-    .set(
+    const chatroom = {
+      id: uuid.v4(),
+    };
+    functions.logger.log("matchedUser", matchedUser);
+
+    matchingResult = { chatroom, user1: user1Data, user2: matchedUser };
+
+    const user1Ref = db.collection("chatqueue").doc(user1Data.chatqueueId);
+    const user2Ref = db.collection("chatqueue").doc(matchedUser.chatqueueId);
+
+    batch.set(
+      user1Ref,
       {
         matchingResult,
+        queueStatus: "Matched",
       },
       { merge: true }
-    )
-    .catch((err) => {
+    );
+
+    batch.set(
+      user2Ref,
+      {
+        matchingResult,
+        queueStatus: "Matched",
+      },
+      { merge: true }
+    );
+
+    await batch.commit().catch((err) => {
       functions.logger.log("err, ", err);
       return res.status(500).send({
         message: "failed",
       });
     });
-
-  return res.status(200).json(matchingResult);
+    return res.status(200).json(matchingResult);
+  } catch (error) {
+    functions.logger.log("err, ", error);
+    return res.status(500).json({ message: "failed to get users" });
+  }
 });
-exports.app = functions.https.onRequest(app);
+
+app.delete("/chatqueue/:chatroomId", async (req, res) => {
+  functions.logger.log("DELETE /chatqueue/:chatroomId", req.params.chatroomId);
+  const batch = db.batch();
+  const chatroomId = req.params.chatroomId;
+
+  try {
+    const snapshot = await db
+      .collection("chatqueue")
+      .where("matchingResult.chatroom.id", "==", chatroomId)
+      .get();
+
+    if (snapshot.empty) {
+      functions.logger.log("No matching documents");
+      return res
+        .status(200)
+        .send({ message: `Chatroom id ${chatroomId} was deleted` });
+    }
+    snapshot.forEach((doc) => {
+      functions.logger.log(`doc ${doc.id} ${doc.ref}`);
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+
+    functions.logger.log(`Chatroom id ${chatroomId} was deleted`);
+    return res
+      .status(200)
+      .send({ message: `Chatroom id ${chatroomId} was deleted` });
+  } catch (error) {
+    functions.logger.log("Chatroom deletion error, ", error);
+    return res.status(500).send({ message: "Server error" });
+  }
+});
 exports.app = functions.https.onRequest(app);
