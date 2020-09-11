@@ -38,7 +38,8 @@ export default function Profile() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
     let avatar = data.avatar_url
-
+    console.log('profile ', data)
+    console.log('answer music  ', data.answers.music)
     console.log(avatar);
     setAvatar(avatar);
   }
