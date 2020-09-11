@@ -91,6 +91,10 @@ export default function Home(props) {
       ) : (
         <button onClick={queueUp}>Find someone to talk to.</button>
       )}
+      {/* This is a temporary link to check the chatbot */}
+      <Link to="/chatbot">
+        <button>Testing chatbot</button>
+      </Link>
       <Clouds />
     </div>
   );

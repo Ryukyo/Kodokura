@@ -28,6 +28,7 @@ import BooksCard from "./components/Questions/CheckBoxCards/04BooksCard";
 import GamesCard from "./components/Questions/CheckBoxCards/05GamesCard";
 import SportsCard from "./components/Questions/CheckBoxCards/06SportsCard";
 import FoodsCard from "./components/Questions/CheckBoxCards/07FoodsCard";
+import Chatbot from "./components/ChatBot/BotComponent";
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -176,6 +177,12 @@ function App() {
             path="/foodscard"
             authenticated={authentication}
             component={FoodsCard}
+          />
+
+          <PrivateRoute
+            path="/chatbot"
+            authenticated={authentication}
+            component={Chatbot}
           />
 
         </Switch>
