@@ -14,7 +14,7 @@ export default function Home() {
 
   const user = auth().currentUser;
   console.log(user.email);
-  
+
   async function getData() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
@@ -36,7 +36,11 @@ export default function Home() {
       <Link to="/chatroom">
         <button>Find someone to talk to.</button>
       </Link>
-      <Clouds/>
+      {/* This is a temporary link to check the chatbot */}
+      <Link to="/chatbot">
+        <button>Testing chatbot</button>
+      </Link>
+      <Clouds />
     </div>
   );
 }
