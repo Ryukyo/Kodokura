@@ -19,12 +19,17 @@ export default function MusicCard() {
         return id;
     };
     getUserId();
-    
     async function updateAnswers() {
         const userId = await getUserId();
         axios.put(`/users/${userId}`, { answers: music });
     };
-    
+
+    async function checkBox(i) {
+        let req = await axios.get(`/users/${user.email}`)
+        let data = req.data;
+        music.music[i] = !data.answers.music[i];
+    };
+
     async function checkBox(i) {
         let req = await axios.get(`/users/${user.email}`)
         let data = req.data;
@@ -38,20 +43,20 @@ export default function MusicCard() {
                     <div>
                         {
                             e ?
-                            <>
-                            <label for="fname">{category[i]}</label>
-                            <input type="checkbox" defaultChecked={e} onChange={() => {
-                                
-                                checkBox(i)
-                            }} />
-                            </>
-                            :
-                            <>
-                            <label for="fname">{category[i]}</label>
-                            <input type="checkbox" defaultChecked={e} onChange={() => {
-                                checkBox(i)
-                            }} />
-                            </>
+                                <>
+                                    <label for="fname">{category[i]}</label>
+                                    <input type="checkbox" defaultChecked={e} onChange={() => {
+
+                                        checkBox(i)
+                                    }} />
+                                </>
+                                :
+                                <>
+                                    <label for="fname">{category[i]}</label>
+                                    <input type="checkbox" defaultChecked={e} onChange={() => {
+                                        checkBox(i)
+                                    }} />
+                                </>
                         }
                     </div>
                 )
@@ -63,7 +68,7 @@ export default function MusicCard() {
         <>
             <h3> What style of music do you like? </h3>
 
-            {renderCheckBox('Classical', 'Soundtracks', 'Rock', 'Blues', 'Jazz', 'Flok', 'Pop', 'J-Pop', 'K-Pop', 'Hip-Hop')}
+            {renderCheckBox('Classical', 'Soundtracks', 'Rock', 'Blues', 'Jazz', 'Folk', 'Pop', 'J-Pop', 'K-Pop', 'Hip-Hop')}
 
             <Link to="/interestsmenu">
                 <button onClick={() => {
