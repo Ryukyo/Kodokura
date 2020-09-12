@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "main": "index.js",
-    "proxy": "https://us-central1-kodokura-eb787.cloudfunctions.net/app",
+    "proxy": "https://asia-northeast1-eb787.cloudfunctions.net/app",
     "dependencies": {
         "axios": "^0.20.0",
         "firebase": "^7.19.1",
