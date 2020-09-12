@@ -7,6 +7,8 @@ import { auth } from "../../services/firebase";
 export default function Profile() {
 
   const user = auth().currentUser;
+  const [myAvatar, setAvatar] = useState('');
+
   async function getUserId() {
     let req = await axios.get(`/users/${user.email}`)
     let data = req.data;
@@ -26,7 +28,6 @@ export default function Profile() {
       });
   };
 
-  const [avatar, setAvatar] = useState('');
 
   async function getData() {
     let req = await axios.get(`/users/${user.email}`);
@@ -34,12 +35,10 @@ export default function Profile() {
     let avatar = data.avatar_url
     console.log('profile ', data)
     console.log('answer music  ', data.answers.music)
-    console.log(avatar);
+    console.log('vatarrrr', avatar);
     setAvatar(avatar);
+    return myAvatar;
   }
-
-  getData();
-
 
   return (
     <>
@@ -48,7 +47,7 @@ export default function Profile() {
         <button>Back</button>
       </Link>
       <div>
-        <img src={avatar} alt="avatar" style={{ width: "100px" }}></img>
+        <img src={getData()} alt="avatar" style={{ width: "100px" }}></img>
       </div>
       <div>
         <Link to="/avatar">

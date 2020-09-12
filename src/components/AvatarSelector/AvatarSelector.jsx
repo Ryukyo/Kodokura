@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 
 export default function Avatar() {
 
+    
+
     const user = auth().currentUser;
     async function getUserId() {
         let req = await axios.get(`/users/${user.email}`)

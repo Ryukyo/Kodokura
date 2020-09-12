@@ -1,1 +1,6 @@
-$backGroundClr: red;
+
+$primary-purple: #6443e9;
+$primary-blue: #57d2e2;
+$primary-red: #ff2e63;
+
+$primary-gradient: linear-gradient(60deg, $primary-purple 0%, $primary-blue 100%) no-repeat fixed center;
