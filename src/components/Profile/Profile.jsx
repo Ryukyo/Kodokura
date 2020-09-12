@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 import { auth } from "../../services/firebase";
 
 export default function Profile() {
-
   const user = auth().currentUser;
   const [myAvatar, setAvatar] = useState('');
 
   async function getUserId() {
-    let req = await axios.get(`/users/${user.email}`)
+    let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
     let id = data.id;
-    console.log(data)
+    console.log(data);
     return id;
-  };
+  }
 
   async function deleteUser() {
-    console.log('deleted')
+    console.log("deleted");
     const userId = await getUserId();
     axios.delete(`/users/${userId}`);
     let user = auth().currentUser;
-    user.delete()
+    user
+      .delete()
       .then(function () {})
-      .catch(function (error) {
-      });
-  };
-
+      .catch(function (error) {});
+  }
 
   async function getData() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
-    let avatar = data.avatar_url
-    console.log('profile ', data)
-    console.log('answer music  ', data.answers.music)
-    console.log('vatarrrr', avatar);
+    let avatar = data.avatar_url;
+    // console.log('profile ', data)
+    // console.log('answer music  ', data.answers.music)
+    // console.log(avatar);
     setAvatar(avatar);
     return myAvatar;
   }
+
+  getData();
 
   return (
     <>

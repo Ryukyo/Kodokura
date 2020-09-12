@@ -4,7 +4,7 @@ import { signUp, signInWithGoogle } from "../../helpers/auth";
 import axios from 'axios';
 
 //img
-import usernameIcon from './img/users.svg';
+import usernameIcon from '../Utility/img/users.svg';
 import emailIcon from '../Utility/img/mail.svg';
 import passwordIcon from '../Utility/img/key.svg';
 import backIcon from '../Utility/img/back.svg';
@@ -16,8 +16,6 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-
-  console.log(email)
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -50,27 +48,19 @@ export default function CreateAccount() {
       } */
 
   async function createUser(name, email) {
-
     const params = {
       name: name,
-      email: email
+      email: email,
     };
-    let res = await axios.post('/users', params);
+    let res = await axios.post("/users", params);
   }
 
   async function getUser(email) {
-
     let req = await axios.get(`/users/${email}`);
     let data = req.data;
 
     return data;
-
   }
-
-  function takeToQuestions() {
-    console.log(email);
-  }
-  takeToQuestions();
 
   return (
     <div className="createAccount">
@@ -120,15 +110,18 @@ export default function CreateAccount() {
             placeholder="Password"
             name="password"
             onChange={handlePasswordChange}
-            // value={password}
             type="password"
+            value={password}
           ></input>
         </div>
 
         <div className="form-groupe">
           {error ? <p className="text-danger">{error}</p> : null}
-          
-            <button className="btn btn-primary px-5" type="submit" onClick={() => {
+
+          <button
+            className="btn btn-primary px-5"
+            type="submit"
+            onClick={() => {
               createUser(name, email);
               }}>
               Sign Up

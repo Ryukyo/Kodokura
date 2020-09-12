@@ -13,8 +13,8 @@ export default function Loading() {
   async function checkQuestions() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
-    console.log("medata", data.answers.length);
-    console.log("data", data);
+    // console.log("medata", data.answers.length);
+    // console.log("data", data);
     setAnswersLength(data.answers.length);
     setLoading(false);
   }
