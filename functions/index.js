@@ -242,7 +242,7 @@ app.get("/chatqueue/:userId", async (req, res) => {
       return true;
     };
 
-    // matched recently? (opt)
+    // TODO matched recently? (opt)
     const calculateMatchingScore = (user1, user2) => {
       let matchingScore = 0;
 
