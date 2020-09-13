@@ -1,0 +1,65 @@
+@import '../../style/colors';
+
+div.profile {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background: $primary-gradient;
+    
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        height: 15vh;
+        padding: 30px;
+
+        p {
+            color: #ffffff;
+        }
+    }
+
+    section.profile-pic {
+        display: flex;
+        justify-content: center;
+        margin: 2vh 0;
+        
+        img {
+            height: 200px;
+            padding: 20px;
+            border-radius: 50%;
+            border: 1px solid #ffffff;
+        }
+    }
+
+    section.profile-nav {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        margin: 5vh 0;
+
+        button {
+            height: 64px;
+            width: 300px;
+            margin: 1vh;
+            border-radius: 30px;
+            font-size: 20px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background: $primary-gradient;
+            outline: none;
+    
+        }
+        button:hover {
+            background: #ffffff;
+            color: $primary-purple;
+            border: 1px solid $primary-purple;
+        }
+        button:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
+        }
+    }
+}

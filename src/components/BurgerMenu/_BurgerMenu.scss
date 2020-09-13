@@ -58,6 +58,7 @@ aside.close-navbar {
     transition: transform 0.3s ease-in-out;
     font-size: 20px;
     padding: 0 10vw;
+    box-shadow: 1px 1px 15px -5px rgba(0,0,0,0.5);
 
     header {
         margin-top: 10vh;
@@ -90,7 +91,7 @@ aside.close-navbar {
 aside.open-navbar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #ffffff;
     color: $primary-purple;
     opacity: 0.95;
@@ -103,10 +104,16 @@ aside.open-navbar {
     transition: transform 0.3s ease-in-out;
     font-size: 20px;
     padding: 0 10vw;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 8px 2px 15px -5px rgba(0,0,0,0.5);
+    ;
 
     header {
-        margin-top: 10vh;
+        margin-top: 20vh;
         height: 10vh;
+        display: flex;
+        align-items: center;
     }
 
     ul {
