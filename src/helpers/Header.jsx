@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../services/firebase";
+import { getUserFromCurrentAuthUser, updateUserStatus } from "./backend";
 
 function Header({ avatar }) {
+  const signOut = async () => {
+    const user = await getUserFromCurrentAuthUser();
+    updateUserStatus(user.id, "OFFLINE");
+    auth().signOut();
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-sm fixed-top navbar-light bg-light">
@@ -14,9 +21,9 @@ function Header({ avatar }) {
             <div className="navbar-nav">
               <Link to={{ pathname: "/profile", query: { avatar: avatar } }}>
                 <img className="homeavatar" src={avatar} alt="avatar" />
-              </Link>
+              </Link>{" "}
               <div>
-                <button className="btn" onClick={() => auth().signOut()}>
+                <button className="btn" onClick={() => signOut()}>
                   Logout{" "}
                 </button>{" "}
               </div>{" "}
@@ -38,3 +45,4 @@ function Header({ avatar }) {
 }
 
 export default Header;
+

@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
-import Clouds from '../Clouds/Clouds';
-import axios from 'axios';
-import { auth } from '../../services/firebase';
+import { getUser, updateUserStatus } from "../../helpers/backend";
+import Clouds from "../Clouds/Clouds";
 
 export default function LogIn() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -25,6 +22,9 @@ export default function LogIn() {
     setError("");
     try {
       await signIn(email, password);
+
+      const user = await getUser(email);
+      updateUserStatus(user.id, "ACTIVE");
     } catch (err) {
       setError(err.message);
     }
@@ -59,9 +59,11 @@ export default function LogIn() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-          /* value={this.state.email} */
+            /* value={this.state.email} */
           />
-          <label for="name" className="form-label">Email</label>
+          <label for="name" className="form-label">
+            Email
+          </label>
         </div>
         <div className="form-group">
           <input
@@ -72,14 +74,15 @@ export default function LogIn() {
             /* value={this.state.password} */
             type="password"
           />
-          <label for="name" className="form-label">Password</label>
+          <label for="name" className="form-label">
+            Password
+          </label>
         </div>
         <div className="form-group">
           {error ? <p className="text-danger">{error}</p> : null}
-            <button className="btn btn-primary px-5" type="submit">
-              Login
-            </button>
-
+          <button className="btn btn-primary px-5" type="submit">
+            Login
+          </button>
         </div>
         {/* <p>You can also log in with any of these services</p>
         <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
@@ -93,7 +96,7 @@ export default function LogIn() {
       <Link to="/">
         <button>Go back</button>
       </Link>
-      <Clouds/>
+      <Clouds />
     </div>
   );
 }

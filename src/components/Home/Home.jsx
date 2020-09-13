@@ -4,6 +4,7 @@ import Clouds from "../Clouds/Clouds";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { auth } from "../../services/firebase";
+import { updateUserStatus } from "../../helpers/backend";
 
 export default function Home(props) {
   const [avatar, setAvatar] = useState("");
@@ -34,6 +35,8 @@ export default function Home(props) {
     axios
       .get(`/chatqueue/${id.id}`)
       .then((res) => {
+        updateUserStatus(id.id, "BUSY");
+
         props.history.push({
           pathname: "/chatroom",
           state: { detail: res.data, userId: id.id },
@@ -55,8 +58,9 @@ export default function Home(props) {
       await axios
         .get(`/chatqueue/${userId}`)
         .then((res) => {
-          console.log("entering if block", res);
           flag = false;
+          updateUserStatus(userId, "BUSY");
+
           return props.history.push({
             pathname: "/chatroom",
             state: { detail: res.data, userId: userId },
@@ -89,8 +93,8 @@ export default function Home(props) {
       {loading ? (
         <div>Searching for matches...</div>
       ) : (
-          <button onClick={queueUp}>Find someone to talk to.</button>
-        )}
+        <button onClick={queueUp}>Find someone to talk to.</button>
+      )}
       <Clouds />
     </div>
   );
