@@ -12,8 +12,10 @@ export default function ChatRoom(props) {
 
   const currentUserId = props.location.state.userId;
   let currentUser = matchResult.user1;
+  let otherUser = matchResult.user2;
   if (currentUser.id !== currentUserId) {
     currentUser = matchResult.user2;
+    otherUser = matchResult.user1;
   }
 
   const [chats, setChats] = useState([]);
@@ -158,8 +160,22 @@ export default function ChatRoom(props) {
 
   const addFriend = (e) => { };
 
-  const addBlock = (e) => { };
+  // Maybe add functionality to check whether user is already on block list?
+  // But if a user is already on block list, you should never meet him again and come into a situation where to block him again
+  const addBlock = async (e) => {
+    // get current block list of current user and push an object with the name and id of the user to be blocked
+    let blocklistToUpdate = currentUser.blocklist;
+    blocklistToUpdate.push({
+      name: otherUser.name,
+      id: otherUser.id,
+    });
 
+    console.log(blocklistToUpdate);
+    console.log("current user", currentUserId);
+    await axios.put(`/users/${currentUserId}`, {
+      blocklist: blocklistToUpdate,
+    });
+  };
 
 
   return (
