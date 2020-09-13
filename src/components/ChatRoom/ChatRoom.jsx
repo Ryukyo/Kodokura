@@ -29,6 +29,32 @@ export default function ChatRoom(props) {
   const history = useHistory();
   const { room } = useParams();
 
+  const botMessage = (text) => {
+    // define new message
+    const chat = newchat;
+    chat.roomname = roomId;
+    chat.type = "message";
+    chat.nickname = "R2D2"; // bot name here
+    chat.date = Moment(new Date()).format(" DD/MM/YYYY HH:mm:ss");
+    chat.message = text;
+    return chat;
+  }
+
+  const sendBotMessage = (message) => {
+    // send to realitime DB => automatically synchronized and displayed
+    const newMessage = db.ref("chats").push();
+    newMessage.set(message);
+
+    // update react status and re-render
+    setNewchat({
+      roomname: roomId,
+      nickname: "",
+      message: "",
+      date: "",
+      type: "",
+    });
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       setNickname(currentUser.name);
@@ -40,12 +66,35 @@ export default function ChatRoom(props) {
           "value",
           (resp) => {
             setChats([]);
-            setChats(snapshotToArray(resp));
+            // create message array from DB
+            const messages = snapshotToArray(resp);
+            if (messages.length < 1) {
+              // create bot chat message
+              const welcomeMessage = botMessage(`Welcome ${currentUser.name} and ${matchResult.user2.name}!`);
+              // send message to Realtime DB
+              sendBotMessage(welcomeMessage);
+              // also add message to messages array
+              messages.push(welcomeMessage);
+            }
+            // TODO only user1 sends bot message / not good, because user1 not loggedin or leave room, bot never response
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const from = lastMessage.nickname;
+              if (text.includes("hi") && from !== "R2D2") {
+                const botReactionToName = botMessage("You've said my name human. I'm afraid I cannot answer your questions yet.I'm here just to be sure that you're not alone");
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+            // change status to show messages
+            setChats(messages);
           },
           (error) => {
             console.log("error in fetch chats", error);
           }
         );
+
     };
 
     fetchData();
@@ -107,9 +156,11 @@ export default function ChatRoom(props) {
     history.push("/home");
   };
 
-  const addFriend = (e) => {};
+  const addFriend = (e) => { };
 
-  const addBlock = (e) => {};
+  const addBlock = (e) => { };
+
+
 
   return (
     <div className="Container">
@@ -161,25 +212,24 @@ export default function ChatRoom(props) {
                 <span className="ChatContentCenter">{item.message}</span>
               </div>
             ) : (
-              <div className="ChatMessage">
-                <div
-                  className={`${
-                    item.nickname === nickname ? "RightBubble" : "LeftBubble"
-                  }`}
-                >
-                  {item.nickname === nickname ? (
-                    <span className="MsgName"> Me</span>
-                  ) : (
-                    <span className="MsgName">
-                      {" "}
-                      <u>{item.nickname}</u>
-                    </span>
-                  )}
-                  <span className="MsgDate"> at {item.date}</span>
-                  <p className="message">{item.message}</p>
+                <div className="ChatMessage">
+                  <div
+                    className={`${item.nickname === nickname ? "RightBubble" : "LeftBubble"
+                      }`}
+                  >
+                    {item.nickname === nickname ? (
+                      <span className="MsgName"> Me</span>
+                    ) : (
+                        <span className="MsgName">
+                          {" "}
+                          <u>{item.nickname}</u>
+                        </span>
+                      )}
+                    <span className="MsgDate"> at {item.date}</span>
+                    <p className="message">{item.message}</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
         ))}
       </ScrollToBottom>
@@ -207,3 +257,11 @@ export default function ChatRoom(props) {
     </div>
   );
 }
+
+
+
+
+
+
+
+// if users dont speak, get a common interest from both and recommend that topic to speak
