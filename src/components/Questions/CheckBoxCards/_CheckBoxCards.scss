@@ -42,6 +42,27 @@ div.interests {
         }
     }
 
+    button {
+        height: 64px;
+        width: 240px;
+        border-radius: 30px;
+        margin-top: 30px;
+        font-size: 20px;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        background: $primary-gradient;
+        outline: none;
+    }
+    button:hover {
+        background: #ffffff;
+        color: $primary-purple;
+        border: 1px solid $primary-purple;
+    }
+    button:active {
+        color: #ffffff;
+        background: $primary-purple;
+        border: none;
+    }
 }
 
 
@@ -85,28 +106,27 @@ div.interest-cards {
         }
     }
 
+    button {
+        height: 64px;
+        width: 240px;
+        border-radius: 30px;
+        margin-top: 20px;
+        font-size: 20px;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        background: $primary-gradient;
+        outline: none;
+    }
+    button:hover {
+        background: #ffffff;
+        color: $primary-purple;
+        border: 1px solid $primary-purple;
+    }
+    button:active {
+        color: #ffffff;
+        background: $primary-purple;
+        border: none;
+    }
 }
 
 
-
-// button {
-//     height: 64px;
-//     width: 240px;
-//     border-radius: 30px;
-//     margin-top: 20px;
-//     font-size: 20px;
-//     border: 1px solid #ffffff;
-//     color: #ffffff;
-//     background: $primary-gradient;
-//     outline: none;
-// }
-// button:hover {
-//     background: #ffffff;
-//     color: $primary-purple;
-//     border: 1px solid $primary-purple;
-// }
-// button:active {
-//     color: #ffffff;
-//     background: $primary-purple;
-//     border: none;
-// }

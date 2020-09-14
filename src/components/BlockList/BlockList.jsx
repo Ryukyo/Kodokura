@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../services/firebase";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 import backIcon from "../../components/Utility/img/back.svg";
 
 export default function BlockList() {
@@ -35,23 +36,33 @@ export default function BlockList() {
 
   return (
     <div className="blocklist">
-      <h1>Block List</h1>
-      <Link to="/home">
-        <img src={backIcon} alt="back" />
-      </Link>
+
+      <nav>
+        <Link to="/home">
+          <img src={backIcon} alt="back"/>
+        </Link>
+        <p>Block List</p>
+      </nav>
+
+      <header>Blocked Users</header>
+
       {blockList !== undefined ? (
-        <>
-          {blockList.map((blockedUser, index) => {
-            return (
-              <div className="blocked-user-name" key={index}>
-                <p>{blockedUser.name}</p>
-                <button>Unblock</button>
-              </div>
-            );
-          })}
-        </>
+      <>
+      {blockList.map((blockedUser, index) => {
+      return (
+
+      <section className="blocked-user-name" key={index}>
+        <div>
+          <p>{blockedUser.name}</p>
+          <button>Unblock</button>
+        </div>
+      </section>
+
+      );
+      })}
+      </>
       ) : (
-        <div>No users on your block list</div>
+      <section>No users on your block list</section>
       )}
     </div>
   );

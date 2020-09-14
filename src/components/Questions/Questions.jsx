@@ -35,21 +35,24 @@ export default function Questions() {
 
     return (
         <>  
-            
-            <header>
-                <h3>Questions</h3>
-            </header>
+            <div className="first-question">
+                <nav>
+                    <Link to='/avatar' className="skip-link">
+                        <p onClick={() => updateAnswers()}>Skip questions</p>
+                    </Link>
+                    <p>Tell us about you</p>
+                </nav>
 
-            <section>
-                <p>What are you interested in?</p>
-                <p>You can change your interests at anytime in your profile</p>
+                <section>
+                    <h3>Questions</h3>
+                    <p>What are you interested in?</p>
+                    <p>You can change your interests<br/> at anytime in your profile.</p>
+
+                </section>
                 <Link to='/interestsmenu'>
                     <button onClick={() => updateAnswers()}>Get started</button>
                 </Link>
-                <Link to='/avatar'>
-                    <button onClick={() => updateAnswers()}>Skip questions</button>
-                </Link>
-            </section>
+            </div>
         </>
     )
 }

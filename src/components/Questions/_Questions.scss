@@ -1,0 +1,62 @@
+@import '../../style/colors';
+
+div.first-question {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background: $primary-gradient;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        height: 10vh;
+        padding: 30px;
+
+        p {
+            color: #ffffff;
+        }
+        .skip-link {
+            text-decoration: none;
+        }
+    }
+
+    section {
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 20px;
+        h3 {
+            margin-bottom: 10vh;
+        }
+
+    }:nth-child(2) {
+        margin-bottom: 10px;
+    }
+
+    button {
+        height: 64px;
+        width: 240px;
+        border-radius: 30px;
+        margin: 30px;
+        font-size: 20px;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        background: $primary-gradient;
+        outline: none;
+
+    }
+    button:hover {
+        background: #ffffff;
+        color: $primary-purple;
+        border: 1px solid $primary-purple;
+    }
+    button:active {
+        color: #ffffff;
+        background: $primary-purple;
+        border: none;
+    }
+}
