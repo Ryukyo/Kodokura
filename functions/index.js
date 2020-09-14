@@ -215,9 +215,40 @@ app.get("/chatqueue/:userId", async(req, res) => {
 
         // TODO Return those who have waited too long first.
 
+
         if (checkUserMatching.length < 1) {
             functions.logger.log("No matching User");
             return res.status(404).send({ message: "Not Found" });
+
+    const canBeMatched = (accessUser, targetUser) => {
+      // Blocklist
+      //{ name: foo, id: egawegawe }
+      for (let block of accessUser.blocklist) {
+        if (block.id === targetUser.id) return false;
+      }
+
+      // Language
+      if (accessUser.lang !== targetUser.lang) return false;
+
+      // User Status
+      if (targetUser.status !== "ACTIVE") return false;
+
+      return true;
+    };
+
+    // TODO matched recently? (opt)
+    const calculateMatchingScore = (user1, user2) => {
+      let matchingScore = 0;
+
+      for (let key in user1.answers) {
+        for (let i = 0; i < user1.answers[key].length; i++) {
+          if (
+            user1.answers[key][i] === true &&
+            user2.answers[key][i] === true
+          ) {
+            matchingScore++;
+          }
+
         }
 
         const canBeMatched = (accessUser, targetUser) => {
