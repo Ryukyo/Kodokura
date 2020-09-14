@@ -85,8 +85,10 @@ div.language {
 
     section.flag {
         display: flex;
+        align-content: center;
         justify-content: space-evenly;
         flex-wrap: wrap;
+        height: 50vh;
         padding: 30px;
 
         img {
