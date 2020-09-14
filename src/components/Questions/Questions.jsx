@@ -34,7 +34,8 @@ export default function Questions() {
 
 
     return (
-        <>
+        <>  
+            
             <header>
                 <h3>Questions</h3>
             </header>

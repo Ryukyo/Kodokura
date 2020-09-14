@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { auth } from "../../../services/firebase";
 
+//img
+import backIcon from '../../Utility/img/back.svg'
 
 export default function InterestsMenu() {
 
@@ -27,44 +29,43 @@ export default function InterestsMenu() {
 
     return (
         <>
-            <h3> Interests </h3>
-            <div>
-                <Link to="/musiccard">
-                    <button>Music</button>
-                </Link>
+            <div className="interests">
+
+                <nav>
+                    <Link to="/profile">
+                    <img src={backIcon} alt="back"/>
+                    </Link>
+                    <p>Select what you are interested in</p>
+                </nav>
+
+                <section>
+                    <div>
+                        <Link to="/musiccard" className="hobbies-link">Music</Link>
+                    </div>
+                    <div>
+                        <Link to="/moviescard" className="hobbies-link">Movies</Link>
+                    </div>
+                    <div>
+                        <Link to="/tvshowscard" className="hobbies-link" className="hobbies-link">TV Shows</Link>
+                    </div>
+                    <div>
+                        <Link to="/bookscard" className="hobbies-link">Books</Link>
+                    </div>
+                    <div>
+                        <Link to="/gamescard" className="hobbies-link">Games</Link>
+                    </div>
+                    <div>
+                        <Link to="/sportscard" className="hobbies-link">Sports</Link>
+                    </div>
+                    <div>
+                        <Link to="/foodscard" className="hobbies-link">Foods</Link>
+                    </div>
+                </section>
+                {
+                    hasAvatar.length === 0 ?
+                    <Link to='/avatar'><button>Done!</button></Link> : <Link to='/profile'><button >Done!</button></Link>
+                }
             </div>
-            <div>
-                <Link to="/moviescard">
-                    <button>Movies</button>
-                </Link>
-            </div>
-            <div>
-                <Link to="/tvshowscard">
-                    <button>TV Shows</button>
-                </Link>
-            </div>
-            <div>
-                <Link to="/bookscard">
-                    <button>Books</button>
-                </Link>
-            </div>
-            <div>
-                <Link to="/gamescard">
-                    <button>Games</button>
-                </Link>
-            </div>
-            <div>
-                <Link to="/sportscard">
-                    <button>Sports</button>
-                </Link>
-            </div>
-            <div>
-                <Link to="/foodscard">
-                    <button>Foods</button>
-                </Link>
-            </div>
-            {hasAvatar.length === 0 ?
-                <Link to='/avatar'><button>Done!</button></Link> : <Link to='/profile'><button >Done!</button></Link>}
         </>
     )
 }

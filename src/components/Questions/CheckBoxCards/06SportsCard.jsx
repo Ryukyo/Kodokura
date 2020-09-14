@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import axios from 'axios';
 
+//img
+import backIcon from '../../Utility/img/back.svg';
+
 export default function SportsCard() {
 
     const user = auth().currentUser;
@@ -60,15 +63,31 @@ export default function SportsCard() {
 
     return (
         <>
-            <h3> What kind of sports do you like ? </h3>
+            <div className="interest-cards">
+                <nav>
+                <Link to="/interestsmenu">
+                <img src={backIcon} alt="back"/>
+                </Link>
+                <p>Sports</p>
+                </nav>
 
-            {renderCheckBox('Soccer', 'Football', 'Basket', 'Baseball', 'Ice-hockey', 'Golf', 'Tenis', 'Cycling', 'Yoga', 'Body-building')}
 
-            <Link to="/interestsmenu">
-                <button onClick={() => {
+                <h3> What kind of Sports do you like? </h3>
+
+                <section className="selection-box">
+                    {renderCheckBox('Soccer', 'Football', 'Basket', 'Baseball', 'Ice-hockey', 'Golf', 'Tenis', 'Cycling', 'Yoga', 'Body-building')}
+                </section>
+
+                <Link to="/interestsmenu">
+                    <button
+                    onClick={() => {
                     updateAnswers();
-                }}>Done!</button>
-            </Link>
+                    }}
+                    >
+                    Done!
+                    </button>
+                </Link>
+            </div>
         </>
     )
 }
