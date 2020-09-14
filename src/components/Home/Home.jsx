@@ -85,24 +85,18 @@ export default function Home(props) {
 
   return (
     <div className="home">
-
       <Header avatar={avatar} />
 
       <section className="look-chat">
-
-      {loading ? (
-        <div>Searching for matches...</div>
-      ) : (
-
-        <button onClick={queueUp}>Find someone <br/>to talk to.</button>
-      )}
-
+        {loading ? (
+          <div>Searching for matches...</div>
+        ) : (
+          <button onClick={queueUp}>
+            Find someone <br />
+            to talk to.
+          </button>
+        )}
       </section>
-     
-
-          
-
-
     </div>
   );
 }
