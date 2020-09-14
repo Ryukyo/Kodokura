@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-
+import ChatRoom from "../ChatRoom/ChatRoom.jsx"
 
 //initial basic random questions 
-
-const answerRandomizer = (array) => {
+export function answerRandomizer(array) {
     let randomNum = Math.round(Math.random() * array.length)
     return randomNum
 }
 
-const hiKodobot = () => {
+export function hiKodobot() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -23,7 +22,23 @@ const hiKodobot = () => {
     }
 }
 
-const howAreYouKodobot = () => {
+export function whyDidTheChicken() {
+    if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+        const lastMessage = messages[messages.length - 1];
+        const text = lastMessage.message;
+        const lowercaseText = text.toLowerCase()
+        if (lowercaseText.includes("why did the chicken cross the road")) {
+            const answer = ["I'm not answering that question", "Human...figure out by yourself!", "Because he has 2 legs and he can!!.... I cannot because I'm a simply bot"]
+            const random = answerRandomizer(answer)
+            const botReactionToName = botMessage(answer[random]);
+            sendBotMessage(botReactionToName);
+            messages.push(botReactionToName);
+        }
+    }
+}
+
+
+export function howAreYouKodobot() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -38,7 +53,7 @@ const howAreYouKodobot = () => {
     }
 }
 
-const invokedKodobotName = () => {
+export function invokedKodobotName() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -53,7 +68,7 @@ const invokedKodobotName = () => {
     }
 }
 
-const whoAreYouKodobot = () => {
+export function whoAreYouKodobot() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -68,7 +83,7 @@ const whoAreYouKodobot = () => {
     }
 }
 
-const winterIsComing = () => {
+export function winterIsComing() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -83,7 +98,7 @@ const winterIsComing = () => {
     }
 }
 
-const iLoveYouKodobot = () => {
+export function iLoveYouKodobot() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -98,7 +113,7 @@ const iLoveYouKodobot = () => {
     }
 }
 
-const whatIsTheMeaningOfLife = () => {
+export function whatIsTheMeaningOfLife() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -113,7 +128,7 @@ const whatIsTheMeaningOfLife = () => {
     }
 }
 
-const areWeLivingInAsimulation = () => {
+export function areWeLivingInAsimulation() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -128,7 +143,7 @@ const areWeLivingInAsimulation = () => {
     }
 }
 
-const doYouAgree = () => {
+export function doYouAgree() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -142,7 +157,7 @@ const doYouAgree = () => {
         }
     }
 }
-const yesOrNo = () => {
+export function yesOrNo() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -156,7 +171,7 @@ const yesOrNo = () => {
         }
     }
 }
-const whereDoYouComeFrom = () => {
+export function whereDoYouComeFrom() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -171,7 +186,7 @@ const whereDoYouComeFrom = () => {
     }
 }
 
-const howOldAreYou = () => {
+export function howOldAreYou() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -186,7 +201,7 @@ const howOldAreYou = () => {
     }
 }
 
-const areYouHappy = () => {
+export function areYouHappy() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -201,7 +216,7 @@ const areYouHappy = () => {
     }
 }
 
-const areYouABoy = () => {
+export function areYouABoy() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -216,7 +231,7 @@ const areYouABoy = () => {
     }
 }
 
-const areYouAGirl = () => {
+export function areYouAGirl() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -231,7 +246,7 @@ const areYouAGirl = () => {
     }
 }
 
-const areYouGay = () => {
+export function areYouGay() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -246,7 +261,7 @@ const areYouGay = () => {
     }
 }
 
-const predictFuture = () => {
+export function predictFuture() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -261,7 +276,7 @@ const predictFuture = () => {
     }
 }
 
-const whatTimeIsIt = () => {
+export function whatTimeIsIt() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -278,7 +293,7 @@ const whatTimeIsIt = () => {
     }
 }
 
-const insults = () => {
+export function insults() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -296,7 +311,7 @@ const insults = () => {
 //pet section
 
 
-const doYouLikePets = () => {
+export function doYouLikePets() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -311,7 +326,7 @@ const doYouLikePets = () => {
     }
 }
 
-const doYouLikeCats = () => {
+export function doYouLikeCats() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -326,7 +341,7 @@ const doYouLikeCats = () => {
     }
 }
 
-const doYouLikeDogs = () => {
+export function doYouLikeDogs() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -343,7 +358,7 @@ const doYouLikeDogs = () => {
 
 // interests
 
-const doYouLikeMovies = () => {
+export function doYouLikeMovies() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -358,7 +373,7 @@ const doYouLikeMovies = () => {
     }
 }
 
-const doYouLikeSports = () => {
+export function doYouLikeSports() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -373,7 +388,7 @@ const doYouLikeSports = () => {
     }
 }
 
-const doYouLikeFood = () => {
+export function doYouLikeFood() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -388,7 +403,7 @@ const doYouLikeFood = () => {
     }
 }
 
-const doYouLikeMusic = () => {
+export function doYouLikeMusic() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -403,7 +418,7 @@ const doYouLikeMusic = () => {
     }
 }
 
-const doYouLikeGames = () => {
+export function doYouLikeGames() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -418,7 +433,7 @@ const doYouLikeGames = () => {
     }
 }
 
-const doYouLikeBooks = () => {
+export function doYouLikeBooks() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -433,7 +448,7 @@ const doYouLikeBooks = () => {
     }
 }
 
-const doYouLikeTVShows = () => {
+export function doYouLikeTVShows() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -448,7 +463,7 @@ const doYouLikeTVShows = () => {
     }
 }
 
-const favoriteMovie = () => {
+export function favoriteMovie() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -462,7 +477,7 @@ const favoriteMovie = () => {
         }
     }
 }
-const favoriteDish = () => {
+export function favoriteDish() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -477,7 +492,7 @@ const favoriteDish = () => {
     }
 }
 
-const favoriteSong = () => {
+export function favoriteSong() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -492,7 +507,7 @@ const favoriteSong = () => {
     }
 }
 
-const favoriteSport = () => {
+export function favoriteSport() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
@@ -507,7 +522,7 @@ const favoriteSport = () => {
     }
 }
 
-const favoriteBook = () => {
+export function favoriteBook() {
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;

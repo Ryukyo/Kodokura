@@ -5,6 +5,10 @@ import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { db } from "../../services/firebase";
 import axios from "axios";
+// import { answerRandomizer, hiKodobot, whyDidTheChicken, howAreYouKodobot, invokedKodobotName, whoAreYouKodobot, winterIsComing, iLoveYouKodobot, whatIsTheMeaningOfLife, areWeLivingInAsimulation, doYouAgree, yesOrNo, whereDoYouComeFrom, areYouHappy, areYouABoy, areYouAGirl, areYouGay, predictFuture, whatTimeIsIt, insults } from "../ChatBot/ChatBotHelper.jsx";
+// import { doYouLikePets, doYouLikeCats, doYouLikeDogs } from "../ChatBot/ChatBotHelper.jsx";
+// import { doYouLikeMovies, doYouLikeSports, doYouLikeFood, doYouLikeMusic, doYouLikeGames, doYouLikeBooks, doYouLikeTVShows, favoriteMovie, favoriteDish, favoriteSong, favoriteSport, favoriteBook } from "../ChatBot/ChatBotHelper.jsx";
+
 
 export default function ChatRoom(props) {
   const matchResult = props.location.state.detail;
@@ -89,17 +93,19 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
+            //helper functions
             const answerRandomizer = (array) => {
               let randomNum = Math.round(Math.random() * array.length)
               return randomNum
             }
-            const invokedKodobotName = () => {
+
+            const hiKodobot = () => {
               if (messages.length > 0 && currentUserId === matchResult.user1.id) {
                 const lastMessage = messages[messages.length - 1];
                 const text = lastMessage.message;
                 const lowercaseText = text.toLowerCase()
-                if (lowercaseText.includes("kodobot")) {
-                  const answer = ["You've said my name humans", "I'm here to take care of you humans", "I'm still learning human language"]
+                if (lowercaseText.includes("hi kodobot")) {
+                  const answer = ["Hi humans", "Hello humans", "Kodobot here!"]
                   const random = answerRandomizer(answer)
                   const botReactionToName = botMessage(answer[random]);
                   sendBotMessage(botReactionToName);
@@ -107,7 +113,45 @@ export default function ChatRoom(props) {
                 }
               }
             }
-            invokedKodobotName();
+
+            answerRandomizer();
+            hiKodobot();
+            // whyDidTheChicken();
+            // howAreYouKodobot();
+            // invokedKodobotName();
+            // whoAreYouKodobot();
+            // winterIsComing();
+            // iLoveYouKodobot();
+            // whatIsTheMeaningOfLife();
+            // areWeLivingInAsimulation();
+            // doYouAgree();
+            // yesOrNo();
+            // whereDoYouComeFrom();
+            // areYouHappy();
+            // areYouABoy();
+            // areYouAGirl();
+            // areYouGay();
+            // predictFuture();
+            // whatTimeIsIt();
+            // insults();
+
+            // doYouLikePets();
+            // doYouLikeCats();
+            // doYouLikeDogs();
+
+            // doYouLikeMovies();
+            // doYouLikeSports();
+            // doYouLikeFood();
+            // doYouLikeMusic();
+            // doYouLikeGames();
+            // doYouLikeBooks();
+            // doYouLikeTVShows();
+            // favoriteMovie();
+            // favoriteDish();
+            // favoriteSong();
+            // favoriteSport();
+            // favoriteBook();
+
             // change status to show messages
             setChats(messages);
           },
