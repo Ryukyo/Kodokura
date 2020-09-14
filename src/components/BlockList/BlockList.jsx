@@ -17,7 +17,7 @@ export default function BlockList() {
       return null;
     }
     setBlocklist(data.blocklist);
-    console.log(blockList, "blocklist");
+    // console.log(blockList, "blocklist");
     return id;
   }
 
@@ -25,12 +25,18 @@ export default function BlockList() {
     getBlocklistAndId();
   }, []);
 
-  async function updateBlocklist() {
+  async function updateBlocklist(username) {
     // needs to be provided the name/id of a user that is to be removed from the blocklist
     // then remove the user from the blockList in this component
     // and set the blocklist in the user object of the database to the new blockList
     const userId = await getBlocklistAndId();
-    axios.put(`/users/${userId}`, { blocklist: blockList });
+    let filteredAray = blockList.filter((obj) => {
+      return obj.name !== username;
+    });
+    console.log("filtered array", filteredAray);
+    setBlocklist(filteredAray);
+    await axios.put(`/users/${userId}`, { blocklist: blockList });
+    console.log("blocklist", blockList);
   }
 
   return (
@@ -39,13 +45,15 @@ export default function BlockList() {
       <Link to="/home">
         <img src={backIcon} alt="back" />
       </Link>
-      {blockList !== undefined ? (
+      {blockList.length > 0 ? (
         <>
           {blockList.map((blockedUser, index) => {
             return (
               <div className="blocked-user-name" key={index}>
                 <p>{blockedUser.name}</p>
-                <button>Unblock</button>
+                <button onClick={() => updateBlocklist(blockedUser.name)}>
+                  Unblock
+                </button>
               </div>
             );
           })}
