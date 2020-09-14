@@ -34,7 +34,7 @@ export default function ChatRoom(props) {
     const chat = newchat;
     chat.roomname = roomId;
     chat.type = "message";
-    chat.nickname = "R2D2"; // bot name here
+    chat.nickname = "KodoBot"; // bot name here
     chat.date = Moment(new Date()).format(" DD/MM/YYYY HH:mm:ss");
     chat.message = text;
     return chat;
@@ -81,12 +81,31 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
               const from = lastMessage.nickname;
-              if (text.includes("hi") && from !== "R2D2") {
+              if (text.includes("hi") && from !== "KodoBot") {
                 const botReactionToName = botMessage("You've said my name human. I'm afraid I cannot answer your questions yet.I'm here just to be sure that you're not alone");
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
               }
             }
+            const answerRandomizer = (array) => {
+              let randomNum = Math.round(Math.random() * array.length)
+              return randomNum
+            }
+            const invokedKodobotName = () => {
+              if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+                const lastMessage = messages[messages.length - 1];
+                const text = lastMessage.message;
+                const lowercaseText = text.toLowerCase()
+                if (lowercaseText.includes("kodobot")) {
+                  const answer = ["You've said my name humans", "I'm here to take care of you humans", "I'm still learning human language"]
+                  const random = answerRandomizer(answer)
+                  const botReactionToName = botMessage(answer[random]);
+                  sendBotMessage(botReactionToName);
+                  messages.push(botReactionToName);
+                }
+              }
+            }
+            invokedKodobotName();
             // change status to show messages
             setChats(messages);
           },
