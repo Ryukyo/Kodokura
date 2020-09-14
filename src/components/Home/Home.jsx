@@ -93,14 +93,15 @@ export default function Home(props) {
       {loading ? (
         <div>Searching for matches...</div>
       ) : (
+
         <button onClick={queueUp}>Find someone <br/>to talk to.</button>
       )}
 
       </section>
-      {/* This is a temporary link to check the chatbot */}
-      {/* <Link to="/chatbot">
-        <button>Testing chatbot</button>
-      </Link> */}
+     
+
+          
+
 
     </div>
   );
