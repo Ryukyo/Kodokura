@@ -113,6 +113,16 @@ function App() {
             component={Profile}
           />
           <PrivateRoute
+            path="/friendlist"
+            authenticated={authentication}
+            component={FriendList}
+          />
+          <PrivateRoute
+            path="/blocklist"
+            authenticated={authentication}
+            component={BlockList}
+          />
+          <PrivateRoute
             path="/avatar"
             authenticated={authentication}
             component={AvatarSelector}
