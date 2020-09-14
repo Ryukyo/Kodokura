@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../../services/firebase";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import backIcon from "../../components/Utility/img/back.svg";
 
 export default function BlockList() {
   // pass user object from parent component to get the id and avoid making another call to auth just to get the id?
   const user = auth().currentUser;
-  const [blockList, setBlocklist] = useState();
+  const [blockList, setBlocklist] = useState([]);
 
   async function getBlocklistAndId() {
     let req = await axios.get(`/users/${user.email}`);
@@ -18,7 +20,10 @@ export default function BlockList() {
     console.log(blockList, "blocklist");
     return id;
   }
-  getBlocklistAndId();
+
+  useEffect(() => {
+    getBlocklistAndId();
+  }, []);
 
   async function updateBlocklist() {
     // needs to be provided the name/id of a user that is to be removed from the blocklist
@@ -29,32 +34,25 @@ export default function BlockList() {
   }
 
   return (
-    <>
+    <div className="blocklist">
       <h1>Block List</h1>
-      <button>back</button>
-      <div className="blocked-user-name">
-        <img></img>
-        <p>Eduardo</p>
-        <button>Unblock</button>
-      </div>
-      <div className="blocked-user-name">
-        <img></img>
-        <p>Philippe</p>
-        <button>Unblock</button>
-      </div>
-      <img></img>
-      <div className="blocked-user-name">
-        <p>Florian</p>
-        <button>Unblock</button>
-      </div>
-      <div className="blocked-user-name">
-        <p>Vincent</p>
-        <button>Unblock</button>
-      </div>
-      <div className="blocked-user-name">
-        <p>Tomoyuki</p>
-        <button>Unblock</button>
-      </div>
-    </>
+      <Link to="/home">
+        <img src={backIcon} alt="back" />
+      </Link>
+      {blockList !== undefined ? (
+        <>
+          {blockList.map((blockedUser, index) => {
+            return (
+              <div className="blocked-user-name" key={index}>
+                <p>{blockedUser.name}</p>
+                <button>Unblock</button>
+              </div>
+            );
+          })}
+        </>
+      ) : (
+        <div>No users on your block list</div>
+      )}
+    </div>
   );
 }
