@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
 import { getUser, updateUserStatus } from "../../helpers/backend";
-import Clouds from "../Clouds/Clouds";
+
+//img
+import backIcon from "../Utility/img/back.svg";
+import emailIcon from "../Utility/img/mail.svg";
+import passwordIcon from "../Utility/img/key.svg";
+import logo from "../Utility/img/logo-wh.png";
 
 export default function LogIn() {
   const [error, setError] = useState(null);
@@ -39,20 +44,25 @@ export default function LogIn() {
       } */
 
   return (
-    <div className="LogIn">
-      <form
-        className="mt-5 py-5 px-5"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <h1>
-          Login to
-          <Link className="title ml-2" to="/">
-            Kodokura
-          </Link>
-        </h1>
-        <p className="lead">Fill in the form below to login to your account.</p>
+    <div className="login">
+      <nav>
+        <Link to="/">
+          <img src={backIcon} alt="back" />
+        </Link>
+        <p>Login</p>
+      </nav>
+
+      <header>
+        <Link className="main-link" to="/">
+          <img src={logo} alt="logo" />
+        </Link>
+      </header>
+
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-group">
+          <label htmlFor="username">
+            <img src={emailIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Email"
@@ -61,11 +71,11 @@ export default function LogIn() {
             onChange={handleEmailChange}
             /* value={this.state.email} */
           />
-          <label for="name" className="form-label">
-            Email
-          </label>
         </div>
         <div className="form-group">
+          <label htmlFor="username">
+            <img src={passwordIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Password"
@@ -74,29 +84,22 @@ export default function LogIn() {
             /* value={this.state.password} */
             type="password"
           />
-          <label for="name" className="form-label">
-            Password
-          </label>
         </div>
-        <div className="form-group">
+        <div className="form-group error-msg">
           {error ? <p className="text-danger">{error}</p> : null}
-          <button className="btn btn-primary px-5" type="submit">
-            Login
-          </button>
+          <button type="submit">Login</button>
         </div>
         {/* <p>You can also log in with any of these services</p>
         <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
           Sign in with Google
         </button> */}
-        <hr />
-        <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
       </form>
-      <Link to="/">
-        <button>Go back</button>
-      </Link>
-      <Clouds />
+      <p className="have-account">
+        Don't have an account?{" "}
+        <Link to="/signup" className="text-link">
+          Sign up
+        </Link>
+      </p>
     </div>
   );
 }

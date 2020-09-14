@@ -1,21 +1,22 @@
-import { auth } from "../services/firebase";
+import {
+    auth
+} from "../services/firebase";
 import axios from "axios";
 
-export async function getCurrentAuthUser() {
-    return await auth().currentUser;
+export function getCurrentAuthUser() {
+    return auth().currentUser;
 }
 
 // TODO throws error when request failed
 // TODO Since the same request is called over and over again, it's better to store it in state or Redux, or to cache it.
 
 export async function getUser(email) {
-    const user = await axios.get(`/users/${email}`);
-    return user;
+    const res = await axios.get(`/users/${email}`);
+    return res.data;
 }
 
 export async function getUserFromCurrentAuthUser() {
     const currentUser = getCurrentAuthUser();
-    console.log("current User", currentUser);
     const user = await getUser(currentUser.email);
     return user;
 }
@@ -25,12 +26,13 @@ async function createUser(name, email) {
         name: name,
         email: email,
     };
-    const idObj = await axios.post("/users", params);
-    return idObj;
+    const res = await axios.post("/users", params);
+    return res.data;
 }
 
 export async function updateUser(userId, body) {
-    return await axios.put(`/users/${userId}`, body);
+    const res = await axios.put(`/users/${userId}`, body);
+    return res.data;
 }
 
 /**
@@ -40,5 +42,7 @@ export async function updateUser(userId, body) {
  * @return {User} updated user
  */
 export async function updateUserStatus(userId, newStatus) {
-    return updateUser(userId, { status: newStatus });
+    return updateUser(userId, {
+        status: newStatus
+    });
 }

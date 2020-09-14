@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
-import Clouds from "../Clouds/Clouds";
+import axios from 'axios';
 
-import axios from "axios";
+//img
+import usernameIcon from '../Utility/img/users.svg';
+import emailIcon from '../Utility/img/mail.svg';
+import passwordIcon from '../Utility/img/key.svg';
+import backIcon from '../Utility/img/back.svg';
+import logo from '../Utility/img/logo-wh.png';
+
 
 export default function CreateAccount() {
   const [error, setError] = useState(null);
@@ -50,16 +56,24 @@ export default function CreateAccount() {
   }
 
   return (
-    <div className="CreateAccount">
-      <form className="mt-5 py-5 px-5" onSubmit={handleSubmit}>
-        <h1>
-          Sign Up to
-          <Link className="title ml-2" to="/">
-            Kodokura
-          </Link>
-        </h1>
-        <p className="lead">Fill in the form below to create an account.</p>
+    <div className="createAccount">
+      <nav>
+        <Link to="/">
+          <img src={backIcon} alt="back"/>
+        </Link>
+        <p>Sign Up</p>
+      </nav>
+
+      <header>
+        <Link className="main-link" to="/">
+          <img src={logo} alt="logo"/>
+        </Link>
+      </header>
+
+      <form className="form" onSubmit={handleSubmit}>
+
         <div className="form-group">
+          <label htmlFor="username" className="username-icom"><img src={usernameIcon} alt=""/></label>
           <input
             type="input"
             className="form-field"
@@ -67,12 +81,11 @@ export default function CreateAccount() {
             name="name"
             onChange={handleNameChange}
             value={name}
+            autoComplete="off"
           ></input>
-          <label for="name" className="form-label">
-            Username
-          </label>
         </div>
         <div className="form-group">
+        <label htmlFor="username"><img src={emailIcon} alt=""/></label>
           <input
             className="form-field"
             placeholder="Email"
@@ -80,12 +93,11 @@ export default function CreateAccount() {
             type="email"
             onChange={handleEmailChange}
             value={email}
+            autoComplete="off"
           ></input>
-          <label for="name" className="form-label">
-            Email
-          </label>
         </div>
         <div className="form-group">
+          <label htmlFor="username"><img src={passwordIcon} alt=""/></label>
           <input
             className="form-field"
             placeholder="Password"
@@ -94,9 +106,6 @@ export default function CreateAccount() {
             type="password"
             value={password}
           ></input>
-          <label for="name" className="form-label">
-            Password
-          </label>
         </div>
 
         <div className="form-groupe">
@@ -107,24 +116,21 @@ export default function CreateAccount() {
             type="submit"
             onClick={() => {
               createUser(name, email);
-            }}
-          >
-            Sign up
-          </button>
+              }}>
+              Sign Up
+            </button>  
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
               Sign up with Google
             </button> */}
-        <hr></hr>
-        <p>
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
       </form>
-      <Link to="/">
-        <button>Go back</button>
-      </Link>
-      <Clouds />
+
+      <p className="have-account">
+        Already have an account? <Link to="/login" className="text-link">Login</Link>
+      </p>
+
+
     </div>
   );
 }

@@ -29,19 +29,32 @@ export default function Avatar() {
 
     return (
         <>
-            <header>
-                <p>Choose your avatar</p>
-            </header>
-            <img src={bulbasaur} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(bulbasaur)}/>
-            <img src={charmander} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(charmander)}/>
-            <img src={pikachu} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(pikachu)}/>
-            <img src={raichu} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(raichu)}/>
-            <img src={squirtle} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(squirtle)}/>
-            <img src={togepi} alt="avatar" style={{width: "50px"}} onClick={() => updateAvatar(togepi)}/>
+            <div className="avatar-selector">
 
-            <Link to='/home'>
-                <button>Start</button>
-            </Link>
+                <header>
+                    <p>Choose your avatar</p>
+                </header>
+                
+                <section className="avatar">
+                    <img src={bulbasaur} alt="avatar" onClick={() => updateAvatar(bulbasaur)}/>
+                    <img src={charmander} alt="avatar" onClick={() => updateAvatar(charmander)}/>
+                    <img src={pikachu} alt="avatar" onClick={() => updateAvatar(pikachu)}/>
+                    <img src={raichu} alt="avatar" onClick={() => updateAvatar(raichu)}/>
+                    <img src={squirtle} alt="avatar" onClick={() => updateAvatar(squirtle)}/>
+                    <img src={togepi} alt="avatar" onClick={() => updateAvatar(togepi)}/>
+                </section>
+
+                <nav className="btn">
+                    <Link to='/home'>
+                        <button>Start chatting!</button>
+                    </Link>
+                    
+                    <Link to='/profile'>
+                        <button>Go to profile</button>
+                    </Link>
+                </nav>
+            </div>
+            
 
         </>
     )

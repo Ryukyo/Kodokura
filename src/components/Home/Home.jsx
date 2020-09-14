@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../helpers/Header";
-import Clouds from "../Clouds/Clouds";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { auth } from "../../services/firebase";
 import { updateUserStatus } from "../../helpers/backend";
@@ -88,14 +86,19 @@ export default function Home(props) {
   }
 
   return (
-    <div className="Home">
+    <div className="home">
       <Header avatar={avatar} />
-      {loading ? (
-        <div>Searching for matches...</div>
-      ) : (
-        <button onClick={queueUp}>Find someone to talk to.</button>
-      )}
-      <Clouds />
+
+      <section className="look-chat">
+        {loading ? (
+          <div>Searching for matches...</div>
+        ) : (
+          <button onClick={queueUp}>
+            Find someone <br />
+            to talk to.
+          </button>
+        )}
+      </section>
     </div>
   );
 }

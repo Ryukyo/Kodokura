@@ -4,8 +4,13 @@ import axios from "axios";
 
 import { auth } from "../../services/firebase";
 
+//img
+import backIcon from '../Utility/img/back.svg'
+
 export default function Profile() {
   const user = auth().currentUser;
+  const [myAvatar, setAvatar] = useState('');
+
   async function getUserId() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
@@ -25,8 +30,6 @@ export default function Profile() {
       .catch(function (error) {});
   }
 
-  const [avatar, setAvatar] = useState("");
-
   async function getData() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
@@ -34,37 +37,48 @@ export default function Profile() {
     // console.log('profile ', data)
     // console.log('answer music  ', data.answers.music)
     // console.log(avatar);
+    console.log(data)
     setAvatar(avatar);
+    return myAvatar;
   }
 
   getData();
 
   return (
     <>
-      <h1>Profile</h1>
-      <Link to="/home">
-        <button>Back</button>
-      </Link>
-      <div>
-        <img src={avatar} alt="avatar" style={{ width: "100px" }}></img>
-      </div>
-      <div>
-        <Link to="/avatar">
-          <button>Change Avatar</button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/interestsmenu">
-          <button>Tell us about you again</button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/language">
-          <button>Change language</button>
-        </Link>
-      </div>
-      <div>
-        <button onClick={() => deleteUser()}>Delete account</button>
+      <div className="profile">
+        <nav>
+          <Link to="/home">
+            <img src={backIcon} alt="back"/>
+          </Link>
+          <p>Profile</p>
+        </nav>
+
+        <section className="profile-pic">
+          <img src={myAvatar} alt="avatar"/>
+        </section>
+
+        <section className="profile-nav">
+          <div>
+            <Link to="/avatar">
+              <button>Change Avatar</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/interestsmenu">
+              <button>Tell us about you again</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/language">
+              <button>Change language</button>
+            </Link>
+          </div>
+          <div>
+            <button onClick={() => deleteUser()}>Delete account</button>
+          </div>
+        </section>
+
       </div>
     </>
   );

@@ -3,30 +3,35 @@ import { Link } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { getUserFromCurrentAuthUser, updateUserStatus } from "./backend";
 
-function Header({ avatar }) {
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
+
+//img
+import profileIcon from "../components/Utility/img/users.svg";
+import exitIcon from "../components/Utility/img/exit.svg";
+import logo from "../components/Utility/img/logo-wh.png";
+
+function Header(props) {
   const signOut = async () => {
     const user = await getUserFromCurrentAuthUser();
+    console.log("bbb, ", user);
     updateUserStatus(user.id, "OFFLINE");
     auth().signOut();
   };
 
   return (
     <header>
-      <nav className="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNavAltMarkup"
-        >
+      <nav>
+        <div>
           {auth().currentUser ? (
-            <div className="navbar-nav">
-              <Link to={{ pathname: "/profile", query: { avatar: avatar } }}>
+            <div className="header-container">
+              <nav>
+                <BurgerMenu />
+                <img src={logo} alt="home" className="logo-img" />
+                <img src={exitIcon} alt="exit" onClick={() => signOut()} />{" "}
+              </nav>{" "}
+              {/* <Link to={{ pathname: "/profile", query: { avatar: avatar } }}>
                 <img className="homeavatar" src={avatar} alt="avatar" />
-              </Link>{" "}
-              <div>
-                <button className="btn" onClick={() => signOut()}>
-                  Logout{" "}
-                </button>{" "}
-              </div>{" "}
+              </Link> */}
             </div>
           ) : (
             <div className="navbar-nav">
