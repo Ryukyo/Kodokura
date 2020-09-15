@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import axios from "axios";
 
+//img
+import backIcon from '../../Utility/img/back.svg';
+
 export default function MusicCard() {
   const user = auth().currentUser;
   const [music, setMusic] = useState();
@@ -65,30 +68,42 @@ export default function MusicCard() {
 
   return (
     <>
-      <h3> What style of music do you like? </h3>
+      <div className="interest-cards">
+        <nav>
+          <Link to="/interestsmenu">
+          <img src={backIcon} alt="back"/>
+          </Link>
+          <p>Musics</p>
+        </nav>
 
-      {renderCheckBox(
-        "Classical",
-        "Soundtracks",
-        "Rock",
-        "Blues",
-        "Jazz",
-        "Folk",
-        "Pop",
-        "J-Pop",
-        "K-Pop",
-        "Hip-Hop"
-      )}
 
-      <Link to="/interestsmenu">
-        <button
-          onClick={() => {
-            updateAnswers();
-          }}
-        >
-          Done!
-        </button>
-      </Link>
+        <h3> What style of music do you like? </h3>
+
+        <section className="selection-box">
+          {renderCheckBox(
+            "Classical",
+            "Soundtracks",
+            "Rock",
+            "Blues",
+            "Jazz",
+            "Folk",
+            "Pop",
+            "J-Pop",
+            "K-Pop",
+            "Hip-Hop"
+          )}
+        </section>
+
+        <Link to="/interestsmenu">
+          <button
+            onClick={() => {
+              updateAnswers();
+            }}
+          >
+            Done!
+          </button>
+        </Link>
+      </div>
     </>
   );
 }

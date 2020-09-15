@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import axios from 'axios';
 
+//img
+import backIcon from '../../Utility/img/back.svg';
+
 export default function BooksCard() {
 
     const user = auth().currentUser;
@@ -60,15 +63,31 @@ export default function BooksCard() {
 
     return (
         <>
-            <h3> What kind of books do you like? </h3>
+        <div className="interest-cards">
+            <nav>
+                <Link to="/interestsmenu">
+                <img src={backIcon} alt="back"/>
+                </Link>
+                <p>Books</p>
+            </nav>
 
-            {renderCheckBox('Fiction', 'Non-fiction', 'Fantasy', 'Drama', 'Poetry', 'Fantasy', 'Mystery', 'Biography', 'Romantic', 'Comic/Manga')}
+
+            <h3> What kind of Books do you like? </h3>
+
+            <section className="selection-box">
+                {renderCheckBox('Fiction', 'Non-fiction', 'Fantasy', 'Drama', 'Poetry', 'Fantasy', 'Mystery', 'Biography', 'Romantic', 'Comic/Manga')}
+            </section>
 
             <Link to="/interestsmenu">
-                <button onClick={() => {
-                    updateAnswers();
-                }}>Done!</button>
+                <button
+                onClick={() => {
+                updateAnswers();
+                }}
+                >
+                Done!
+                </button>
             </Link>
+        </div>
         </>
     )
 }

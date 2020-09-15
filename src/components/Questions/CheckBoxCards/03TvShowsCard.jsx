@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import axios from 'axios';
 
+//img
+import backIcon from '../../Utility/img/back.svg';
+
 export default function TvShowsCard() {
 
     const user = auth().currentUser;
@@ -60,15 +63,31 @@ export default function TvShowsCard() {
 
     return (
         <>
+        <div className="interest-cards">
+            <nav>
+                <Link to="/interestsmenu">
+                <img src={backIcon} alt="back"/>
+                </Link>
+                <p>TV Shows</p>
+            </nav>
+
+
             <h3> What kind of TV Shows do you like? </h3>
 
-            {renderCheckBox('Comedy', 'Drama', 'Thriller', 'Horror', 'Romantic', 'Action', 'Sci-fi', 'Fantasy', 'Animation', 'Documentary')}
+            <section className="selection-box">
+                {renderCheckBox('Comedy', 'Drama', 'Thriller', 'Horror', 'Romantic', 'Action', 'Sci-fi', 'Fantasy', 'Animation', 'Documentary')}
+            </section>
 
             <Link to="/interestsmenu">
-                <button onClick={() => {
-                    updateAnswers();
-                }}>Done!</button>
+                <button
+                onClick={() => {
+                updateAnswers();
+                }}
+                >
+                Done!
+                </button>
             </Link>
+        </div>
         </>
     )
 }
