@@ -10,11 +10,17 @@ import axios from "axios";
 // import { doYouLikeMovies, doYouLikeSports, doYouLikeFood, doYouLikeMusic, doYouLikeGames, doYouLikeBooks, doYouLikeTVShows, favoriteMovie, favoriteDish, favoriteSong, favoriteSport, favoriteBook } from "../ChatBot/ChatBotHelper.jsx";
 import { answerRandomizer, hiKodobot } from "../ChatBot/ChatBotHelper.jsx";
 
+//img
+import exitIcon from '../Utility/img/exit.svg';
+import sendIcon from '../Utility/img/paper-plane.svg';
+
 export default function ChatRoom(props) {
   const matchResult = props.location.state.detail;
   const roomId = matchResult.chatroom.id;
 
   const currentUserId = props.location.state.userId;
+
+  console.log(props.location.state)
   let currentUser = matchResult.user1;
   let otherUser = matchResult.user2;
   if (currentUser.id !== currentUserId) {
@@ -40,8 +46,13 @@ export default function ChatRoom(props) {
     const chat = newchat;
     chat.roomname = roomId;
     chat.type = "message";
+<<<<<<< HEAD
     chat.nickname = "KodoBot"; // bot name here
     chat.date = Moment(new Date()).format(" DD/MM/YYYY HH:mm:ss");
+=======
+    chat.nickname = "R2D2"; // bot name here
+    chat.date = Moment(new Date()).format("HH:mm");
+>>>>>>> cb141858b7efa2f3f7bc52912aa7948e6566cb86
     chat.message = text;
     return chat;
   }
@@ -162,7 +173,7 @@ export default function ChatRoom(props) {
     const chat = newchat;
     chat.roomname = roomId;
     chat.nickname = nickname;
-    chat.date = Moment(new Date()).format(" DD/MM/YYYY HH:mm:ss");
+    chat.date = Moment(new Date()).format("HH:mm");
     chat.type = "message";
     const newMessage = db.ref("chats").push();
     newMessage.set(chat);
@@ -220,55 +231,50 @@ export default function ChatRoom(props) {
     });
   };
 
+//   <p className="partner">
+//   <div>
+//     <p>{matchResult.user1.name}</p>
+//     <p>{matchResult.user2.name}</p>
+//   </div>
+// </p>
 
   return (
-    <div className="Container">
-      <div className="ChatNav">
-        <Button
-          variant="primary"
-          type="button"
-          onClick={() => {
-            exitChat();
-          }}
-        >
-          Exit Chat
-        </Button>
-        <p className="partner">
-          <b>
+    <div className="chat-container">
+      <nav className="chatnav">
+
+        <img src={exitIcon} alt="exit icon" onClick={() => {
+          exitChat();
+        }}/>
+
+        <p>Chatroom</p>
+        
+        <div className="black-add">
+          <Button
+            onClick={() => {
+              addFriend();
+            }}
+          >
             {" "}
-            Partner:{" "}
-            <div>
-              <p>{matchResult.user1.name}</p>
-              <p>{matchResult.user2.name}</p>
-            </div>
-          </b>
-        </p>
+            Add Friend{" "}
+          </Button>
+          <Button
+            onClick={() => {
+              addBlock();
+            }}
+          >
+            {" "}
+            Block User{" "}
+          </Button>
+        </div>
+      </nav>
 
-        <Button
-          onClick={() => {
-            addFriend();
-          }}
-        >
-          {" "}
-          AddFriend{" "}
-        </Button>
-        <Button
-          onClick={() => {
-            addBlock();
-          }}
-        >
-          {" "}
-          Block !{" "}
-        </Button>
-      </div>
-
-      <ScrollToBottom className="ChatContent">
+      <ScrollToBottom className="chat-content">
         {chats.map((item, idx) => (
           <div key={idx} className="MessageBox">
             {item.type === "join" || item.type === "exit" ? (
               <div className="ChatStatus">
-                <span className="ChatDate">{item.date}</span>
-                <span className="ChatContentCenter">{item.message}</span>
+                <p className="ChatDate">{item.date}</p>
+                <p className="ChatContentCenter">{item.message}</p>
               </div>
             ) : (
                 <div className="ChatMessage">
@@ -277,14 +283,14 @@ export default function ChatRoom(props) {
                       }`}
                   >
                     {item.nickname === nickname ? (
-                      <span className="MsgName"> Me</span>
+                      <p className="MsgName"> Me</p>
                     ) : (
-                        <span className="MsgName">
+                        <p className="MsgName">
                           {" "}
                           <u>{item.nickname}</u>
-                        </span>
+                        </p>
                       )}
-                    <span className="MsgDate"> at {item.date}</span>
+                    <p className="MsgDate">{item.date}</p>
                     <p className="message">{item.message}</p>
                   </div>
                 </div>
@@ -292,27 +298,29 @@ export default function ChatRoom(props) {
           </div>
         ))}
       </ScrollToBottom>
-      <footer className="StickyFooter">
-        <Form className="MessageForm" onSubmit={submitMessage}>
-          <div className="form-group">
-            <Input
-              type="text"
-              name="message"
-              className="form-field"
-              placeholder="Enter message here"
-              value={newchat.message}
-              onChange={onChange}
-            />
-            <label for="message" className="form-label">
-              Enter message here
-            </label>
-          </div>
 
-          <Button variant="primary" type="submit">
-            Send
-          </Button>
-        </Form>
-      </footer>
+      
+      <form className="message-form" onSubmit={submitMessage}>
+        <p>{nickname}</p>
+
+        <div className="form-group">
+          <input
+            type="text"
+            name="message"
+            className="form-field"
+            placeholder="Enter message here"
+            value={newchat.message}
+            onChange={onChange}
+            autoComplete="off"
+          />
+        </div>
+
+        <button variant="primary" type="submit">
+          <img src={sendIcon} alt="send icon"/>
+        </button>
+
+      </form>
+
     </div>
   );
 }
