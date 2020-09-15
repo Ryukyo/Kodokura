@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
-import axios from 'axios';
+import AgeCheckDialog from "./AgeCheckDialog";
+import axios from "axios";
 
 //img
-import usernameIcon from '../Utility/img/users.svg';
-import emailIcon from '../Utility/img/mail.svg';
-import passwordIcon from '../Utility/img/key.svg';
-import backIcon from '../Utility/img/back.svg';
-import logo from '../Utility/img/logo-wh.png';
-
+import usernameIcon from "../Utility/img/users.svg";
+import emailIcon from "../Utility/img/mail.svg";
+import passwordIcon from "../Utility/img/key.svg";
+import backIcon from "../Utility/img/back.svg";
+import logo from "../Utility/img/logo-wh.png";
 
 export default function CreateAccount() {
   const [error, setError] = useState(null);
@@ -55,32 +55,28 @@ export default function CreateAccount() {
     let res = await axios.post("/users", params);
   }
 
-  async function getUser(email) {
-    let req = await axios.get(`/users/${email}`);
-    let data = req.data;
-
-    return data;
-  }
-
   return (
     <div className="createAccount">
       <nav>
         <Link to="/">
-          <img src={backIcon} alt="back"/>
+          <img src={backIcon} alt="back" />
         </Link>
         <p>Sign Up</p>
       </nav>
 
       <header>
         <Link className="main-link" to="/">
-          <img src={logo} alt="logo"/>
+          <img src={logo} alt="logo" />
         </Link>
       </header>
 
-      <form className="form" onSubmit={handleSubmit}>
+      <AgeCheckDialog />
 
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username" className="username-icom"><img src={usernameIcon} alt=""/></label>
+          <label htmlFor="username" className="username-icom">
+            <img src={usernameIcon} alt="" />
+          </label>
           <input
             type="input"
             className="form-field"
@@ -92,7 +88,9 @@ export default function CreateAccount() {
           ></input>
         </div>
         <div className="form-group">
-        <label htmlFor="username"><img src={emailIcon} alt=""/></label>
+          <label htmlFor="username">
+            <img src={emailIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Email"
@@ -104,7 +102,9 @@ export default function CreateAccount() {
           ></input>
         </div>
         <div className="form-group">
-          <label htmlFor="username"><img src={passwordIcon} alt=""/></label>
+          <label htmlFor="username">
+            <img src={passwordIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Password"
@@ -123,9 +123,10 @@ export default function CreateAccount() {
             type="submit"
             onClick={() => {
               createUser(name, email);
-              }}>
-              Sign Up
-            </button>  
+            }}
+          >
+            Sign Up
+          </button>
         </div>
         {/* <p>You can also sign up with any of these services</p>
             <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
@@ -134,10 +135,11 @@ export default function CreateAccount() {
       </form>
 
       <p className="have-account">
-        Already have an account? <Link to="/login" className="text-link">Login</Link>
+        Already have an account?{" "}
+        <Link to="/login" className="text-link">
+          Login
+        </Link>
       </p>
-
-
     </div>
   );
 }
