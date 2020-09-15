@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../services/firebase";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 import backIcon from "../../components/Utility/img/back.svg";
 
 export default function BlockList() {
@@ -58,7 +59,7 @@ export default function BlockList() {
           })}
         </>
       ) : (
-        <div>No users on your block list</div>
+      <section>No users on your block list</section>
       )}
     </div>
   );

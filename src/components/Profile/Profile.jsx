@@ -71,7 +71,7 @@ export default function Profile() {
           </div>
           <div>
             <Link to="/language">
-              <button>Change language</button>
+              <button>What language do you speak?</button>
             </Link>
           </div>
           <div>

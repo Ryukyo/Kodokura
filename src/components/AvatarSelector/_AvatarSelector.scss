@@ -29,10 +29,14 @@ div.avatar-selector {
             height: 110px;
             margin: 20px;
             cursor: pointer;
+
         }:active {
             border-radius: 10px;
             border: 2px solid $primary-red;
+        }:focus {
+            outline: none !important;
         }
+        
     }
 
     nav.btn {
@@ -59,4 +63,5 @@ div.avatar-selector {
             border: none;
         }
     }
+
 }
