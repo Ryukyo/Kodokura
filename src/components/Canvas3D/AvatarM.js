@@ -19,7 +19,8 @@ function Model() {
   texture.flipY = false;
   
   return (
-    <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} scale={[6, 6, 6]}>
+    <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -3, 0]} scale={[7, 7, 7]}>
+      <ambientLight />
         <mesh castShadow receiveShadow geometry={nodes.TurtleShell.geometry} material={materials.lambert1} >
           <meshBasicMaterial attach="material" map={texture} />
         </mesh>
@@ -61,7 +62,7 @@ export default function AvatarM() {
       <div className="bg" />
      
       <Canvas shadowMap camera={{ position: [0, 0, 10], fov: 80 }}>
-        <ambientLight intensity={10}/>
+        <ambientLight />
         <pointLight intensity={10} position={[-10, 10, -10]} />
         <spotLight
           castShadow

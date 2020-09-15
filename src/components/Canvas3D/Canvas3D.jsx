@@ -1,6 +1,8 @@
 import React from 'react';
 import { Canvas } from 'react-three-fiber';
-import { Avatar } from './Avatar'
+import { Avatar } from './Avatar';
+import { OrbitControls, draco } from 'drei';
+
 
 export default function Canvas3D() {
     return (
@@ -10,6 +12,7 @@ export default function Canvas3D() {
       {[-6, -3, 0, 3, 6].map((x) =>
         [-6, -3, 0, 3, 6].map((z) => <Avatar position={[x, 0, z]} />)
       )}
+      <OrbitControls autoRotate rotateSpeed={1} />
     </Canvas>
     )
 }
