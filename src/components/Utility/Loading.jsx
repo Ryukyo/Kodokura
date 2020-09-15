@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 
 import { auth } from "../../services/firebase";
 
+import Canvas3D from "../Canvas3D/Canvas3D"
+
 export default function Loading() {
   const [answersLength, setAnswersLength] = useState();
   const [loading, setLoading] = useState(true);
@@ -23,8 +25,14 @@ export default function Loading() {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+
+        <div>
+        <Canvas3D/>
+        Loading...</div>
       ) : answersLength === true ? (
+
+     
+
         <Redirect to={{ pathname: "/questions" }} />
       ) : (
         <Redirect to={{ pathname: "/home" }} />

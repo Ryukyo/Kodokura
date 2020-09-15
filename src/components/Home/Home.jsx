@@ -4,6 +4,7 @@ import Clouds from "../Clouds/Clouds";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { auth } from "../../services/firebase";
+import Canvas3D from "../Canvas3D/Canvas3D"
 
 export default function Home(props) {
   const [avatar, setAvatar] = useState("");
@@ -89,7 +90,9 @@ export default function Home(props) {
 
       <section className="look-chat">
         {loading ? (
-          <div>Searching for matches...</div>
+          <div>
+          <Canvas3D/>
+          Searching for matches...</div>
         ) : (
           <button onClick={queueUp}>
             Find someone <br />
