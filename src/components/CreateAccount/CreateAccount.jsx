@@ -55,13 +55,6 @@ export default function CreateAccount() {
     let res = await axios.post("/users", params);
   }
 
-  async function getUser(email) {
-    let req = await axios.get(`/users/${email}`);
-    let data = req.data;
-
-    return data;
-  }
-
   return (
     <div className="createAccount">
       <nav>

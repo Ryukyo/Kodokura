@@ -4,6 +4,7 @@ import { Button, Form, Input } from "reactstrap";
 import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { db } from "../../services/firebase";
+import { updateUserStatus } from "../../helpers/backend";
 import axios from "axios";
 import exitIcon from '../Utility/img/exit.svg';
 import sendIcon from '../Utility/img/paper-plane.svg';
@@ -46,7 +47,7 @@ export default function ChatRoom(props) {
     chat.date = Moment(new Date()).format(" DD/MM/YYYY HH:mm:ss");
     chat.message = text;
     return chat;
-  }
+  };
 
   const sendBotMessage = (message) => {
     // send to realitime DB => automatically synchronized and displayed
@@ -61,7 +62,7 @@ export default function ChatRoom(props) {
       date: "",
       type: "",
     });
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +79,9 @@ export default function ChatRoom(props) {
             const messages = snapshotToArray(resp);
             if (messages.length < 1) {
               // create bot chat message
-              const welcomeMessage = botMessage(`Welcome ${currentUser.name} and ${matchResult.user2.name}!`);
+              const welcomeMessage = botMessage(
+                `Welcome ${currentUser.name} and ${matchResult.user2.name}!`
+              );
               // send message to Realtime DB
               sendBotMessage(welcomeMessage);
               // also add message to messages array
@@ -601,11 +604,13 @@ export default function ChatRoom(props) {
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
+
               const lowercaseText = text.toLowerCase()
               if (lowercaseText.includes("favorite sport kodobot")) {
                 const answer = ["Playing Pokemon Go", "I don't like sports", "I like quidditch"];
                 const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
+
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
               }
@@ -634,7 +639,6 @@ export default function ChatRoom(props) {
             console.log("error in fetch chats", error);
           }
         );
-
     };
 
     fetchData();
@@ -693,10 +697,12 @@ export default function ChatRoom(props) {
 
     axios.delete(`/chatqueue/${roomId}`);
 
+    updateUserStatus(currentUserId, "ACTIVE");
+
     history.push("/home");
   };
 
-  const addFriend = (e) => { };
+  const addFriend = (e) => {};
 
   // Maybe add functionality to check whether user is already on block list?
   // But if a user is already on block list, you should never meet him again and come into a situation where to block him again
@@ -715,12 +721,6 @@ export default function ChatRoom(props) {
     });
   };
 
-  //   <p className="partner">
-  //   <div>
-  //     <p>{matchResult.user1.name}</p>
-  //     <p>{matchResult.user2.name}</p>
-  //   </div>
-  // </p>
 
   return (
     <div className="chat-container">
@@ -761,6 +761,7 @@ export default function ChatRoom(props) {
                 <p className="ChatContentCenter">{item.message}</p>
               </div>
             ) : (
+
                 <div className="ChatMessage">
                   <div
                     className={`${item.nickname === nickname ? "RightBubble" : "LeftBubble"
@@ -777,8 +778,10 @@ export default function ChatRoom(props) {
                     <p className="MsgDate">{item.date}</p>
                     <p className="message">{item.message}</p>
                   </div>
+
                 </div>
-              )}
+              </div>
+            )}
           </div>
         ))}
       </ScrollToBottom>
@@ -808,11 +811,5 @@ export default function ChatRoom(props) {
     </div>
   );
 }
-
-
-
-
-
-
 
 // if users dont speak, get a common interest from both and recommend that topic to speak
