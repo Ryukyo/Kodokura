@@ -4,6 +4,8 @@ import axios from "axios";
 
 import { auth } from "../../services/firebase";
 
+import AvatarM from "../Canvas3D/AvatarM"
+
 //img
 import backIcon from '../Utility/img/back.svg'
 
@@ -55,7 +57,8 @@ export default function Profile() {
         </nav>
 
         <section className="profile-pic">
-          <img src={myAvatar} alt="avatar"/>
+        <AvatarM/>
+          {/* <img src={myAvatar} alt="avatar"/> */}
         </section>
 
         <section className="profile-nav">
@@ -71,7 +74,7 @@ export default function Profile() {
           </div>
           <div>
             <Link to="/language">
-              <button>Change language</button>
+              <button>What language do you speak?</button>
             </Link>
           </div>
           <div>

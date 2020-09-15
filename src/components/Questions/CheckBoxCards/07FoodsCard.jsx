@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import axios from 'axios';
 
+//img
+import backIcon from '../../Utility/img/back.svg';
+
 export default function FoodsCard() {
 
     const user = auth().currentUser;
@@ -60,15 +63,31 @@ export default function FoodsCard() {
 
     return (
         <>
-            <h3> What kind of foods do you like ? </h3>
+            <div className="interest-cards">
+                <nav>
+                    <Link to="/interestsmenu">
+                    <img src={backIcon} alt="back"/>
+                    </Link>
+                    <p>Foods</p>
+                </nav>
 
-            {renderCheckBox('Japanese', 'Chinese', 'Korean', 'Vietnamese', 'Mexican', 'Italian', 'French', 'Greek', 'Desserts', 'Fast-food')}
 
-            <Link to="/interestsmenu">
-                <button onClick={() => {
+                <h3> What kind of Foods do you like? </h3>
+
+                <section className="selection-box">
+                    {renderCheckBox('Japanese', 'Chinese', 'Korean', 'Vietnamese', 'Mexican', 'Italian', 'French', 'Greek', 'Desserts', 'Fast-food')}
+                </section>
+
+                <Link to="/interestsmenu">
+                    <button
+                    onClick={() => {
                     updateAnswers();
-                }}>Done!</button>
-            </Link>
+                    }}
+                    >
+                    Done!
+                    </button>
+                </Link>
+            </div>
         </>
     )
 }

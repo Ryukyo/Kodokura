@@ -9,6 +9,9 @@ import axios from "axios";
 
 import { auth } from "../../services/firebase";
 
+//img
+import backIcon from '../Utility/img/back.svg'
+
 export default function LanguageSelector() {
   const user = auth().currentUser;
   async function getUserId() {
@@ -25,53 +28,55 @@ export default function LanguageSelector() {
 
   return (
     <>
-      <h1>Language</h1>
-      <Link to="/profile">
-        <button>Back</button>
-      </Link>
-      <div>
-        <img
-          src={america}
-          alt="american flag"
-          style={{ width: "50px" }}
-          onClick={() => updateLanguage("en")}
-        ></img>
-      </div>
-      <div>
-        <img
-          src={spain}
-          alt="spanish flag"
-          style={{ width: "50px" }}
-          onClick={() => updateLanguage("es")}
-        ></img>
-      </div>
-      <div>
-        <img
-          src={france}
-          alt="french flag"
-          style={{ width: "50px" }}
-          onClick={() => updateLanguage("fr")}
-        ></img>
-      </div>
-      <div>
-        <img
-          src={germany}
-          alt="german flag"
-          style={{ width: "50px" }}
-          onClick={() => updateLanguage("de")}
-        ></img>
-      </div>
-      <div>
-        <img
-          src={japan}
-          alt="japanese flag"
-          style={{ width: "50px" }}
-          onClick={() => updateLanguage("ja")}
-        ></img>
-      </div>
-      <div>
-        <button>Change language</button>
-      </div>
+    
+    <div className="language">
+
+        <nav>
+            <Link to="/profile">
+            <img src={backIcon} alt="back"/>
+            </Link>
+            <p>Select the language you speak</p>
+        </nav>
+        <section className="flag">
+            <img
+                src={america}
+                alt="american flag"
+                onClick={() => updateLanguage("en")}
+                className="noSelect"
+            ></img>
+            <img
+                src={spain}
+                alt="spanish flag"
+                onClick={() => updateLanguage("es")}
+            ></img>
+            <img
+                src={france}
+                alt="french flag"
+                onClick={() => updateLanguage("fr")}
+            ></img>
+            <img
+                src={germany}
+                alt="german flag"
+                onClick={() => updateLanguage("de")}
+            ></img>
+            <img
+                src={japan}
+                alt="japanese flag"
+                onClick={() => updateLanguage("ja")}
+            ></img>
+        </section>
+
+        <div className="change-language-btn">
+            <Link to="/home">
+                <button>Change language and start chatting</button>
+            </Link>
+            <Link to="/profile">
+                <button>Change language and go back to profile</button>
+            </Link>
+        </div>
+
+    </div>
+
     </>
-  );
+    );
 }

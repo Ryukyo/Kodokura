@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "../../helpers/Header";
 import axios from "axios";
 import { auth } from "../../services/firebase";
+
 import { updateUserStatus } from "../../helpers/backend";
+
+import Canvas3D from "../Canvas3D/Canvas3D"
+
 
 export default function Home(props) {
   const [avatar, setAvatar] = useState("");
@@ -91,7 +95,11 @@ export default function Home(props) {
 
       <section className="look-chat">
         {loading ? (
-          <div>Searching for matches...</div>
+
+          <div>
+          <Canvas3D/>
+          Searching for matches...</div>
+
         ) : (
           <button onClick={queueUp}>
             Find someone <br />
