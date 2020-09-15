@@ -1,0 +1,109 @@
+@import '../../style/colors';
+
+div.login {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: $primary-gradient;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        height: 15vh;
+        padding: 30px;
+
+        p {
+            color: #ffffff;
+        }
+    }
+
+    header {
+        height: 20vh;
+        img{
+            height: 150px;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 50vh;
+
+
+        div.form-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            img {
+                margin-right: 15px;
+            };
+        }
+
+        .error-msg {
+            flex-direction: column;
+
+            .text-danger {
+                color: $primary-blue;
+            }
+        }
+        input {
+            height: 50px;
+            width: 65%;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #ffffff;
+            color: #ffffff;
+            outline: none;
+            padding: 5px;
+            font-size: 18px;
+        }::placeholder {
+            color: #ffffff;
+        }:focus::placeholder {
+            color: #d4d4d42d;
+            
+        }:focus {
+            border-bottom: 2px solid $primary-purple;
+        }
+    }
+
+    button {
+        height: 64px;
+        width: 240px;
+        border-radius: 30px;
+        margin: 30px;
+        font-size: 20px;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        background: $primary-gradient;
+        outline: none;
+
+    }
+    button:hover {
+        background: #ffffff;
+        color: $primary-purple;
+        border: 1px solid $primary-purple;
+    }
+    button:active {
+        color: #ffffff;
+        background: $primary-purple;
+        border: none;
+    }
+
+
+    .have-account {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 15vh;
+        color: #ffffff;
+
+        .text-link {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    }
+
+}

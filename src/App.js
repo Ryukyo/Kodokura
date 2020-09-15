@@ -20,6 +20,15 @@ import Questions from "./components/Questions/Questions";
 import QuestionCard from './components/Questions/QuestionCard';
 import LanguageSelector from './components/Profile/Languages';
 import Loading from './components/Utility/Loading';
+import InterestsMenu from "./components/Questions/CheckBoxCards/00InterestsMenu";
+import MusicCard from "./components/Questions/CheckBoxCards/01MusicCard";
+import MoviesCard from "./components/Questions/CheckBoxCards/02MoviesCard";
+import TvShowsCard from "./components/Questions/CheckBoxCards/03TvShowsCard";
+import BooksCard from "./components/Questions/CheckBoxCards/04BooksCard";
+import GamesCard from "./components/Questions/CheckBoxCards/05GamesCard";
+import SportsCard from "./components/Questions/CheckBoxCards/06SportsCard";
+import FoodsCard from "./components/Questions/CheckBoxCards/07FoodsCard";
+
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -30,7 +39,7 @@ function App() {
       <Route
         {...rest}
         render={(props) =>
-          authenticated === true ?  (
+          authenticated === true ? (
             <Component {...props} />
           ) : (
               <Redirect
@@ -104,6 +113,16 @@ function App() {
             component={Profile}
           />
           <PrivateRoute
+            path="/friendlist"
+            authenticated={authentication}
+            component={FriendList}
+          />
+          <PrivateRoute
+            path="/blocklist"
+            authenticated={authentication}
+            component={BlockList}
+          />
+          <PrivateRoute
             path="/avatar"
             authenticated={authentication}
             component={AvatarSelector}
@@ -128,6 +147,49 @@ function App() {
             authenticated={authentication}
             component={LogIn}
           />
+
+          <PrivateRoute
+            path="/interestsmenu"
+            authenticated={authentication}
+            component={InterestsMenu}
+          />
+          <PrivateRoute
+            path="/musiccard"
+            authenticated={authentication}
+            component={MusicCard}
+          />
+          <PrivateRoute
+            path="/moviescard"
+            authenticated={authentication}
+            component={MoviesCard}
+          />
+          <PrivateRoute
+            path="/tvshowscard"
+            authenticated={authentication}
+            component={TvShowsCard}
+          />
+          <PrivateRoute
+            path="/bookscard"
+            authenticated={authentication}
+            component={BooksCard}
+          />
+          <PrivateRoute
+            path="/gamescard"
+            authenticated={authentication}
+            component={GamesCard}
+          />
+          <PrivateRoute
+            path="/sportscard"
+            authenticated={authentication}
+            component={SportsCard}
+          />
+          <PrivateRoute
+            path="/foodscard"
+            authenticated={authentication}
+            component={FoodsCard}
+          />
+
+
 
         </Switch>
       </Router>

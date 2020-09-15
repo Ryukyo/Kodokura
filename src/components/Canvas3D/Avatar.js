@@ -56,7 +56,7 @@ export const Avatar = ({ position }) => {
 
     const scale = spring.to([0, 1], [1, 2])
     const rotation = spring.to([0, 1], [0, Math.PI])
-    const color = spring.to([0, 1], ["#5f1854", "#1abb9c"])
+    const color = spring.to([0, 1], ["#999999", "#ffffff"])
 
     return (
         <a.mesh

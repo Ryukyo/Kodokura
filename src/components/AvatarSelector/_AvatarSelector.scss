@@ -1,0 +1,67 @@
+@import '../../style/colors';
+
+div.avatar-selector {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background: $primary-gradient;
+
+    header {
+        display: flex;
+        justify-content: center;
+        height: 10vh;
+        padding: 30px;
+
+        p {
+            color: #ffffff;
+        }
+    }
+
+    section.avatar {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        padding: 30px;
+
+        img {
+            height: 110px;
+            margin: 20px;
+            cursor: pointer;
+
+        }:active {
+            border-radius: 10px;
+            border: 2px solid $primary-red;
+        }:focus {
+            outline: none !important;
+        }
+        
+    }
+
+    nav.btn {
+        button {
+            height: 64px;
+            width: 240px;
+            border-radius: 30px;
+            margin: 5px 0;
+            font-size: 20px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background: $primary-gradient;
+            outline: none;
+    
+        }
+        button:hover {
+            background: #ffffff;
+            color: $primary-purple;
+            border: 1px solid $primary-purple;
+        }
+        button:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
+        }
+    }
+
+}

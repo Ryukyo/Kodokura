@@ -14,8 +14,8 @@
         "firebase-functions": "^3.11.0",
         "lodash": "^4.17.20",
         "moment": "^2.27.0",
-        "node-sass": "^4.14.1",
         "react": "^16.13.1",
+        "react-chatbot-kit": "^1.0.6",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",
@@ -31,7 +31,8 @@
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
         "cypress": "^5.1.0",
-        "cypress-react-selector": "^2.0.3"
+        "cypress-react-selector": "^2.0.3",
+        "node-sass": "^4.14.1"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -40,6 +41,7 @@
         "eject": "react-scripts eject",
         "emulate:func": "firebase emulators:start --only functions",
         "deploy:func": "firebase deploy --only functions",
+        "deploy": "firebase deploy",
         "test:e2e": "cypress run",
         "test:e2e-gui": "cypress open"
     },

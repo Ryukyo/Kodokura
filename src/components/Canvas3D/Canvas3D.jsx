@@ -7,8 +7,8 @@ export default function Canvas3D() {
         <Canvas camera={{ position: [10, 20, 10], fov: 60 }}>
       <ambientLight />
       <pointLight position={[-10, 10, -10]} castShadow />
-      {[-4, -2, 0, 2, 4, 6].map((x) =>
-        [-4, -2, 0, 2, 4, 6].map((z) => <Avatar position={[x, 0, z]} />)
+      {[-6, -3, 0, 3, 6].map((x) =>
+        [-6, -3, 0, 3, 6].map((z) => <Avatar position={[x, 0, z]} />)
       )}
     </Canvas>
     )
