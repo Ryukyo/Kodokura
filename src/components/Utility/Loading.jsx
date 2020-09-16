@@ -15,9 +15,8 @@ export default function Loading() {
   async function checkQuestions() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
-    // console.log("medata", data.answers.length);
-    // console.log("data", data);
-    setAnswersLength(data.answers.length);
+    // [] is the default value when a user is created and has not started with questions yet
+    setAnswersLength(data.answers === []);
     setLoading(false);
   }
 
@@ -26,10 +25,14 @@ export default function Loading() {
   return (
     <>
       {loading ? (
+
         <div>
         <Canvas3D/>
         Loading...</div>
-      ) : answersLength === 0 ? (
+      ) : answersLength === true ? (
+
+     
+
         <Redirect to={{ pathname: "/questions" }} />
       ) : (
         <Redirect to={{ pathname: "/home" }} />
