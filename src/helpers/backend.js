@@ -1,7 +1,7 @@
 import { auth } from "../services/firebase";
 import axios from "axios";
 
-// TODO throws or handles error when request failed
+// TODO throws error when request failed
 // TODO Since the same request is called over and over again, it's better to store it in state or Redux, or to cache it.
 
 export function getCurrentAuthUser() {
@@ -30,7 +30,6 @@ export async function createUser(name, email) {
 export async function updateUser(userId, body) {
   const res = await axios.put(`/users/${userId}`, body);
   return res.data;
-}
 
 export async function deleteUser(userId) {
   const res = await axios.delete(`/users/${userId}`);

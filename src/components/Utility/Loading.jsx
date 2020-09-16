@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
@@ -17,14 +17,11 @@ export default function Loading() {
     let data = req.data;
     let answersIsArray = Array.isArray(data.answers);
     // [] is the default value when a user is created and has not started with questions yet
-    console.log(answersIsArray);
+    // console.log(answersIsArray);
     setAnswersArray(answersIsArray);
     setLoading(false);
   }
   checkQuestions();
-  /* useEffect(() => {
-    
-  }, []); */
 
   return (
     <>
