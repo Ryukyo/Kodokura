@@ -1,61 +1,69 @@
-import React from 'react';
-import bulbasaur from './img/bulbasaur.png';
-import charmander from './img/charmander.png';
-import pikachu from './img/pikachu.png';
-import raichu from './img/raichu.png';
-import squirtle from './img/squirtle.png';
-import togepi from './img/togepi.png';
-import axios from 'axios';
+import React from "react";
+import { Link } from "react-router-dom";
 
 import { auth } from "../../services/firebase";
-import { Link } from 'react-router-dom';
+import {
+  getUser,
+  updateAvatar as updateAvatarReq,
+} from "../../helpers/backend";
 
+import bulbasaur from "./img/bulbasaur.png";
+import charmander from "./img/charmander.png";
+import pikachu from "./img/pikachu.png";
+import raichu from "./img/raichu.png";
+import squirtle from "./img/squirtle.png";
+import togepi from "./img/togepi.png";
 
 export default function Avatar() {
+  const authUser = auth().currentUser;
 
-    const user = auth().currentUser;
-    async function getUserId() {
-        let req = await axios.get(`/users/${user.email}`)
-        let data = req.data;
-        let id = data.id;
-        console.log(data.avatar_url)
-        return id;
-    };
+  async function updateAvatar(avatar) {
+    const user = await getUser(authUser.email);
+    updateAvatarReq(user.id, avatar);
+  }
 
-    async function updateAvatar(avatar) {
-        const userId = await getUserId();
-        axios.put(`/users/${userId}`, {'avatar_url': avatar});
-    };
+  return (
+    <>
+      <div className="avatar-selector">
+        <header>
+          <p>Choose your avatar</p>
+        </header>
 
-    return (
-        <>
-            <div className="avatar-selector">
+        <section className="avatar">
+          <img
+            src={bulbasaur}
+            alt="avatar"
+            onClick={() => updateAvatar(bulbasaur)}
+          />
+          <img
+            src={charmander}
+            alt="avatar"
+            onClick={() => updateAvatar(charmander)}
+          />
+          <img
+            src={pikachu}
+            alt="avatar"
+            onClick={() => updateAvatar(pikachu)}
+          />
+          <img src={raichu} alt="avatar" onClick={() => updateAvatar(raichu)} />
+          <img
+            src={squirtle}
+            alt="avatar"
+            onClick={() => updateAvatar(squirtle)}
+          />
+          <img src={togepi} alt="avatar" onClick={() => updateAvatar(togepi)} />
+        </section>
 
-                <header>
-                    <p>Choose your avatar</p>
-                </header>
-                
-                <section className="avatar">
-                    <img src={bulbasaur} alt="avatar" onClick={() => updateAvatar(bulbasaur)}/>
-                    <img src={charmander} alt="avatar" onClick={() => updateAvatar(charmander)}/>
-                    <img src={pikachu} alt="avatar" onClick={() => updateAvatar(pikachu)}/>
-                    <img src={raichu} alt="avatar" onClick={() => updateAvatar(raichu)}/>
-                    <img src={squirtle} alt="avatar" onClick={() => updateAvatar(squirtle)}/>
-                    <img src={togepi} alt="avatar" onClick={() => updateAvatar(togepi)}/>
-                </section>
+        <nav className="btn">
+          <Link to="/home">
+            <button>Start chatting!</button>
+          </Link>
 
-                <nav className="btn">
-                    <Link to='/home'>
-                        <button>Start chatting!</button>
-                    </Link>
-                    
-                    <Link to='/profile'>
-                        <button>Go to profile</button>
-                    </Link>
-                </nav>
-            </div>
-            
-
-        </>
-    )
+          <Link to="/profile">
+            <button>Go to profile</button>
+          </Link>
+        </nav>
+      </div>
+    </>
+  );
 }

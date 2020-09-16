@@ -46,3 +46,15 @@ export async function updateUserStatus(userId, newStatus) {
         status: newStatus
     });
 }
+
+/**
+ * updates user status
+ * @param  {String} userId id of the user
+ * @param  {String} newStatus new status, status should be one of ACTIVE, BUSY, OFFLINE
+ * @return {String} newAvatar updated avatar
+ */
+export async function updateAvatar(userId, newAvatar) {
+    return updateUser(userId, {
+        avatar_url: newAvatar
+    });
+}
