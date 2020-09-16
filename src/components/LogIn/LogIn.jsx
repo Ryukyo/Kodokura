@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle } from "../../helpers/auth";
-import Clouds from '../Clouds/Clouds';
-import axios from 'axios';
-import { auth } from '../../services/firebase';
+import { getUser, updateUserStatus } from "../../helpers/backend";
 
 //img
-import backIcon from '../Utility/img/back.svg';
-import emailIcon from '../Utility/img/mail.svg'
-import passwordIcon from '../Utility/img/key.svg';
-import logo from '../Utility/img/logo-wh.png';
-
-
-
+import backIcon from "../Utility/img/back.svg";
+import emailIcon from "../Utility/img/mail.svg";
+import passwordIcon from "../Utility/img/key.svg";
+import logo from "../Utility/img/logo-wh.png";
 
 export default function LogIn() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -34,6 +27,9 @@ export default function LogIn() {
     setError("");
     try {
       await signIn(email, password);
+
+      const user = await getUser(email);
+      updateUserStatus(user.id, "ACTIVE");
     } catch (err) {
       setError(err.message);
     }
@@ -51,36 +47,35 @@ export default function LogIn() {
     <div className="login">
       <nav>
         <Link to="/">
-          <img src={backIcon} alt="back"/>
+          <img src={backIcon} alt="back" />
         </Link>
         <p>Login</p>
       </nav>
 
       <header>
         <Link className="main-link" to="/">
-          <img src={logo} alt="logo"/>
+          <img src={logo} alt="logo" />
         </Link>
       </header>
 
-      <form
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username"><img src={emailIcon} alt=""/></label>
+          <label htmlFor="username">
+            <img src={emailIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Email"
             name="email"
             type="email"
             onChange={handleEmailChange}
-          /* value={this.state.email} */
+            /* value={this.state.email} */
           />
-
         </div>
         <div className="form-group">
-          <label htmlFor="username"><img src={passwordIcon} alt=""/></label>
+          <label htmlFor="username">
+            <img src={passwordIcon} alt="" />
+          </label>
           <input
             className="form-field"
             placeholder="Password"
@@ -92,10 +87,7 @@ export default function LogIn() {
         </div>
         <div className="form-group error-msg">
           {error ? <p className="text-danger">{error}</p> : null}
-            <button type="submit">
-              Login
-            </button>
-
+          <button type="submit">Login</button>
         </div>
         {/* <p>You can also log in with any of these services</p>
         <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
@@ -103,9 +95,11 @@ export default function LogIn() {
         </button> */}
       </form>
       <p className="have-account">
-        Don't have an account? <Link to="/signup" className="text-link">Sign up</Link>
+        Don't have an account?{" "}
+        <Link to="/signup" className="text-link">
+          Sign up
+        </Link>
       </p>
-
     </div>
   );
 }

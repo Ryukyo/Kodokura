@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle } from "../../helpers/auth";
+import { createUser } from "../../helpers/backend";
 import AgeCheckDialog from "./AgeCheckDialog";
-import axios from "axios";
 
 //img
 import usernameIcon from "../Utility/img/users.svg";
@@ -34,6 +34,7 @@ export default function CreateAccount() {
     setError("");
     try {
       await signUp(email, password, name);
+      await createUser(name, email);
     } catch (err) {
       setError(err.message);
     }
@@ -46,21 +47,6 @@ export default function CreateAccount() {
           this.setState({ error: error.message });
         }
       } */
-
-  async function createUser(name, email) {
-    const params = {
-      name: name,
-      email: email,
-    };
-    let res = await axios.post("/users", params);
-  }
-
-  async function getUser(email) {
-    let req = await axios.get(`/users/${email}`);
-    let data = req.data;
-
-    return data;
-  }
 
   return (
     <div className="createAccount">
@@ -125,13 +111,7 @@ export default function CreateAccount() {
         <div className="form-groupe">
           {error ? <p className="text-danger">{error}</p> : null}
 
-          <button
-            className="btn btn-primary px-5"
-            type="submit"
-            onClick={() => {
-              createUser(name, email);
-            }}
-          >
+          <button className="btn btn-primary px-5" type="submit">
             Sign Up
           </button>
         </div>
