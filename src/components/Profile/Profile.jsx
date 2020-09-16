@@ -4,14 +4,14 @@ import axios from "axios";
 
 import { auth } from "../../services/firebase";
 
-import AvatarM from "../Canvas3D/AvatarM"
+import AvatarM from "../Canvas3D/AvatarM";
 
 //img
-import backIcon from '../Utility/img/back.svg'
+import backIcon from "../Utility/img/back.svg";
 
 export default function Profile() {
   const user = auth().currentUser;
-  const [myAvatar, setMyAvatar] = useState('');
+  const [myAvatar, setMyAvatar] = useState("");
 
   async function getUserId() {
     let req = await axios.get(`/users/${user.email}`);
@@ -51,14 +51,13 @@ export default function Profile() {
       <div className="profile">
         <nav>
           <Link to="/home">
-            <img src={backIcon} alt="back"/>
+            <img src={backIcon} alt="back" />
           </Link>
           <p>Profile</p>
         </nav>
 
         <section className="profile-pic">
-        <AvatarM avatar={myAvatar} />
-          {/* <img src={myAvatar} alt="avatar"/> */}
+          {myAvatar ? <AvatarM avatar={myAvatar} /> : <div />}
         </section>
 
         <section className="profile-nav">
@@ -81,7 +80,6 @@ export default function Profile() {
             <button onClick={() => deleteUser()}>Delete account</button>
           </div>
         </section>
-
       </div>
     </>
   );
