@@ -9,7 +9,7 @@ import { AvatarFiles } from "./AvatarFiles.js"
 
 
 
-// const avatarName = "Bear";
+const avatar = "Bear";
 function Model({avatar}) {
   console.log("avatarName", avatar)
   const model = AvatarFiles[avatar]
