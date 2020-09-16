@@ -1,0 +1,43 @@
+@import '../../style/colors';
+
+section.member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 12vh;
+    margin: 10px 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 6px 6px 8px -1px rgba(15,18,87,0.56);
+    
+    img.member-pic {
+        height: 80px;
+        border-radius: 50%;
+        background: $primary-gradient;
+        box-shadow: 2px 2px 5px -1px rgba(10, 12, 49, 0.9);
+
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+
+        p.member-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: $primary-purple;
+        }
+    }
+    nav.sns-logo {
+        display: flex;
+        flex-direction: column;
+        img {
+            height: 35px;
+            padding: 3px;
+            border-radius: 50%;
+            background: $primary-gradient;
+        }
+    }
+}
