@@ -6,23 +6,22 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls, draco } from 'drei'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { AvatarFiles } from "./AvatarFiles.js"
-import turtle3D from "./TurtleShellMeshPBR.glb"
-import turtleTexture from "./PBRTurtleShellComplete.png"
-import slime3D from "./SlimeMeshPBR.glb"
-import slimeTexture from "./PBRSlimeComplete.png"
 
 
 
-function Model() {
-  const { nodes, materials } = useLoader(GLTFLoader, turtle3D, draco())
-  const texture = useLoader(TextureLoader, turtleTexture);
+// const avatarName = "Bear";
+function Model({avatar}) {
+  console.log("avatarName", avatar)
+  const model = AvatarFiles[avatar]
+  const { nodes, materials } = useLoader(GLTFLoader, model.object3D, draco())
+  const texture = useLoader(TextureLoader, model.texture);
   texture.flipY = false;
   
   return (
-    <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -3, 0]} scale={[7, 7, 7]}>
+    <group rotation={[0, 0, 0]} position={[0, -6, 0]} scale={[7, 7, 7]}>
       <ambientLight />
-        <mesh castShadow receiveShadow geometry={nodes.TurtleShell.geometry} material={materials.lambert1} >
-          <meshBasicMaterial attach="material" map={texture} />
+        <mesh castShadow receiveShadow geometry={nodes[avatar].geometry} material={materials[model.materials]} >
+          <meshBasicMaterial attach="material" side={THREE.DoubleSide} map={texture} />
         </mesh>
     </group>
   )
@@ -56,12 +55,12 @@ function Loading() {
   )
 }
 
-export default function AvatarM() {
+export default function AvatarM({avatar}) {
   return (
     <>
       <div className="bg" />
      
-      <Canvas shadowMap camera={{ position: [0, 0, 10], fov: 80 }}>
+      <Canvas shadowMap camera={{ position: [0, 0, 12], fov: 80 }}>
         <ambientLight />
         <pointLight intensity={10} position={[-10, 10, -10]} />
         <spotLight
@@ -77,7 +76,7 @@ export default function AvatarM() {
         {/* <fog attach="fog" args={['#cc7b32', 16, 20]} /> */}
         <Suspense fallback={null}>
           {/* <Model url={turtle} objText={texturecolor} nodesGeo={TurtleShell.geometry} matMat={MaterialTurtle} /> */}
-          <Model />
+          {avatar ? <Model avatar={avatar}/> : <div /> }
         </Suspense>
         <OrbitControls
           autoRotate
@@ -85,7 +84,7 @@ export default function AvatarM() {
           enableZoom={false}
           enableDamping
           dampingFactor={0.5}
-          rotateSpeed={0.8}
+          rotateSpeed={0.6}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />

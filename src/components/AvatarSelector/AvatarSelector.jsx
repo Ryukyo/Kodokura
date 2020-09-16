@@ -1,10 +1,11 @@
 import React from 'react';
-import bulbasaur from './img/bulbasaur.png';
-import charmander from './img/charmander.png';
-import pikachu from './img/pikachu.png';
-import raichu from './img/raichu.png';
-import squirtle from './img/squirtle.png';
-import togepi from './img/togepi.png';
+import bearImg from './img/BearCube.png';
+import birdImg from './img/BirdCube.png';
+import bunnyImg from './img/BunnyCube.png';
+import catImg from './img/CatCube.png';
+import cowImg from './img/CowCube.png';
+import deerImg from './img/DeerCube.png';
+
 import axios from 'axios';
 
 import { auth } from "../../services/firebase";
@@ -15,7 +16,7 @@ export default function Avatar() {
 
     const user = auth().currentUser;
     async function getUserId() {
-        let req = await axios.get(`/users/${user.email}`)
+        let req = await axios.get(`/users/${user}`)
         let data = req.data;
         let id = data.id;
         console.log(data.avatar_url)
@@ -36,12 +37,18 @@ export default function Avatar() {
                 </header>
                 
                 <section className="avatar">
-                    <img src={bulbasaur} alt="avatar" onClick={() => updateAvatar(bulbasaur)}/>
-                    <img src={charmander} alt="avatar" onClick={() => updateAvatar(charmander)}/>
-                    <img src={pikachu} alt="avatar" onClick={() => updateAvatar(pikachu)}/>
-                    <img src={raichu} alt="avatar" onClick={() => updateAvatar(raichu)}/>
-                    <img src={squirtle} alt="avatar" onClick={() => updateAvatar(squirtle)}/>
-                    <img src={togepi} alt="avatar" onClick={() => updateAvatar(togepi)}/>
+                    <img src={bearImg} alt="avatar" onClick={() => updateAvatar("Bear")}/>
+                    <img src={birdImg} alt="avatar" onClick={() => updateAvatar("Bird")}/>
+                    <img src={bunnyImg} alt="avatar" onClick={() => updateAvatar("Bunny")}/>
+                    <img src={catImg} alt="avatar" onClick={() => updateAvatar("Cat")}/>
+                    <img src={cowImg} alt="avatar" onClick={() => updateAvatar("Cow")}/>
+                    <img src={deerImg} alt="avatar" onClick={() => updateAvatar("Deer")}/>
+                    <button alt="avatar" onClick={() => updateAvatar("Dog")}> </button>
+                    <button alt="avatar" onClick={() => updateAvatar("Duck")}> </button>
+                    <button alt="avatar" onClick={() => updateAvatar("Fox")}> </button>
+                    <button alt="avatar" onClick={() => updateAvatar("Goat")}> </button>
+                    <button alt="avatar" onClick={() => updateAvatar("Horse")}> </button>
+                    <button alt="avatar" onClick={() => updateAvatar("Lion")}> </button>
                 </section>
 
                 <nav className="btn">
