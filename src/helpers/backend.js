@@ -30,6 +30,7 @@ export async function createUser(name, email) {
 export async function updateUser(userId, body) {
   const res = await axios.put(`/users/${userId}`, body);
   return res.data;
+}
 
 export async function deleteUser(userId) {
   const res = await axios.delete(`/users/${userId}`);
