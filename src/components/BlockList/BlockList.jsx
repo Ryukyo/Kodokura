@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../../services/firebase";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { getUser, getCurrentAuthUser, updateUser } from "../../helpers/backend";
 
 import backIcon from "../../components/Utility/img/back.svg";
 
 export default function BlockList() {
   // pass user object from parent component to get the id and avoid making another call to auth just to get the id?
-  const user = auth().currentUser;
+  const currentUser = getCurrentAuthUser();
   const [blockList, setBlockList] = useState([]);
 
   async function getBlocklistAndId() {
-    let req = await axios.get(`/users/${user.email}`);
-    let data = req.data;
-    let id = data.id;
+    // let req = await axios.get(`/users/${currentUser.email}`);
+    let userData = await getUser(currentUser.email);
+    let id = userData.id;
     if (blockList === undefined) {
       return null;
     }
-    setBlockList(data.blocklist);
-    // console.log(blockList, "blocklist");
+    setBlockList(userData.blocklist);
     return id;
   }
 
@@ -35,16 +33,16 @@ export default function BlockList() {
     setBlockList(filteredAray);
     // Should work with putting the blockList but blockList remains filled even after setting?!
     // Could lead to side effects when multiple users on block list?
-    await axios.put(`/users/${userId}`, { blocklist: filteredAray });
+    await updateUser(userId, { blocklist: filteredAray });
+    // await axios.put(`/users/${userId}`, { blocklist: filteredAray });
     // console.log("blocklist", blockList);
   }
 
   return (
     <div className="blocklist">
-
       <nav>
         <Link to="/home">
-        <img src={backIcon} alt="back"/>
+          <img src={backIcon} alt="back" />
         </Link>
         <p>Block List</p>
       </nav>
@@ -66,7 +64,7 @@ export default function BlockList() {
             })}
           </>
         ) : (
-        <section>No users on your block list</section>
+          <section>No users on your block list</section>
         )}
       </section>
     </div>

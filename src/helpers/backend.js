@@ -51,7 +51,7 @@ export async function updateUserStatus(userId, newStatus) {
 }
 
 /**
- * updates user status
+ * updates user avatar
  * @param  {String} userId id of the user
  * @param {String} newAvatar updated avatar
  * @return {User} updated user
@@ -63,7 +63,7 @@ export async function updateAvatar(userId, newAvatar) {
 }
 
 /**
- * updates user status
+ * updates user lang
  * @param  {String} userId id of the user
  * @param {String} newLanguage updated avatar
  * @return {User} updated user
@@ -71,6 +71,18 @@ export async function updateAvatar(userId, newAvatar) {
 export async function updateLanguage(userId, newLanguage) {
   return updateUser(userId, {
     lang: newLanguage,
+  });
+}
+
+/**
+ * updates user answers
+ * @param  {String} userId id of the user
+ * @param {Answers} newAnswers updated answers
+ * @return {User} updated user
+ */
+export async function updateAnswers(userId, newAnswers) {
+  return updateUser(userId, {
+    answers: newAnswers,
   });
 }
 
