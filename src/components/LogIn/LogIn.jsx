@@ -5,8 +5,8 @@ import { getUser, updateUserStatus } from "../../helpers/backend";
 
 //img
 import backIcon from "../Utility/img/back.svg";
-import emailIcon from "../Utility/img/mail.svg";
-import passwordIcon from "../Utility/img/key.svg";
+import emailIcon from "../Utility/img/contact.svg";
+import passwordIcon from "../Utility/img/lock.svg";
 import logo from "../Utility/img/logo-wh.png";
 
 export default function LogIn() {

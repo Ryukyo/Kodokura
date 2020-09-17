@@ -28,7 +28,7 @@ export default function About () {
                 <p>Meet the Team</p>
             </header>
             <MemberCard img={edu} name="Eduardo" role="Frontend Developer" git="https://github.com/eduru" linkIn="" />
-            <MemberCard img={flo} name="Floiran" role="Fullstack Developer" git="https://github.com/Ryukyo" linkIn="" />
+            <MemberCard img={flo} name="Florian" role="Fullstack Developer" git="https://github.com/Ryukyo" linkIn="" />
             <MemberCard img={phi} name="Philippe" role="Frontend Developer"  git="https://github.com/pw-yuu" linkIn="https://linkedin.com/in/philippe-huynh-0a7151109" />
             <MemberCard img={tom} name="Tomoyuki" role="Fullstack Developer" git="https://github.com/bakisunsan" linkIn="" />
             <MemberCard img={vin} name="Vincent" role="Frontend Developer" git="https://github.com/TwenLeMammouth" linkIn="" />
