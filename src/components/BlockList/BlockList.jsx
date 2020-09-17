@@ -41,26 +41,34 @@ export default function BlockList() {
 
   return (
     <div className="blocklist">
-      <h1>Block List</h1>
-      <Link to="/home">
-        <img src={backIcon} alt="back" />
-      </Link>
-      {blockList.length > 0 ? (
-        <>
-          {blockList.map((blockedUser, index) => {
-            return (
-              <div className="blocked-user-name" key={index}>
-                <p>{blockedUser.name}</p>
-                <button onClick={() => updateBlocklist(blockedUser.name)}>
-                  Unblock
-                </button>
-              </div>
-            );
-          })}
-        </>
-      ) : (
-      <section>No users on your block list</section>
-      )}
+
+      <nav>
+        <Link to="/home">
+        <img src={backIcon} alt="back"/>
+        </Link>
+        <p>Block List</p>
+      </nav>
+
+      <header>Blocked Users</header>
+
+      <section>
+        {blockList.length > 0 ? (
+          <>
+            {blockList.map((blockedUser, index) => {
+              return (
+                <div className="blocked-user-name" key={index}>
+                  <p>{blockedUser.name}</p>
+                  <button onClick={() => updateBlocklist(blockedUser.name)}>
+                    Unblock
+                  </button>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+        <section>No users on your block list</section>
+        )}
+      </section>
     </div>
   );
 }

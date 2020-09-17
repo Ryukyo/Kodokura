@@ -8,16 +8,20 @@ div.chat-container {
   height: 100vh;
   width: 100vw;
   background: #ffffff;
+  background-image: url(./img/bubbles.png);
+  background-clip: content-box;  
 
   nav.chatnav {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100vw;
     height: 10vh;
-    padding: 30px;
+    padding: 10px 30px;
     position: fixed;
     top: 0;
     background: $primary-gradient;
+    border-bottom: 1px solid $secondary-purple;
 
     p {
       color: #ffffff;
@@ -26,32 +30,85 @@ div.chat-container {
   }
 
   .chat-content {
-    margin: 85px 0;
+    margin: 82px 0;
     overflow: scroll;
-    padding: 0 20px;
+    padding: 0 10px;
+    
+    
+    .MessageBox {
 
-    .LeftBubble {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 20px 10px;
-      color: $primary-purple;
+      .chat-RightBubble {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+        margin: 10px 0;
+        .RightBubble {
+          max-width: 80%;
+          min-width: 5%;
+          color: #ffffff;
+          background: $primary-gradient;
+          border-radius: 30px;
+          padding: 5px;
+    
+          .message {
+            font-size: 16px;
+            text-align: right;
+            padding: 5px 15px;
+            font-family: 'Open Sans', sans-serif;
+          }
+        }
+      }
 
-      .MsgDate {
-        font-size: 12px;
+      .chat-LeftBubble {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin: 10px 0;
+
+        .LeftBubble {
+          max-width: 80%;
+          min-width: 15%;
+          color: #ffffff;
+          background: linear-gradient(100deg, #383838 0%, #aaaaaa 100%) no-repeat fixed center;;
+          border-radius: 30px;
+          padding: 5px;
+    
+          .message {
+            font-size: 16px;
+            text-align: left;
+            padding: 5px 15px;
+            font-family: 'Open Sans', sans-serif;
+          }
+        }
+
+        .BotBubble {
+          max-width: 80%;
+          min-width: 15%;
+          color: #6e6e6e;
+          background: #ffffff;
+          border: 1px solid #6e6e6e;
+          border-radius: 8px;
+          padding: 3px;
+    
+          .message {
+            font-size: 16px;
+            text-align: left;
+            padding: 5px 15px;
+            font-family: 'Open Sans', sans-serif;
+          }
+        }
       }
     }
-    
-    .RightBubble {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin: 20px 10px;
-      color: $primary-blue;
+  }
 
-      .MsgDate {
-        font-size: 12px;
-      }
+  div.chat-info {
+    display: flex;
+    p {
+      color: #919191;
+      font-size: 14px;
+      margin: 0 2px;
     }
   }
 
@@ -65,6 +122,7 @@ div.chat-container {
     position: fixed;
     bottom: 0;
     background: $primary-gradient;
+    border-top: 1px solid $secondary-purple;
 
     p {
       color: #ffffff;
@@ -83,9 +141,9 @@ div.chat-container {
       padding: 10px 20px;
       font-size: 16px;
     }::placeholder {
-      color: #ffffff;
+      color: $secondary-purple;
     }:focus::placeholder {
-      color: #d4d4d42d;
+      color: $secondary-red;
     }
 
     button {
@@ -98,6 +156,29 @@ div.chat-container {
 
       padding: 10px 15px;
     }
+  }
+
+  .block-user {
+    height: 30px;
+    width: 80px;
+    border-radius: 30px;
+    margin: 5px 0;
+    font-size: 12px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    background: $secondary-purple;
+    outline: none;
+
+  }
+  .block-user:hover {
+      background: #ffffff;
+      color: $primary-purple;
+      border: 1px solid $primary-purple;
+  }
+  .block-user:active {
+      color: #ffffff;
+      background: $primary-purple;
+      border: none;
   }
 
 }

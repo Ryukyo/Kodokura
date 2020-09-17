@@ -28,6 +28,7 @@ import BooksCard from "./components/Questions/CheckBoxCards/04BooksCard";
 import GamesCard from "./components/Questions/CheckBoxCards/05GamesCard";
 import SportsCard from "./components/Questions/CheckBoxCards/06SportsCard";
 import FoodsCard from "./components/Questions/CheckBoxCards/07FoodsCard";
+import About from "./components/About/About";
 
 
 function App() {
@@ -146,6 +147,12 @@ function App() {
             path="/login"
             authenticated={authentication}
             component={LogIn}
+          />
+
+          <PublicRoute
+            path="/about"
+            authenticated={authentication}
+            component={About}
           />
 
           <PrivateRoute
