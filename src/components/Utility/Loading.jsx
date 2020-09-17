@@ -11,10 +11,8 @@ export default function Loading() {
   const currentUser = getCurrentAuthUser();
   async function checkQuestions() {
     let userData = await getUser(currentUser.email);
-    console.log(userData.answers);
     let answersIsArray = Array.isArray(userData.answers);
     // [] is the default value when a user is created and has not started with questions yet
-    console.log(answersIsArray);
     setAnswersArray(answersIsArray);
     setLoading(false);
   }
