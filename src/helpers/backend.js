@@ -1,4 +1,5 @@
 import { auth } from "../services/firebase";
+import { functionUrl } from "../services/cloudfunction";
 import axios from "axios";
 
 // TODO throws error when request failed
@@ -8,7 +9,7 @@ export function getCurrentAuthUser() {
   return auth().currentUser;
 }
 export async function getUser(email) {
-  const res = await axios.get(`/users/${email}`);
+  const res = await axios.get(`${functionUrl}/users/${email}`);
   return res.data;
 }
 
@@ -23,17 +24,17 @@ export async function createUser(name, email) {
     name: name,
     email: email,
   };
-  const res = await axios.post("/users", params);
+  const res = await axios.post(`${functionUrl}/users`, params);
   return res.data;
 }
 
 export async function updateUser(userId, body) {
-  const res = await axios.put(`/users/${userId}`, body);
+  const res = await axios.put(`${functionUrl}/users/${userId}`, body);
   return res.data;
 }
 
 export async function deleteUser(userId) {
-  const res = await axios.delete(`/users/${userId}`);
+  const res = await axios.delete(`${functionUrl}/users/${userId}`);
   return res.data;
 }
 
@@ -50,7 +51,7 @@ export async function updateUserStatus(userId, newStatus) {
 }
 
 /**
- * updates user status
+ * updates user avatar
  * @param  {String} userId id of the user
  * @param {String} newAvatar updated avatar
  * @return {User} updated user
@@ -62,7 +63,7 @@ export async function updateAvatar(userId, newAvatar) {
 }
 
 /**
- * updates user status
+ * updates user lang
  * @param  {String} userId id of the user
  * @param {String} newLanguage updated avatar
  * @return {User} updated user
@@ -70,6 +71,18 @@ export async function updateAvatar(userId, newAvatar) {
 export async function updateLanguage(userId, newLanguage) {
   return updateUser(userId, {
     lang: newLanguage,
+  });
+}
+
+/**
+ * updates user answers
+ * @param  {String} userId id of the user
+ * @param {Answers} newAnswers updated answers
+ * @return {User} updated user
+ */
+export async function updateAnswers(userId, newAnswers) {
+  return updateUser(userId, {
+    answers: newAnswers,
   });
 }
 
@@ -91,16 +104,16 @@ export async function removeFromBlockList(userId, currentList, targetName) {
 }
 
 export async function postChatQueue(userId) {
-  return axios.post(`/chatqueue/${userId}`, {
+  return axios.post(`${functionUrl}/chatqueue`, {
     id: userId,
   });
 }
 
 // note: Not using await once because the existing code's error handling is now using PROMISE (code change needed to be made to use try/catch)
 export async function getChatQueue(userId) {
-  return axios.get(`/chatqueue/${userId}`);
+  return axios.get(`${functionUrl}/chatqueue/${userId}`);
 }
 
 export async function deleteChatQueue(roomId) {
-  return axios.delete(`/chatqueue/${roomId}`);
+  return axios.delete(`${functionUrl}/chatqueue/${roomId}`);
 }
