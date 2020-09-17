@@ -63,7 +63,7 @@ export default function CreateAccount() {
         </Link>
       </header>
 
-      {/* <AgeCheckDialog /> */}
+      <AgeCheckDialog />
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">

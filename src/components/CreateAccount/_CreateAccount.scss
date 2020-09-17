@@ -101,3 +101,73 @@ div.createAccount {
         }
     }
 }
+
+.age-checking {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+    width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid $secondary-blue;
+    box-shadow: 3px 3px 10px -1px rgba(0,0,0,0.4);
+
+    header {
+        font-size: 20px;
+        color: $secondary-blue;
+    }
+    p.last-p {
+        margin-top: 10px;
+        font-size: 16px;
+        color: $primary-grey;
+    }
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        input {
+            font-size: 16px;
+            width: 80px;
+            padding: 5px 10px;
+        }:focus {
+            border: 1px solid $primary-red;
+        }
+        p {
+            margin: 5px;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+
+        button {
+            height: 40px;
+            width: 90px;
+            border-radius: 30px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background: $primary-gradient;
+            outline: none;
+    
+        }
+        button:hover {
+            background: #ffffff;
+            color: $primary-purple;
+            border: 1px solid $primary-purple;
+        }
+        button:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
+        }
+    }
+
+    
+}

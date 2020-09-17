@@ -9,15 +9,15 @@ import Canvas3D from "../Canvas3D/Canvas3D"
 
 
 export default function Home(props) {
-  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const user = auth().currentUser;
 
   async function getData() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
-
-    setAvatar(data.avatar_url);
+    let username = data.name
+    setUsername(username);
   }
 
   useEffect(() => {
@@ -91,7 +91,9 @@ export default function Home(props) {
 
   return (
     <div className="home">
-      <Header avatar={avatar} />
+      <Header />
+
+      <h3 className="welcome-user">Welcome {username}!</h3>
 
       <section className="look-chat">
         {loading ? (

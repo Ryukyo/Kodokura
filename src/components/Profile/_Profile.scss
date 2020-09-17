@@ -20,15 +20,19 @@ div.profile {
         }
     }
 
+    h3 {
+        margin: 0 auto;
+        padding-bottom: 10px;
+        width: 100px;
+        color: #ffffff;
+        border-bottom: 1px solid #ffffff;
+    }
+
     section.profile-pic {
         display: flex;
         justify-content: center;
         margin: 2vh 0;
         
-        img {
-            height: 200px;
-            padding: 20px;
-        }
     }
 
     section.profile-nav {
@@ -121,4 +125,9 @@ div.language {
         background: $primary-purple;
         border: none;
     }
+
+
 }
+
+
+

@@ -12,6 +12,7 @@ import backIcon from "../Utility/img/back.svg";
 export default function Profile() {
   const user = auth().currentUser;
   const [myAvatar, setMyAvatar] = useState("");
+  const [username, setUsername] = useState("");
 
   async function getUserId() {
     let req = await axios.get(`/users/${user.email}`);
@@ -36,11 +37,13 @@ export default function Profile() {
     let req = await axios.get(`/users/${user.email}`);
     let data = req.data;
     let avatar = data.avatar_url;
+    let username = data.name;
     // console.log('profile ', data)
     // console.log('answer music  ', data.answers.music)
     // console.log(avatar);
     // console.log(data)
     setMyAvatar(avatar);
+    setUsername(username);
     return myAvatar;
   }
 
@@ -55,6 +58,8 @@ export default function Profile() {
           </Link>
           <p>Profile</p>
         </nav>
+
+        <h3>{username}</h3>
 
         <section className="profile-pic">
           {myAvatar ? <AvatarM avatar={myAvatar} /> : <div />}
