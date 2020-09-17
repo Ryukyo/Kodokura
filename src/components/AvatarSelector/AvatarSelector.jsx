@@ -50,30 +50,26 @@ export default function Avatar() {
             alt="avatar"
             onClick={() => updateAvatar("Bunny")}
           />
-          <img src={catImg} alt="avatar" onClick={() => updateAvatar("Cat")} />
+          {/* <img src={catImg} alt="avatar" onClick={() => updateAvatar("Cat5")} /> */}
           <img src={cowImg} alt="avatar" onClick={() => updateAvatar("Cow")} />
-          <img
-            src={deerImg}
-            alt="avatar"
-            onClick={() => updateAvatar("Deer")}
-          />
+          {/* <img src={deerImg} alt="avatar" onClick={() => updateAvatar("Deer")} /> */}
           <button alt="avatar" onClick={() => updateAvatar("Dog")}>
-            {" "}
+            Dog
           </button>
           <button alt="avatar" onClick={() => updateAvatar("Duck")}>
-            {" "}
+            Duck
           </button>
           <button alt="avatar" onClick={() => updateAvatar("Fox")}>
-            {" "}
+            Fox
           </button>
           <button alt="avatar" onClick={() => updateAvatar("Goat")}>
-            {" "}
+            Goat
           </button>
           <button alt="avatar" onClick={() => updateAvatar("Horse")}>
-            {" "}
+            Horse
           </button>
           <button alt="avatar" onClick={() => updateAvatar("Lion")}>
-            {" "}
+            Lion
           </button>
         </section>
 

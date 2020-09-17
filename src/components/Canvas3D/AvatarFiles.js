@@ -70,7 +70,7 @@ export const AvatarFiles = {
                         texture: animal1Texture
                     },
                     Cat:{
-                        name:"Cat",
+                        name:"Cat5",
                         object3D: cat3D,
                         materials: "CubeAnimals_SHDR",
                         texture: animal1Texture
