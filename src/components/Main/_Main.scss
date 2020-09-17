@@ -6,13 +6,13 @@ div.main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: $primary-gradient;
+    background: #ffffff;
     height: 100vh;
 
     footer {
+        height: 5vh;
         font-size: 10px;
-        color: #ffffff;
-        margin-bottom: 10px;
+        color: $primary-purple;
     }
 }
 
@@ -21,12 +21,21 @@ header.main-header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 30vh;
-    width: 100vw;
+    height: 55vh;
+    width: 100vw; 
+    background-image: url(./img/wave-color2.svg);
+    background-repeat: no-repeat;
+
+    p {
+        font-size: 18px;
+        color: #ffffff;
+        span {
+            color: $primary-blue;
+        }
+    }
 }
 
 img.logo {
-    margin-top: 90px;
     height: 150px;
 }
 
@@ -35,12 +44,12 @@ nav.login-section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 40vh;
     width: 100vw;
     font-size: 20px;
 
     p {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         span{
             color: $primary-purple;
             font-weight: bold;
@@ -48,17 +57,17 @@ nav.login-section {
     }
 
 
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border-radius: 3px;
-        width: 300px;
-        height: 400px;
-        background: #ffffff;
-        box-shadow: 16px 16px 36px -5px rgba(0,0,0,0.5);
-    }
+    // div {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     justify-content: center;
+    //     border-radius: 3px;
+    //     width: 300px;
+    //     height: 400px;
+    //     background: #ffffff;
+    //     box-shadow: 16px 16px 36px -5px rgba(0,0,0,0.5);
+    // }
 
     button {
         height: 64px;
@@ -67,6 +76,7 @@ nav.login-section {
         margin: 15px;
         font-size: 20px;
         border: none;
+        outline: none;
         color: #ffffff;
         background: $primary-gradient;
 
@@ -75,11 +85,39 @@ nav.login-section {
     button:hover {
         background: #ffffff;
         color: $primary-purple;
-        border: 1px solid $primary-purple;
     }
     button:active {
+        color: $primary-purple;
+        background: #ffffff;
+        box-sizing: border-box;
+    }
+
+    button.secondary-btn {
+        height: 64px;
+        width: 240px;
+        border-radius: 30px;
+        margin: 15px;
+        font-size: 20px;
+        color: $primary-purple;
+        background: #ffffff;
+        
+        border: solid 2px transparent;
+        background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, $primary-purple, $primary-blue);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        box-shadow: 2px 1000px 1px #fff inset;
+        
+
+
+    }
+    button.secondary-btn:hover {
+        background: #ffffff;
+        color: $primary-purple;
+        border: 1px solid $primary-purple;
+    }
+    button.secondary-btn:active {
         color: #ffffff;
-        background: $primary-purple;
+        background: $primary-gradient;
         border: none;
     }
 }

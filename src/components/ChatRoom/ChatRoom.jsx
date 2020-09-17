@@ -6,7 +6,9 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import { db } from "../../services/firebase";
 import { updateUserStatus } from "../../helpers/backend";
 import axios from "axios";
-import exitIcon from "../Utility/img/exit.svg";
+
+//img
+import backIcon from "../Utility/img/back.svg";
 import sendIcon from "../Utility/img/paper-plane.svg";
 
 export default function ChatRoom(props) {
@@ -991,11 +993,21 @@ export default function ChatRoom(props) {
     });
   };
 
+
+
+  function detectChatBot (nickname) {
+    if (nickname === 'KodoBot') {
+      return 'BotBubble';
+    } else {
+      return 'LeftBubble'
+    };
+  };
+
   return (
     <div className="chat-container">
       <nav className="chatnav">
         <img
-          src={exitIcon}
+          src={backIcon}
           alt="exit icon"
           onClick={() => {
             exitChat();
@@ -1006,14 +1018,7 @@ export default function ChatRoom(props) {
 
         <div className="black-add">
           <Button
-            onClick={() => {
-              addFriend();
-            }}
-          >
-            {" "}
-            Add Friend{" "}
-          </Button>
-          <Button
+          className="block-user"
             onClick={() => {
               addBlock();
             }}
@@ -1033,22 +1038,24 @@ export default function ChatRoom(props) {
                 <p className="ChatContentCenter">{item.message}</p>
               </div>
             ) : (
-              <div className="ChatMessage">
+              <div className={`${
+                item.nickname === nickname ? "chat-RightBubble" : "chat-LeftBubble"
+              }`}>
                 <div
                   className={`${
-                    item.nickname === nickname ? "RightBubble" : "LeftBubble"
+                    item.nickname === nickname ? "RightBubble" : detectChatBot(item.nickname)
                   }`}
                 >
+                  <p className="message">{item.message}</p>
+                  
+                </div>
+                <div className="chat-info">
+                  <p className="MsgDate">{item.date}</p>
                   {item.nickname === nickname ? (
                     <p className="MsgName"> Me</p>
                   ) : (
-                    <p className="MsgName">
-                      {" "}
-                      <u>{item.nickname}</u>
-                    </p>
+                    <p className="MsgName">{item.nickname}</p>
                   )}
-                  <p className="MsgDate">{item.date}</p>
-                  <p className="message">{item.message}</p>
                 </div>
               </div>
             )}
@@ -1064,7 +1071,7 @@ export default function ChatRoom(props) {
             type="text"
             name="message"
             className="form-field"
-            placeholder="Enter message here"
+            placeholder="Send a message"
             value={newchat.message}
             onChange={onChange}
             autoComplete="off"

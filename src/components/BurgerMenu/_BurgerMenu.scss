@@ -122,15 +122,19 @@ aside.open-navbar {
         justify-content: center;
         height: auto;
         list-style: none;
-        border-bottom: 1px solid black;
         li {
             display: flex;
             align-items: center;
             height: 64px;
         }
         .text-link {
+            display: flex;
+            align-items: center;
             color: $primary-purple;
             text-decoration: none;
+            img {
+                margin-right: 15px;
+            }
         }
     }
 

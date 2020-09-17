@@ -25,23 +25,25 @@ div.blocklist {
         margin-bottom: 30px;
     }
 
-    section.blocked-user-name {
+    section {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 20px;
-        div {
+        max-height: 70vh;
+        overflow: scroll;
+
+        div.blocked-user-name {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            width: 50%;
+            align-items: center;
+            width: 50vw;
+            padding-bottom: 20px;
 
             p {
-                font-size: 24px;
+                font-size: 18px;
                 color: #ffffff;
             }
 
-            
             button {
                 height: 20px;
                 width: 80px;
@@ -63,14 +65,14 @@ div.blocklist {
                 background: $primary-purple;
                 border: none;
             }
-
+    
             .have-account {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 height: 15vh;
                 color: #ffffff;
-
+    
                 .text-link {
                     color: #ffffff;
                     font-weight: bold;
