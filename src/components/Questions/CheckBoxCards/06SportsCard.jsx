@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   getCurrentAuthUser,
@@ -25,7 +25,7 @@ export default function SportsCard() {
 
   async function updateAnswers() {
     const userId = await getUserId();
-    updateAnswersReq(userId, { answers: sports });
+    updateAnswersReq(userId, sports);
   }
 
   async function checkBox(i) {

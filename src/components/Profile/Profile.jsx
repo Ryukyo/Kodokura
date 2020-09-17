@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { getUser, getCurrentAuthUser, deleteUser } from "../../helpers/backend";
 
@@ -25,7 +25,7 @@ export default function Profile() {
   }
 
   async function getData() {
-    const userData = await getUser();
+    const userData = await getUser(currentUser.email);
     let avatar = userData.avatar_url;
     setMyAvatar(avatar);
     return myAvatar;

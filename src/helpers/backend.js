@@ -104,7 +104,7 @@ export async function removeFromBlockList(userId, currentList, targetName) {
 }
 
 export async function postChatQueue(userId) {
-  return axios.post(`${functionUrl}/chatqueue/${userId}`, {
+  return axios.post(`${functionUrl}/chatqueue`, {
     id: userId,
   });
 }

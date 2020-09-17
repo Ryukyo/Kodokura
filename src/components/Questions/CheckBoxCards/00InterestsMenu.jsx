@@ -44,11 +44,7 @@ export default function InterestsMenu() {
             </Link>
           </div>
           <div>
-            <Link
-              to="/tvshowscard"
-              className="hobbies-link"
-              className="hobbies-link"
-            >
+            <Link to="/tvshowscard" className="hobbies-link">
               TV Shows
             </Link>
           </div>

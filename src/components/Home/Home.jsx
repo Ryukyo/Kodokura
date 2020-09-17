@@ -28,17 +28,14 @@ export default function Home(props) {
   async function queueUp() {
     setLoading(true);
 
-    let req = await getUser(currentUser.email);
-
-    let userData = req.data;
+    let user = await getUser(currentUser.email);
     let id = {
-      id: userData.id,
+      id: user.id,
     };
 
     getChatQueue(id.id)
       .then((res) => {
         updateUserStatus(id.id, "BUSY");
-
         props.history.push({
           pathname: "/chatroom",
           state: { detail: res.data, userId: id.id },
@@ -68,7 +65,7 @@ export default function Home(props) {
           });
         })
         .catch(async (err) => {
-          console.error("error during matchmaking", err);
+          console.log("error during matchmaking", err);
         });
 
       // wait for 10 seconds
