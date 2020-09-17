@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
-import { auth } from "../../services/firebase";
+import { getUser, getCurrentAuthUser, deleteUser } from "../../helpers/backend";
 
 import AvatarM from "../Canvas3D/AvatarM";
 
@@ -10,41 +8,29 @@ import AvatarM from "../Canvas3D/AvatarM";
 import backIcon from "../Utility/img/back.svg";
 
 export default function Profile() {
-  const user = auth().currentUser;
+  const currentUser = getCurrentAuthUser();
   const [myAvatar, setMyAvatar] = useState("");
   const [username, setUsername] = useState("");
 
-  async function getUserId() {
-    let req = await axios.get(`/users/${user.email}`);
-    let data = req.data;
-    let id = data.id;
-    // console.log(data);
-    return id;
-  }
+  async function deleteUserAndAuth() {
+    const userData = await getUser(currentUser.email);
+    const userId = userData.id;
+    await deleteUser(userId);
 
-  async function deleteUser() {
-    console.log("deleted");
-    const userId = await getUserId();
-    axios.delete(`/users/${userId}`);
-    let user = auth().currentUser;
-    user
+    currentUser
       .delete()
       .then(function () {})
-      .catch(function (error) {});
+      .catch(function (error) {
+        console.error(error);
+      });
   }
 
   async function getData() {
-    let req = await axios.get(`/users/${user.email}`);
-    let data = req.data;
-    let avatar = data.avatar_url;
-    let username = data.name;
-    // console.log('profile ', data)
-    // console.log('answer music  ', data.answers.music)
-    // console.log(avatar);
-    // console.log(data)
+    const userData = await getUser(currentUser.email);
+    let avatar = userData.avatar_url;
+    let username = userData.name;
     setMyAvatar(avatar);
     setUsername(username);
-    return myAvatar;
   }
 
   getData();
@@ -82,7 +68,7 @@ export default function Profile() {
             </Link>
           </div>
           <div>
-            <button onClick={() => deleteUser()}>Delete account</button>
+            <button onClick={() => deleteUserAndAuth()}>Delete account</button>
           </div>
         </section>
       </div>

@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AvatarM from "../Canvas3D/AvatarM";
-import axios from 'axios';
 import { auth } from "../../services/firebase";
+
+import {
+    getCurrentAuthUser,
+    getUser,
+} from "../../helpers/backend";
 
 
 //img
@@ -12,26 +16,22 @@ import blockIcon from '../Utility/img/error.svg'
 export default function Navbar({ navbar }) {
 
 
-    const user = auth().currentUser;
     const [myAvatar, setMyAvatar] = useState("");
     const [username, setUsername] = useState("");
 
+    const currentUser = getCurrentAuthUser();
 
     async function getData() {
-        let req = await axios.get(`/users/${user.email}`);
-        let data = req.data;
-        let avatar = data.avatar_url;
-        let username = data.name;
-        // console.log('profile ', data)
-        // console.log('answer music  ', data.answers.music)
-        // console.log(avatar);
-        console.log(data)
+        const user = await getUser(currentUser.email);
+        let avatar = user.avatar_url;
+        let name = user.name;
         setMyAvatar(avatar);
-        setUsername(username);
-        return myAvatar;
+        setUsername(name)
     }
     
-    getData();
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <aside className={navbar}>
