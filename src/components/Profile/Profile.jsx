@@ -10,6 +10,7 @@ import backIcon from "../Utility/img/back.svg";
 export default function Profile() {
   const currentUser = getCurrentAuthUser();
   const [myAvatar, setMyAvatar] = useState("");
+  const [username, setUsername] = useState("");
 
   async function deleteUserAndAuth() {
     const userData = await getUser(currentUser.email);
@@ -27,8 +28,9 @@ export default function Profile() {
   async function getData() {
     const userData = await getUser(currentUser.email);
     let avatar = userData.avatar_url;
+    let username = userData.name;
     setMyAvatar(avatar);
-    return myAvatar;
+    setUsername(username);
   }
 
   getData();
@@ -42,6 +44,8 @@ export default function Profile() {
           </Link>
           <p>Profile</p>
         </nav>
+
+        <h3>{username}</h3>
 
         <section className="profile-pic">
           {myAvatar ? <AvatarM avatar={myAvatar} /> : <div />}

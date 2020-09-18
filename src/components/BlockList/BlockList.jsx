@@ -64,7 +64,7 @@ export default function BlockList() {
             })}
           </>
         ) : (
-          <section>No users on your block list</section>
+          <section className="no-block">No users on your block list</section>
         )}
       </section>
     </div>
