@@ -19,7 +19,6 @@ export default function Home(props) {
 
   async function getData() {
     const user = await getUser(currentUser.email);
-    // setAvatar(user.avatar_url);
     setUsername(user.name);
   }
 
@@ -100,12 +99,12 @@ export default function Home(props) {
           <div>
             <Planet />
             Searching for matches...
-            <p>
+            <div className="attention">
               {" "}
-              This is an anonymus application. Please, do not share personal
+              This is an anonymous application. Please, do not share personal
               information (addresses, phone numbers, birth date, age, bank
               account details, or email addresses) with others.
-            </p>
+            </div>
           </div>
         ) : (
           <button onClick={queueUp}>
