@@ -1,8 +1,3 @@
-import turtleShell3D from "./TurtleShellMeshPBR.glb"
-import turtleShellTexture from "./PBRTurtleShellComplete.png"
-import slime3D from "./SlimeMeshPBR.glb"
-import slimeTexture from "./PBRSlimeComplete.png"
-
 import bear3D from "./Animal1/Bear.glb"
 import bird3D from "./Animal1/Bird.glb"
 import bunny3D from "./Animal1/Bunny.glb"
@@ -39,18 +34,7 @@ import whitebear3D from "./Animal2/WhiteBear.glb"
 import animal2Texture from "./Animal2/KUBIKOS_Animals2_D.png"
 
 export const AvatarFiles = { 
-                TurtleShell:{
-                    name: "TurtleShell",
-                    object3D: turtleShell3D,
-                    materials: "lambert1",
-                    texture: turtleShellTexture
-                },
-                Slime:{
-                    name:"Slime",
-                    object3D: slime3D,
-                    materials: "lambert1",
-                    texture: slimeTexture
-                },
+                
                     Bear:{
                         name:"Bear",
                         object3D: bear3D,

@@ -7,7 +7,7 @@ import { Scene } from 'three';
 
 
 
-export const Avatar = ({ position }) => {
+export const Cubes = ({ position }) => {
     // let loader = new FBXLoader();
 
     // let scene = new THREE.Scene();
