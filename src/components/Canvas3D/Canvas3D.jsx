@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas } from 'react-three-fiber';
-import { Avatar } from './Avatar';
+import { Cubes } from './Cubes';
 import { OrbitControls, draco } from 'drei';
 
 
@@ -10,9 +10,9 @@ export default function Canvas3D() {
       <ambientLight />
       <pointLight position={[-10, 10, -10]} castShadow />
       {[-6, -3, 0, 3, 6].map((x) =>
-        [-6, -3, 0, 3, 6].map((z) => <Avatar position={[x, 0, z]} />)
+        [-6, -3, 0, 3, 6].map((z) => <Cubes position={[x, 0, z]} />)
       )}
-      <OrbitControls autoRotate rotateSpeed={1} />
+      {/* <OrbitControls autoRotate rotateSpeed={1} /> */}
     </Canvas>
     )
 }

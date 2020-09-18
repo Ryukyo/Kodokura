@@ -8,7 +8,8 @@ import {
   postChatQueue,
 } from "../../helpers/backend";
 
-import Canvas3D from "../Canvas3D/Canvas3D";
+
+import Planet from "../Canvas3D/Planet"
 
 export default function Home(props) {
   const [username, setUsername] = useState("");
@@ -88,16 +89,20 @@ export default function Home(props) {
 
   return (
     <div className="home">
+
       <Header />
 
       <h3 className="welcome-user">Welcome {username}!</h3>
 
+
       <section className="look-chat">
         {loading ? (
           <div>
-            <Canvas3D />
-            Searching for matches...
-          </div>
+
+          <Planet/>
+          Searching for matches...</div>
+
+
         ) : (
           <button onClick={queueUp}>
             Find someone <br />

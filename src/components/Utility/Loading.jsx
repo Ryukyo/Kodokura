@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { getUser, getCurrentAuthUser } from "../../helpers/backend";
 import { Redirect } from "react-router-dom";
 
-import Canvas3D from "../Canvas3D/Canvas3D";
 
 export default function Loading() {
   const [answersArray, setAnswersArray] = useState([]);
@@ -22,7 +21,7 @@ export default function Loading() {
     <>
       {loading ? (
         <div>
-          <Canvas3D />
+         
           Loading...
         </div>
       ) : answersArray === true ? (
