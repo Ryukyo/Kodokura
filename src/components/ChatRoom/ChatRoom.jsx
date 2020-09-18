@@ -83,7 +83,7 @@ export default function ChatRoom(props) {
             if (messages.length < 1) {
               // create bot chat message
               const welcomeMessage = botMessage(
-                `Welcome ${currentUser.name} and ${matchResult.user2.name}! Feel free to ask me anything by mention my name and enjoy your chat!`
+                `Welcome ${currentUser.name} and ${matchResult.user2.name}! \nEnjoy your chat!`
               );
               // send message to Realtime DB
               sendBotMessage(welcomeMessage);
@@ -108,15 +108,15 @@ export default function ChatRoom(props) {
             //if the messages length < messages.length +1 
             //send message
 
-            //WIP
-            // setTimeout(function () {
-            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
-            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
-            //     const botReactionToName = botMessage(answer);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }, 30000)
+            // WIP
+            setTimeout(function () {
+              if ((messages.length == 1 && messages.length < 2) && currentUserId === matchResult.user1.id) {
+                const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
+                const botReactionToName = botMessage(answer);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }, 30000)
 
 
             //helper functions
@@ -144,6 +144,23 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
+            //invoked just kodobot name
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const lowercaseText = text.toLowerCase();
+              if (lowercaseText.indexOf("kodobot") == 0) {
+                const answer = [
+                  "You said my name. Do you need something?",
+                  "That's my name",
+                  "Kodobot here!"];
+                const random = answerRandomizer(answer);
+                const botReactionToName = botMessage(answer[random]);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+
             //riddle1
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
