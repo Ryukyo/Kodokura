@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../helpers/Header";
-import axios from "axios";
-import { auth } from "../../services/firebase";
+import {
+  getCurrentAuthUser,
+  updateUserStatus,
+  getUser,
+  getChatQueue,
+  postChatQueue,
+} from "../../helpers/backend";
 
-import { updateUserStatus } from "../../helpers/backend";
-
-import Canvas3D from "../Canvas3D/Canvas3D"
 
 import Planet from "../Canvas3D/Planet"
 
-
 export default function Home(props) {
-  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
-  const user = auth().currentUser;
+
+  const currentUser = getCurrentAuthUser();
 
   async function getData() {
-    let req = await axios.get(`/users/${user.email}`);
-    let data = req.data;
-
-    setAvatar(data.avatar_url);
+    const user = await getUser(currentUser.email);
+    // setAvatar(user.avatar_url);
+    setUsername(user.name)
   }
 
   useEffect(() => {
@@ -29,25 +30,21 @@ export default function Home(props) {
   async function queueUp() {
     setLoading(true);
 
-    let req = await axios.get(`/users/${user.email}`);
-
-    let userData = req.data;
+    let user = await getUser(currentUser.email);
     let id = {
-      id: userData.id,
+      id: user.id,
     };
 
-    axios
-      .get(`/chatqueue/${id.id}`)
+    getChatQueue(id.id)
       .then((res) => {
         updateUserStatus(id.id, "BUSY");
-
         props.history.push({
           pathname: "/chatroom",
           state: { detail: res.data, userId: id.id },
         });
       })
       .catch(async (err) => {
-        await axios.post("/chatqueue", id);
+        postChatQueue(id.id);
         startMatchmaking(id.id);
       });
   }
@@ -59,8 +56,7 @@ export default function Home(props) {
     let flag = true;
     // wait until get 200
     while (flag) {
-      await axios
-        .get(`/chatqueue/${userId}`)
+      getChatQueue(userId)
         .then((res) => {
           flag = false;
           updateUserStatus(userId, "BUSY");
@@ -71,7 +67,7 @@ export default function Home(props) {
           });
         })
         .catch(async (err) => {
-          console.error("error during matchmaking", err);
+          console.log("error during matchmaking", err);
         });
 
       // wait for 10 seconds
@@ -93,14 +89,19 @@ export default function Home(props) {
 
   return (
     <div className="home">
-    <Header avatar={avatar} />
-      
+
+      <Header />
+
+      <h3 className="welcome-user">Welcome {username}!</h3>
+
 
       <section className="look-chat">
         {loading ? (
           <div>
+
           <Planet/>
           Searching for matches...</div>
+
 
         ) : (
           <button onClick={queueUp}>

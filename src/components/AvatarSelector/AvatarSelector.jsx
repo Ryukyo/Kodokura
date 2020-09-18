@@ -5,26 +5,21 @@ import bunnyImg from "./img/BunnyCube.png";
 import catImg from "./img/CatCube.png";
 import cowImg from "./img/CowCube.png";
 import deerImg from "./img/DeerCube.png";
+import {
+  getUser,
+  updateAvatar as updateAvatarReq,
+  getCurrentAuthUser,
+} from "../../helpers/backend";
 
-import axios from "axios";
-
-import { auth } from "../../services/firebase";
 import { Link } from "react-router-dom";
 
 export default function Avatar() {
-  const user = auth().currentUser;
-  async function getUserId() {
-    let req = await axios.get(`/users/${user.email}`);
-    let data = req.data;
-    let id = data.id;
-    console.log(data.avatar_url);
-    return id;
-  }
+  const user = getCurrentAuthUser();
 
   async function updateAvatar(avatar) {
-    const userId = await getUserId();
-    console.log("userId ", userId);
-    axios.put(`/users/${userId}`, { avatar_url: avatar });
+    const userData = await getUser(user.email);
+    const userId = userData.id;
+    updateAvatarReq(userId, avatar);
   }
 
   return (

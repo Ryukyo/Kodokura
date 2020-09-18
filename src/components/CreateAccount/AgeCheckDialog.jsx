@@ -74,33 +74,41 @@ export default function AppCheckDialog(props) {
   }
 
   return (
-    <div className="App">
-      <Modal isOpen={isOpen} contentLabel="age check dialog">
-        <div>Enter your date of birth</div>
+    <div className="age-app">
+      <Modal isOpen={isOpen} contentLabel="age check dialog" className="age-checking">
+        <header>
+          <p>You must be of legal age to use this application.</p>
+          <p className="last-p">Please submit your date of birth to continue.</p>
+        </header>
+
         <form>
           <input
             type="number"
             name="year"
-            placeholder="2000"
+            placeholder="Year"
             onChange={handleYearChange}
           />
+          <p>-</p>
           <input
             type="number"
             name="month"
-            placeholder="1"
+            placeholder="Month"
             onChange={handleMonthChange}
           />
+          <p>-</p>
           <input
             type="number"
             name="date"
-            placeholder="31"
+            placeholder="Day"
             onChange={handleDateChange}
           />
         </form>
-        <button onClick={onSubmit}>OK</button>
-        <Link to="/login" className="text-link">
-          <button>Cancel</button>
-        </Link>
+        <nav>
+          <button onClick={onSubmit}>Continue</button>
+          <Link to="/" className="text-link">
+            <button>Back</button>
+          </Link>
+        </nav>
         {err ? <div>{err}</div> : <div />}
       </Modal>
     </div>

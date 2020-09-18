@@ -5,9 +5,9 @@ import { createUser } from "../../helpers/backend";
 import AgeCheckDialog from "./AgeCheckDialog";
 
 //img
-import usernameIcon from "../Utility/img/users.svg";
-import emailIcon from "../Utility/img/mail.svg";
-import passwordIcon from "../Utility/img/key.svg";
+import usernameIcon from '../Utility/img/user.svg';
+import emailIcon from "../Utility/img/contact.svg";
+import passwordIcon from "../Utility/img/lock.svg";
 import backIcon from "../Utility/img/back.svg";
 import logo from "../Utility/img/logo-wh.png";
 
