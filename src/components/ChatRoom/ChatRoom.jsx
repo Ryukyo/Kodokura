@@ -80,7 +80,7 @@ export default function ChatRoom(props) {
             if (messages.length < 1) {
               // create bot chat message
               const welcomeMessage = botMessage(
-                `Welcome ${currentUser.name} and ${matchResult.user2.name}!`
+                `Welcome ${currentUser.name} and ${matchResult.user2.name}! Feel free to ask me anything by mention my name and enjoy your chat!`
               );
               // send message to Realtime DB
               sendBotMessage(welcomeMessage);
@@ -99,6 +99,23 @@ export default function ChatRoom(props) {
             //   }
             // }
 
+            //encourage conversation
+            //check the last time stamp
+            //set time from last time stamp
+            //if the messages length < messages.length +1 
+            //send message
+
+            //WIP
+            // setTimeout(function () {
+            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
+            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
+            //     const botReactionToName = botMessage(answer);
+            //     sendBotMessage(botReactionToName);
+            //     messages.push(botReactionToName);
+            //   }
+            // }, 30000)
+
+
             //helper functions
             const answerRandomizer = (array) => {
               let multiplier = array.length;
@@ -113,9 +130,6 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
               const lowercaseText = text.toLowerCase();
-              console.log("lower", lowercaseText);
-              console.log("text", text);
-              console.log("last", lastMessage);
               if (lowercaseText.includes("hi kodobot") || lowercaseText.includes("hey kodobot") || lowercaseText.includes("hello kodobot")) {
                 const answer = [
                   "Hi humans",
@@ -970,7 +984,7 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("what are your hobbies kodobot")) {
                 const answer = [
                   "I like to sing. But please don't ask me. I'm cannot use the speaker yet!",
-                  "I like to thing",
+                  "I like to think",
                   "I'm really into human History",
                   "I like to be in this chatroom and learn from humans",
                 ];
@@ -980,6 +994,27 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
+
+            //apple android
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const lowercaseText = text.toLowerCase();
+              if (lowercaseText.includes("are you an apple user kodobot") ||
+                lowercaseText.includes("are you an android user kodobot") ||
+                lowercaseText.includes("are you an iphone user")) {
+                const answer = [
+                  "I live in a server so any device is fine for me ^^",
+                  "I like both of them iOS and Android"
+                ];
+                const random = answerRandomizer(answer);
+                const botReactionToName = botMessage(answer[random]);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+
+            //media accounts
 
 
             // // kodobot invoked
