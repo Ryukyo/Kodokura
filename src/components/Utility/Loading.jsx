@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 
 import { auth } from "../../services/firebase";
 
-import Canvas3D from "../Canvas3D/Canvas3D";
+import Planet from "../Canvas3D/Planet";
 
 export default function Loading() {
   const [answersArray, setAnswersArray] = useState([]);
@@ -27,7 +27,7 @@ export default function Loading() {
     <>
       {loading ? (
         <div>
-          <Canvas3D />
+          <Planet />
           Loading...
         </div>
       ) : answersArray === true ? (

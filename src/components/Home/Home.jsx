@@ -7,6 +7,8 @@ import { updateUserStatus } from "../../helpers/backend";
 
 import Canvas3D from "../Canvas3D/Canvas3D"
 
+import Planet from "../Canvas3D/Planet"
+
 
 export default function Home(props) {
   const [avatar, setAvatar] = useState("");
@@ -91,13 +93,13 @@ export default function Home(props) {
 
   return (
     <div className="home">
-      <Header avatar={avatar} />
+    <Header avatar={avatar} />
+      
 
       <section className="look-chat">
         {loading ? (
-
           <div>
-          <Canvas3D/>
+          <Planet/>
           Searching for matches...</div>
 
         ) : (
