@@ -99,16 +99,18 @@ export default function Home(props) {
         {loading ? (
           <div>
 
-          <Planet/>
-          Searching for matches...</div>
+            <Planet />
+          Searching for matches...
+            <p> This is an anonymus application. Please, do not share personal information (addresses, phone numbers, birth date, age, bank account details, or email addresses) with others.</p>
+          </div>
 
 
         ) : (
-          <button onClick={queueUp}>
-            Find someone <br />
+            <button onClick={queueUp}>
+              Find someone <br />
             to talk to.
-          </button>
-        )}
+            </button>
+          )}
       </section>
     </div>
   );

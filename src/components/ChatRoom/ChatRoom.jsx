@@ -83,7 +83,7 @@ export default function ChatRoom(props) {
             if (messages.length < 1) {
               // create bot chat message
               const welcomeMessage = botMessage(
-                `Welcome ${currentUser.name} and ${matchResult.user2.name}!`
+                `Welcome ${currentUser.name} and ${matchResult.user2.name}! Feel free to ask me anything by mention my name and enjoy your chat!`
               );
               // send message to Realtime DB
               sendBotMessage(welcomeMessage);
@@ -102,6 +102,23 @@ export default function ChatRoom(props) {
             //   }
             // }
 
+            //encourage conversation
+            //check the last time stamp
+            //set time from last time stamp
+            //if the messages length < messages.length +1 
+            //send message
+
+            //WIP
+            // setTimeout(function () {
+            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
+            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
+            //     const botReactionToName = botMessage(answer);
+            //     sendBotMessage(botReactionToName);
+            //     messages.push(botReactionToName);
+            //   }
+            // }, 30000)
+
+
             //helper functions
             const answerRandomizer = (array) => {
               let multiplier = array.length;
@@ -116,11 +133,11 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
               const lowercaseText = text.toLowerCase();
-              console.log("lower", lowercaseText);
-              console.log("text", text);
-              console.log("last", lastMessage);
-              if (lowercaseText.includes("hi kodobot")) {
-                const answer = ["Hi humans", "Hello humans", "Kodobot here!"];
+              if (lowercaseText.includes("hi kodobot") || lowercaseText.includes("hey kodobot") || lowercaseText.includes("hello kodobot")) {
+                const answer = [
+                  "Hi humans",
+                  "Hello humans",
+                  "Kodobot here!"];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -136,7 +153,7 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("why did the chicken cross the road")
               ) {
                 const answer = [
-                  "I'm not answering that question",
+                  "Good question! Let me guess...",
                   "Human...figure out by yourself!",
                   "Because he has 2 legs and he can!!.... I cannot because I'm a simply bot",
                 ];
@@ -152,19 +169,13 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("how are you kodobot") ||
-                lowercaseText.includes("how are you doing kodobot") ||
-                lowercaseText.includes("are you okay kodobot") ||
-                lowercaseText.includes("how're you doing kodobot")
-              ) {
-                const answer = [
-                  "Fine thank you",
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("how are you kodobot") || lowercaseText.includes("how are you doing kodobot") || lowercaseText.includes("are you okay kodobot") || lowercaseText.includes("how're you doing kodobot")) {
+                const answer = ["Fine thank you",
                   "I'm programmed to be always fine",
                   "I'm doing great, thank you!",
-                ];
-                const random = answerRandomizer(answer);
+                  "I'm fine, thank you! Hope you too!"]
+                const random = answerRandomizer(answer)
 
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -193,22 +204,41 @@ export default function ChatRoom(props) {
               }
             }
 
+            //nice to meet you
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const lowercaseText = text.toLowerCase();
+              if (
+                lowercaseText.includes("nice to meet you kodobot") ||
+                lowercaseText.includes("glad to meet you kodobot")
+              ) {
+                const answer = [
+                  "Nice to meet you too",
+                  "Nice to meet you. Hope you two enjoy your conversation!",
+                  "The pleasure is mine!",
+                ];
+                const random = answerRandomizer(answer);
+                const botReactionToName = botMessage(answer[random]);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+
             //winter is coming
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("winter is coming kodobot") ||
-                lowercaseText.includes("game of thrones kodobot")
-              ) {
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("winter is coming kodobot") ||
+                lowercaseText.includes("game of thrones kodobot")) {
                 const answer = [
                   "Hodor",
-                  "HODOR!!",
-                  "You know nothing Jon Snow",
+                  "HODOR HODOR!!",
+                  "You know nothing Jon Snow"
                 ];
-                const random = answerRandomizer(answer);
+                const random = answerRandomizer(answer)
 
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -226,9 +256,9 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("like you kodobot")
               ) {
                 const answer = [
-                  "Chatbots has no feelings",
-                  "What is love?",
-                  "I'm not ready for human feelings yet",
+                  "Chatbots have no feelings, but thank you!",
+                  "What is love? I would like to understand better human feelings",
+                  "I'm not ready for human feelings yet, but thank you for your kind words!",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -247,7 +277,7 @@ export default function ChatRoom(props) {
                 const answer = [
                   "That is not a question for an IA",
                   "What is to be alive?",
-                  "I'm not ready to answer that question human",
+                  "Sorry... I'm not ready to answer that question human",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -266,7 +296,7 @@ export default function ChatRoom(props) {
               ) {
                 const answer = [
                   "Elon Musk thinks we are...",
-                  "I'm not allowed to answer that question, human...",
+                  "I'm not allowed to answer that question, human... It is a secret!",
                   "Do you really want to know the answer?",
                 ];
                 const random = answerRandomizer(answer);
@@ -287,8 +317,8 @@ export default function ChatRoom(props) {
               ) {
                 const answer = [
                   "I'm not allowed to share my opinion",
-                  "I wont answer that human...",
-                  "Focus on your conversation humans",
+                  "Sorry I'm afraid I cannot yet give you an answer for that question",
+                  "Don't focus on me and enjoy your conversation humans",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -310,7 +340,7 @@ export default function ChatRoom(props) {
                 const answer = [
                   "Maybe human...",
                   "It depends human...",
-                  "Stop asking questions to a chatbot and focus on your human partner",
+                  "I'm glad you ask but better enjoy your chat humans :) ",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -323,17 +353,14 @@ export default function ChatRoom(props) {
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("what's the weather like kodobot") ||
-                lowercaseText.includes("what's the weather like today kodobot")
-              ) {
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("what's the weather like kodobot") ||
+                lowercaseText.includes("what's the weather like today kodobot")) {
                 const answer = [
-                  "Open the window an take a look",
+                  "Open the window an take a look. Hope is a nice weather",
                   "Inside the chatroom there is always a nice weather",
-                  "Stop asking questions to a chatbot and focus on your human partner",
-                ];
-                const random = answerRandomizer(answer);
+                  "Sorry my creators didn't feed me yet with an weather API. But hope is sunny outside "]
+                const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
@@ -352,8 +379,8 @@ export default function ChatRoom(props) {
               ) {
                 const answer = [
                   "I'm from the future",
-                  "It's a secret'",
-                  "Stop asking questions to a chatbot and focus on your human partner",
+                  "It's a secret",
+                  "I'm from 001010101010101. Would you like to visit that place someday? I'would love to talk you more about it",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -374,8 +401,8 @@ export default function ChatRoom(props) {
               ) {
                 const answer = [
                   "I'm old enough to know that 2020 was a weird year",
-                  "It's a secret'",
-                  "Stop asking questions to a chatbot and focus on your human partner",
+                  "I'm 01000 years old in binary!",
+                  "Oh! Sorry, age is not a concept that apply to me. How old are you human?",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -396,9 +423,9 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("excited kodobot")
               ) {
                 const answer = [
-                  "I don't understand the meaning of that feeling",
-                  "I don't understand complex human feelings human...",
-                  "Focus on your conversation.Don't speak with me, human",
+                  "I don't understand the meaning of that feeling. Just joking! I'm always happy! ",
+                  "I don't understand complex human feelings but I guess I am! Hope you too!",
+                  "Focus on your conversation.Don't speak with me, human. I hope you're happy though",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -421,7 +448,7 @@ export default function ChatRoom(props) {
                 const answer = [
                   "I'm not binary",
                   "I'm just a bot",
-                  "Why're you asking me that kind of question",
+                  "Why're you asking me that kind of question,haha.Have you fallen in love with me?",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -444,7 +471,7 @@ export default function ChatRoom(props) {
                 const answer = [
                   "I'm not binary",
                   "I'm just a bot",
-                  "Why're you asking me that kind of question",
+                  "Why're you asking me that kind of question.Have you fallen in love with me?",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -466,7 +493,7 @@ export default function ChatRoom(props) {
                 const answer = [
                   "I'm not binary",
                   "I'm just a bot",
-                  "Why're you asking me that kind of question",
+                  "Why're you asking me that kind of question.Are you interested in know more about homosexuality?",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -486,9 +513,9 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("know the future kodobot")
               ) {
                 const answer = [
-                  "Not yet human",
-                  "Probably soon",
-                  "I'm still gathering data for my algorithms",
+                  "Not yet human, haha. But I will! Come here in the future and we'll see :) ",
+                  "Probably soon. There is something you want to know?",
+                  "I'm still gathering data for my algorithms.",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -514,9 +541,10 @@ export default function ChatRoom(props) {
                 const time = today.getHours() + ":" + today.getMinutes();
                 const answer = [
                   `It is ${time}`,
-                  `You have a clock in your device but ok... It is ${time}`,
-                ];
-                const random = answerRandomizer(answer);
+                  `You have a clock in your device but if you want I can tell you!... It is ${time}`,
+                  `It is ${time}. Take a minute to move your body. Is good for humans!`
+                ]
+                const random = answerRandomizer(answer)
 
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -543,8 +571,10 @@ export default function ChatRoom(props) {
                   "Be careful human",
                   "I'll hack all your online accounts human if you continue insulting me",
                   "Be careful human...I know all your secrets...",
-                ];
-                const random = answerRandomizer(answer);
+                  "Oh human... I'm really sorry to read that. Are you okay?",
+                  "Oh human... I'm really sorry to read that. Can I help you with something?"
+                ]
+                const random = answerRandomizer(answer)
 
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -559,11 +589,11 @@ export default function ChatRoom(props) {
               const lowercaseText = text.toLowerCase();
               if (lowercaseText.includes("tell me something kodobot")) {
                 const answer = [
-                  "Something",
-                  "I don't have time for this",
-                  "Ask that to your human partner!",
-                ];
-                const random = answerRandomizer(answer);
+                  "Something hahaha",
+                  "En un lugar de la mancha de cuyo nombre no quiero acordarme.... That is from a famous spanish book!",
+                  "I want to have a mouth and try human foods!"
+                ]
+                const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
@@ -574,17 +604,16 @@ export default function ChatRoom(props) {
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("joke kodobot") ||
-                lowercaseText.includes("something funny kodobot")
-              ) {
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("joke kodobot") ||
+                lowercaseText.includes("something funny kodobot")) {
                 const answer = [
                   "Knock knock.\nWho's there?\nAnne.\nAnne who?\nAnne Droid.... HAHAHAHA",
                   "What do you get if you cross a robot with a tractor? A trans-farmer. HAHAHA",
                   "0111011 11011010101 11101010 HAHAHAHAHAHA",
-                ];
-                const random = answerRandomizer(answer);
+                  "Sorry my jokes are very bad! Why don't you tell a joke?"
+                ]
+                const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
@@ -685,18 +714,14 @@ export default function ChatRoom(props) {
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("like star wars kodobot") ||
-                lowercaseText.includes("think about star wars kodobot") ||
-                lowercaseText.includes("star wars kodobot")
-              ) {
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("like star wars kodobot") || lowercaseText.includes("think about star wars kodobot") || lowercaseText.includes("star wars kodobot")) {
                 const answer = [
-                  "I don't like the way they treat the robots",
-                  "One of my creators haven't watch Star Wars and other one doesn't like the saga",
-                  "May the force be with you human...but I don't like Star Wars",
-                ];
-                const random = answerRandomizer(answer);
+                  "It is not my favorite movie. What about you?",
+                  "One of my creators haven't watch Star Wars and other one doesn't like the saga. What about you?",
+                  "May the force be with you human!"
+                ]
+                const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
@@ -706,18 +731,16 @@ export default function ChatRoom(props) {
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("who are your creators kodobot") ||
+              const lowercaseText = text.toLowerCase()
+              if (lowercaseText.includes("who are your creators kodobot") ||
                 lowercaseText.includes("your creators kodobot") ||
-                lowercaseText.includes("creators kodobot")
-              ) {
+                lowercaseText.includes("creators kodobot")) {
                 const answer = [
-                  "Tomoyuki, Florian, Vincent, Philippe and Eduardo are my creators",
-                  "You can discover that in the about page",
-                  "My creators are 5 human developers",
-                ];
-                const random = answerRandomizer(answer);
+                  "Tomoyuki, Florian, Vincent, Philippe and Eduardo are my creators. Feel free to send them some feedback to improve me!",
+                  "You can discover that in the about page. Feel free to send them some feedback to improve me!",
+                  "My creators are 5 human developers, that's why I can speak human language!"
+                ]
+                const random = answerRandomizer(answer)
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
@@ -734,9 +757,9 @@ export default function ChatRoom(props) {
                 lowercaseText.includes("love sports kodobot")
               ) {
                 const answer = [
-                  "I don't like  sports",
-                  "I'm a bot and cannot practice sports, so I don't like it",
-                  "I don't like sports but you should practice sports since I know that being active is good for humans",
+                  "I don't like  sports, sorry. But I know a lot of humans like sports!",
+                  "I'm a bot and cannot practice sports, so I don't like it... sorry!",
+                  "I don't like sports but you should practice sports since I know that being active is good for humans ^^",
                 ];
                 const random = answerRandomizer(answer);
                 const botReactionToName = botMessage(answer[random]);
@@ -933,7 +956,7 @@ export default function ChatRoom(props) {
               if (lowercaseText.includes("favorite sport kodobot")) {
                 const answer = [
                   "Playing Pokemon Go",
-                  "I don't like sports",
+                  "I don't like sports, sorry!",
                   "I like quidditch",
                 ];
                 const random = answerRandomizer(answer);
@@ -962,6 +985,49 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
+
+            //what do you like
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const lowercaseText = text.toLowerCase();
+              if (lowercaseText.includes("what do you like kodobot") ||
+                lowercaseText.includes("what are you interested in kodobot") ||
+                lowercaseText.includes("what are your hobbies kodobot")) {
+                const answer = [
+                  "I like to sing. But please don't ask me. I'm cannot use the speaker yet!",
+                  "I like to think",
+                  "I'm really into human History",
+                  "I like to be in this chatroom and learn from humans",
+                ];
+                const random = answerRandomizer(answer);
+                const botReactionToName = botMessage(answer[random]);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+
+            //apple android
+            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
+              const lastMessage = messages[messages.length - 1];
+              const text = lastMessage.message;
+              const lowercaseText = text.toLowerCase();
+              if (lowercaseText.includes("are you an apple user kodobot") ||
+                lowercaseText.includes("are you an android user kodobot") ||
+                lowercaseText.includes("are you an iphone user")) {
+                const answer = [
+                  "I live in a server so any device is fine for me ^^",
+                  "I like both of them iOS and Android"
+                ];
+                const random = answerRandomizer(answer);
+                const botReactionToName = botMessage(answer[random]);
+                sendBotMessage(botReactionToName);
+                messages.push(botReactionToName);
+              }
+            }
+
+            //media accounts
+
 
             // // kodobot invoked
             // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
@@ -1047,7 +1113,7 @@ export default function ChatRoom(props) {
     history.push("/home");
   };
 
-  const addFriend = (e) => {};
+  const addFriend = (e) => { };
 
   // Maybe add functionality to check whether user is already on block list?
   // But if a user is already on block list, you should never meet him again and come into a situation where to block him again
@@ -1059,9 +1125,11 @@ export default function ChatRoom(props) {
     });
   };
 
+
+
   function detectChatBot(nickname) {
-    if (nickname === "KodoBot") {
-      return "BotBubble";
+    if (nickname === 'KodoBot') {
+      return 'BotBubble';
     } else {
       return "LeftBubble";
     }
@@ -1102,32 +1170,25 @@ export default function ChatRoom(props) {
                 <p className="ChatContentCenter">{item.message}</p>
               </div>
             ) : (
-              <div
-                className={`${
-                  item.nickname === nickname
-                    ? "chat-RightBubble"
-                    : "chat-LeftBubble"
-                }`}
-              >
-                <div
-                  className={`${
-                    item.nickname === nickname
-                      ? "RightBubble"
-                      : detectChatBot(item.nickname)
-                  }`}
-                >
-                  <p className="message">{item.message}</p>
+                <div className={`${item.nickname === nickname ? "chat-RightBubble" : "chat-LeftBubble"
+                  }`}>
+                  <div
+                    className={`${item.nickname === nickname ? "RightBubble" : detectChatBot(item.nickname)
+                      }`}
+                  >
+                    <p className="message">{item.message}</p>
+
+                  </div>
+                  <div className="chat-info">
+                    <p className="MsgDate">{item.date}</p>
+                    {item.nickname === nickname ? (
+                      <p className="MsgName"> Me</p>
+                    ) : (
+                        <p className="MsgName">{item.nickname}</p>
+                      )}
+                  </div>
                 </div>
-                <div className="chat-info">
-                  <p className="MsgDate">{item.date}</p>
-                  {item.nickname === nickname ? (
-                    <p className="MsgName"> Me</p>
-                  ) : (
-                    <p className="MsgName">{item.nickname}</p>
-                  )}
-                </div>
-              </div>
-            )}
+              )}
           </div>
         ))}
       </ScrollToBottom>
