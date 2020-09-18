@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { getUser, getCurrentAuthUser } from "../../helpers/backend";
 import { Redirect } from "react-router-dom";
-
-import Canvas3D from "../Canvas3D/Canvas3D";
+import Spinner from "./Spinner";
 
 export default function Loading() {
   const [answersArray, setAnswersArray] = useState([]);
@@ -21,10 +20,7 @@ export default function Loading() {
   return (
     <>
       {loading ? (
-        <div>
-          <Canvas3D />
-          Loading...
-        </div>
+        <Spinner />
       ) : answersArray === true ? (
         <Redirect to={{ pathname: "/questions" }} />
       ) : (
