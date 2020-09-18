@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "main": "index.js",
-    "proxy": "https://us-central1-kodokura-eb787.cloudfunctions.net/app",
     "dependencies": {
         "@react-spring/core": "^9.0.0-rc.3",
         "@react-spring/three": "^9.0.0-rc.3",

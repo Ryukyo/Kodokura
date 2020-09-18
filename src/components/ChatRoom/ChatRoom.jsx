@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Button, Form, Input } from "reactstrap";
+import { Button } from "reactstrap";
 import Moment from "moment";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { db } from "../../services/firebase";
-import { updateUserStatus } from "../../helpers/backend";
-import axios from "axios";
+import {
+  updateUserStatus,
+  deleteChatQueue,
+  addToBlockList,
+} from "../../helpers/backend";
 
 //img
 import backIcon from "../Utility/img/back.svg";
@@ -526,11 +529,14 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase()
-              if (lowercaseText.includes("what time is it kodobot") ||
+              const lowercaseText = text.toLowerCase();
+              if (
+                lowercaseText.includes("what time is it kodobot") ||
                 lowercaseText.includes("tell me the time kodobot") ||
-                lowercaseText.includes("time kodobot") || lowercaseText.includes("what hour is it kodobot") ||
-                lowercaseText.includes(" hour kodobot")) {
+                lowercaseText.includes("time kodobot") ||
+                lowercaseText.includes("what hour is it kodobot") ||
+                lowercaseText.includes(" hour kodobot")
+              ) {
                 const today = new Date();
                 const time = today.getHours() + ":" + today.getMinutes();
                 const answer = [
@@ -551,8 +557,16 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase()
-              if (lowercaseText.includes("fucking kodobot") || lowercaseText.includes("stupid kodobot") || lowercaseText.includes("asshole kodobot") || lowercaseText.includes("motherfucker kodobot") || lowercaseText.includes("fuckyou kodobot") || lowercaseText.includes("moron kodobot") || lowercaseText.includes("fuck you kodobo")) {
+              const lowercaseText = text.toLowerCase();
+              if (
+                lowercaseText.includes("fucking kodobot") ||
+                lowercaseText.includes("stupid kodobot") ||
+                lowercaseText.includes("asshole kodobot") ||
+                lowercaseText.includes("motherfucker kodobot") ||
+                lowercaseText.includes("fuckyou kodobot") ||
+                lowercaseText.includes("moron kodobot") ||
+                lowercaseText.includes("fuck you kodobo")
+              ) {
                 const answer = [
                   "Be careful human",
                   "I'll hack all your online accounts human if you continue insulting me",
@@ -568,13 +582,11 @@ export default function ChatRoom(props) {
               }
             }
 
-
-
             //tell me somethig
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase()
+              const lowercaseText = text.toLowerCase();
               if (lowercaseText.includes("tell me something kodobot")) {
                 const answer = [
                   "Something hahaha",
@@ -588,7 +600,7 @@ export default function ChatRoom(props) {
               }
             }
 
-            //joke kodobot 
+            //joke kodobot
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
@@ -607,8 +619,6 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
-
-
 
             // //pet section
 
@@ -736,8 +746,6 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
-
-
 
             //doYouLikeSports
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
@@ -875,15 +883,19 @@ export default function ChatRoom(props) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase()
-              if (lowercaseText.includes("favorite movie kodobot") ||
+              const lowercaseText = text.toLowerCase();
+              if (
+                lowercaseText.includes("favorite movie kodobot") ||
                 lowercaseText.includes("like to watch tv kodobot") ||
-                lowercaseText.includes("like tv shows kodobot")) {
+                lowercaseText.includes("like tv shows kodobot")
+              ) {
                 const answer = [
                   "It's hard to answer that question human...",
-                  "Terminator", "I-Robot",
-                  "Avengers Age of Ultron"];
-                const random = answerRandomizer(answer)
+                  "Terminator",
+                  "I-Robot",
+                  "Avengers Age of Ultron",
+                ];
+                const random = answerRandomizer(answer);
 
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
@@ -1031,9 +1043,6 @@ export default function ChatRoom(props) {
             //   }
             // }
 
-
-
-
             // change status to show messages
             setChats(messages);
           },
@@ -1097,7 +1106,7 @@ export default function ChatRoom(props) {
     const newMessage = db.ref("chats").push();
     newMessage.set(chat);
 
-    axios.delete(`/chatqueue/${roomId}`);
+    deleteChatQueue(roomId);
 
     updateUserStatus(currentUserId, "ACTIVE");
 
@@ -1110,16 +1119,9 @@ export default function ChatRoom(props) {
   // But if a user is already on block list, you should never meet him again and come into a situation where to block him again
   const addBlock = async (e) => {
     // get current block list of current user and push an object with the name and id of the user to be blocked
-    let blocklistToUpdate = currentUser.blocklist;
-    blocklistToUpdate.push({
+    addToBlockList(currentUserId, currentUser.blocklist, {
       name: otherUser.name,
       id: otherUser.id,
-    });
-
-    console.log(blocklistToUpdate);
-    console.log("current user", currentUserId);
-    await axios.put(`/users/${currentUserId}`, {
-      blocklist: blocklistToUpdate,
     });
   };
 
@@ -1129,9 +1131,9 @@ export default function ChatRoom(props) {
     if (nickname === 'KodoBot') {
       return 'BotBubble';
     } else {
-      return 'LeftBubble'
-    };
-  };
+      return "LeftBubble";
+    }
+  }
 
   return (
     <div className="chat-container">

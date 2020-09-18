@@ -24,18 +24,18 @@ div.home {
                 height: 70px;
             }
         }
+    }
 
-        img.homeavatar {
-            height: 25vh;
-            border-radius: 50%;
-            padding: 20px;
-            border: 3px solid $primary-blue;
-            background: #ffffff;
-        }
+    h3.welcome-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh;
+        color: #ffffff;
     }
 
     section.look-chat {
-        height: 75vh;
+        height: 65vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -50,7 +50,7 @@ div.home {
             color: #ffffff;
             background: $primary-gradient;
             outline: none;
-        }:hover {
+        :hover {
             background: #ffffff;
             color: $primary-purple;
             border: 1px solid $primary-purple;
@@ -63,6 +63,7 @@ div.home {
         div {
             font-size: 20px;
             color: #ffffff;
+        }
         }
     }
 

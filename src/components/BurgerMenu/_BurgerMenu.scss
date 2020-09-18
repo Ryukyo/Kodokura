@@ -61,8 +61,8 @@ aside.close-navbar {
     box-shadow: 1px 1px 15px -5px rgba(0,0,0,0.5);
 
     header {
-        margin-top: 10vh;
-        height: 10vh;
+        margin-top: 50px;
+        height: 5vh;
     }
 
     ul {
@@ -91,7 +91,6 @@ aside.close-navbar {
 aside.open-navbar {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     background: #ffffff;
     color: $primary-purple;
     opacity: 0.95;
@@ -110,10 +109,14 @@ aside.open-navbar {
     ;
 
     header {
-        margin-top: 20vh;
-        height: 10vh;
+        margin-top: 100px;
+        height: 5vh;
         display: flex;
         align-items: center;
+    }
+
+    h3 {
+        margin-top: 30px;
     }
 
     ul {
@@ -122,6 +125,7 @@ aside.open-navbar {
         justify-content: center;
         height: auto;
         list-style: none;
+        margin-top: 50px;
         li {
             display: flex;
             align-items: center;
@@ -140,5 +144,6 @@ aside.open-navbar {
 
     footer {
         height: 10vh;
+        margin-top: 100px;
     }
 }

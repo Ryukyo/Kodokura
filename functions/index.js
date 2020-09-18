@@ -2,6 +2,7 @@ const functions = require("firebase-functions");
 const express = require("express");
 const admin = require("firebase-admin");
 const uuid = require("uuid");
+const cors = require("cors")({ origin: true });
 
 // init express server
 const app = express();
@@ -11,6 +12,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cors);
 
 // init firestore connection
 admin.initializeApp();
