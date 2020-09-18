@@ -20,8 +20,6 @@ export default function InterestsMenu() {
     getAvatar();
   });
 
-  console.log(hasAvatar);
-
   return (
     <>
       <div className="interests">
