@@ -124,7 +124,6 @@ export default function QuestionCard() {
             <Link to="/avatar">
               <button
                 onClick={() => {
-                  console.log("avatarrrr", hasAvatar);
                   updateAnswersUI();
                 }}
               >
@@ -135,7 +134,6 @@ export default function QuestionCard() {
             <Link to="/profile">
               <button
                 onClick={() => {
-                  console.log("avatarrrr2", hasAvatar);
                   updateAnswersUI();
                 }}
               >

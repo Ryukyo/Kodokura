@@ -1,5 +1,7 @@
 import { auth } from "../services/firebase";
 
+auth().setPersistence(auth.Auth.Persistence.SESSION);
+
 export function signUp(email, password, displayName) {
   auth()
     .createUserWithEmailAndPassword(email.trim(), password)
