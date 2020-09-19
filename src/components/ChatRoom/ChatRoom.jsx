@@ -1057,6 +1057,8 @@ export default function ChatRoom(props) {
       name: otherUser.name,
       id: otherUser.id,
     });
+
+    exitChat();
   };
 
   function detectChatBot(nickname) {
