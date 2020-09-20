@@ -1,7 +1,7 @@
 .burger-container {
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 3;
 
     i.close {
         background: #ffffff;
@@ -45,7 +45,6 @@
 aside.close-navbar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background: #ffffff;
     color: $primary-purple;
     opacity: 0.95;
@@ -58,11 +57,21 @@ aside.close-navbar {
     transition: transform 0.3s ease-in-out;
     font-size: 20px;
     padding: 0 10vw;
-    box-shadow: 1px 1px 15px -5px rgba(0,0,0,0.5);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 8px 2px 15px -5px rgba(0,0,0,0.5);
+    z-index: 2;
+
 
     header {
-        margin-top: 50px;
+        margin-top: 100px;
         height: 5vh;
+        display: flex;
+        align-items: center;
+    }
+
+    h3 {
+        margin-top: 30px;
     }
 
     ul {
@@ -71,20 +80,38 @@ aside.close-navbar {
         justify-content: center;
         height: auto;
         list-style: none;
-        border-bottom: 1px solid black;
+        margin-top: 60px;
         li {
             display: flex;
             align-items: center;
             height: 64px;
         }
+        li.lang-area {
+            margin-top: 30px;
+            border-top: 1px solid $primary-grey;
+            img.lang-pic {
+                height: 30px;
+                margin-right: 20px;
+            }
+            p {
+                font-size: 16px;
+                color: $primary-grey;
+            }
+        }
         .text-link {
+            display: flex;
+            align-items: center;
             color: $primary-purple;
             text-decoration: none;
+            img {
+                margin-right: 15px;
+            }
         }
     }
 
     footer {
         height: 10vh;
+        margin-top: 100px;
     }
 }
 
@@ -106,6 +133,8 @@ aside.open-navbar {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     box-shadow: 8px 2px 15px -5px rgba(0,0,0,0.5);
+    z-index: 2;
+
     
 
     header {
@@ -125,11 +154,26 @@ aside.open-navbar {
         justify-content: center;
         height: auto;
         list-style: none;
-        margin-top: 50px;
+        margin-top: 60px;
         li {
             display: flex;
             align-items: center;
             height: 64px;
+            padding: 0 15px;
+
+
+        }
+        li.lang-area {
+            margin-top: 30px;
+            border-top: 1px solid $primary-grey;
+            img.lang-pic {
+                height: 25px;
+                margin-right: 10px;
+            }
+            p {
+                font-size: 16px;
+                color: $primary-grey;
+            }
         }
         .text-link {
             display: flex;
@@ -139,6 +183,10 @@ aside.open-navbar {
             img {
                 margin-right: 15px;
             }
+        }:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
         }
     }
 

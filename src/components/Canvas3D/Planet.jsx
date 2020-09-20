@@ -57,7 +57,7 @@ const scale = spring.to([0, 1], [1, 1.1])
 
 export default function App() {
   return (
-      <Canvas>
+      <Canvas style={{height: 300, marginTop: 60}}>
         <fog attach="fog" args={['#ffffff', 16, 20]} />
         <ambientLight />
         <directionalLight 
