@@ -2,7 +2,7 @@
 
 TODO about kodokura
 
-CC project
+CC13 senior project
 
 ## About Kodokura
 
