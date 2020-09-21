@@ -94,12 +94,23 @@ div.language {
         padding: 30px;
 
         img {
-            height: 80px;
-            margin: 20px;
+            height: 120px;
+            padding: 20px;
+            // margin: 20px;
             cursor: pointer;
         }:active {
             border-radius: 10px;
-            border: 2px solid $primary-red;
+            border: 1px dashed $secondary-red;
+        }
+
+        .selected-lang {
+            background: radial-gradient(circle, $secondary-red 0%, rgba(148,187,233,0) 70%);
+            transition-property: all;
+            transition-duration: 0.7s;
+            transition-timing-function: ease-in;
+            transform: rotateY(0deg);
+        }:active {
+            transform: rotateY(180deg);
         }
     }
 
@@ -125,9 +136,14 @@ div.language {
         background: $primary-purple;
         border: none;
     }
-
-
 }
 
+@media screen and (max-width: 376px) {
+    div.profile {
+        section.profile-pic {
+            margin: 0;
+        }
+    }
+}
 
 

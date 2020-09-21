@@ -34,33 +34,18 @@ export default function GamesCard() {
   }
 
   function renderCheckBox(...category) {
-    if (games) {
+    if (games && games.games) {
       return games.games.map((e, i) => {
         return (
-          <div>
-            {e ? (
-              <>
-                <label for="fname">{category[i]}</label>
-                <input
-                  type="checkbox"
-                  defaultChecked={e}
-                  onChange={() => {
-                    checkBox(i);
-                  }}
-                />
-              </>
-            ) : (
-              <>
-                <label for="fname">{category[i]}</label>
-                <input
-                  type="checkbox"
-                  defaultChecked={e}
-                  onChange={() => {
-                    checkBox(i);
-                  }}
-                />
-              </>
-            )}
+          <div key={i}>
+            <label htmlFor="fname">{category[i]}</label>
+            <input
+              type="checkbox"
+              defaultChecked={e}
+              onChange={() => {
+                checkBox(i);
+              }}
+            />
           </div>
         );
       });

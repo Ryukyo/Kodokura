@@ -24,14 +24,34 @@ export default function About () {
                 <p>About us</p>
             </nav>
 
-            <header>
-                <p>Meet the Team</p>
-            </header>
-            <MemberCard img={edu} name="Eduardo" role="Frontend Developer" git="https://github.com/eduru" linkIn="" />
-            <MemberCard img={flo} name="Florian" role="Fullstack Developer" git="https://github.com/Ryukyo" linkIn="" />
-            <MemberCard img={phi} name="Philippe" role="Frontend Developer"  git="https://github.com/pw-yuu" linkIn="https://linkedin.com/in/philippe-huynh-0a7151109" />
-            <MemberCard img={tom} name="Tomoyuki" role="Fullstack Developer" git="https://github.com/bakisunsan" linkIn="" />
-            <MemberCard img={vin} name="Vincent" role="Frontend Developer" git="https://github.com/TwenLeMammouth" linkIn="" />
+            <main>
+
+                <section className="member-section">
+                    <header className="member-section">
+                        <p>Meet the Team</p>
+                    </header>
+                    <MemberCard img={edu} name="Eduardo" role="Frontend Developer" git="https://github.com/eduru" linkIn="https://www.linkedin.com/in/eduru/" />
+                    <MemberCard img={flo} name="Florian" role="Fullstack Developer" git="https://github.com/Ryukyo" linkIn="https://www.linkedin.com/in/florian-fejer/" />
+                    <MemberCard img={phi} name="Philippe" role="Frontend Developer"  git="https://github.com/pw-yuu" linkIn="https://linkedin.com/in/philippe-huynh-0a7151109" />
+                    <MemberCard img={tom} name="Tomoyuki" role="Fullstack Developer" git="https://github.com/bakisunsan" linkIn="https://www.linkedin.com/in/kobayashi-tomoyuki/" />
+                    <MemberCard img={vin} name="Vincent" role="Frontend Developer" git="https://github.com/TwenLeMammouth" linkIn="https://www.linkedin.com/in/vincent-groslier/" />
+                </section>
+                <section className="about-section">
+                    <header>
+                        <p>About Kodokura</p>
+                    </header>
+                    <p>
+                    A desire to belong is deeply rooted in people. That's because our ancestors depended on group cohesion to survive.<br/><br/>
+                    Unfortunately we are experiencing a loneliness epidemic that is growing up every year…<br/><br/>
+                    Kodokura will help you to quickly connect with others so you wont feel lonely anymore.
+                    </p>
+
+                    <hr/>
+
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+                </section>
+            </main>
         </div>
     )
 }

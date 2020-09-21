@@ -27,14 +27,23 @@ div.avatar-selector {
 
         img {
             height: 110px;
-            margin: 20px;
             cursor: pointer;
-
         }:active {
             border-radius: 10px;
-            border: 2px solid $primary-red;
+            border: 1px dashed $secondary-red;
         }:focus {
             outline: none !important;
+        }
+
+        .selected-avatar {
+            background: radial-gradient(circle, $secondary-red 0%, rgba(148,187,233,0) 70%);
+            transition-property: all;
+            transition-duration: 0.7s;
+            transition-timing-function: ease-in;
+            transform: rotateY(180deg);
+        }:active {
+            transform: rotateY(0deg);
+
         }
         
     }
@@ -64,4 +73,12 @@ div.avatar-selector {
         }
     }
 
+}
+
+@media screen and (max-width: 376px) {
+    div.avatar-selector {
+        section.avatar {
+            padding: 0 10px;
+        }
+    }
 }

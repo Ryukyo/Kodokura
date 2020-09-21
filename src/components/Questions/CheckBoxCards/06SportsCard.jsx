@@ -34,33 +34,18 @@ export default function SportsCard() {
   }
 
   function renderCheckBox(...category) {
-    if (sports) {
+    if (sports && sports.sports) {
       return sports.sports.map((e, i) => {
         return (
-          <div>
-            {e ? (
-              <>
-                <label for="fname">{category[i]}</label>
-                <input
-                  type="checkbox"
-                  defaultChecked={e}
-                  onChange={() => {
-                    checkBox(i);
-                  }}
-                />
-              </>
-            ) : (
-              <>
-                <label for="fname">{category[i]}</label>
-                <input
-                  type="checkbox"
-                  defaultChecked={e}
-                  onChange={() => {
-                    checkBox(i);
-                  }}
-                />
-              </>
-            )}
+          <div key={i}>
+            <label htmlFor="fname">{category[i]}</label>
+            <input
+              type="checkbox"
+              defaultChecked={e}
+              onChange={() => {
+                checkBox(i);
+              }}
+            />
           </div>
         );
       });

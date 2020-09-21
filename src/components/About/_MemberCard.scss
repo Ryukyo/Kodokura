@@ -4,7 +4,9 @@ section.member {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 12vh;
+    min-height: 12vh;
+    min-width: 300px;
+
     margin: 10px 20px;
     background: #ffffff;
     border-radius: 8px;
@@ -27,7 +29,7 @@ section.member {
         p.member-name {
             font-size: 20px;
             font-weight: bold;
-            color: $primary-purple;
+            color: $secondary-blue;
         }
     }
     nav.sns-logo {
@@ -38,6 +40,15 @@ section.member {
             padding: 3px;
             border-radius: 50%;
             background: $primary-gradient;
+        }:active {
+            background: $primary-purple;
+            border-radius: 50%;
         }
+    }
+}
+
+@media screen and (min-width: 769px) {
+    section.member {
+        justify-content: space-evenly;
     }
 }

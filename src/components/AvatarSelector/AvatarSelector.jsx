@@ -1,10 +1,15 @@
-import React from "react";
-import bearImg from "./img/BearCube.png";
-import birdImg from "./img/BirdCube.png";
-import bunnyImg from "./img/BunnyCube.png";
-import catImg from "./img/CatCube.png";
-import cowImg from "./img/CowCube.png";
-import deerImg from "./img/DeerCube.png";
+import React, { useState, useEffect } from "react";
+import bear from "./img/BearCube.png";
+import bird from "./img/BirdCube.png";
+import bunny from "./img/BunnyCube.png";
+import cow from "./img/CowCube.png";
+import dog from "./img/DogCube.png";
+import duck from "./img/DuckCube.png";
+import fox from "./img/FoxCube.png";
+import goat from "./img/GoatCube.png";
+import horse from "./img/HorseCube.png";
+import lion from "./img/LionCube.png";
+
 import {
   getUser,
   updateAvatar as updateAvatarReq,
@@ -14,13 +19,25 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Avatar() {
-  const user = getCurrentAuthUser();
+  const [avatar, setAvatar] = useState('');
+  const currentUseruser = getCurrentAuthUser();
+
+  async function getAvatar() {
+    const user = await getUser(currentUseruser.email);
+    let avatar = user.avatar_url;
+    setAvatar(avatar);
+  }
 
   async function updateAvatar(avatar) {
-    const userData = await getUser(user.email);
+    const userData = await getUser(currentUseruser.email);
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
-  }
+  };
+
+
+  useEffect(() => {
+    getAvatar();
+  }, []);
 
   return (
     <>
@@ -31,41 +48,95 @@ export default function Avatar() {
 
         <section className="avatar">
           <img
-            src={bearImg}
-            alt="avatar"
-            onClick={() => updateAvatar("Bear")}
+            src={bear}
+            alt="Bear"
+            className={"Bear" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
           />
           <img
-            src={birdImg}
-            alt="avatar"
-            onClick={() => updateAvatar("Bird")}
+            src={bird}
+            alt="Bird"
+            className={"Bird" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
           />
           <img
-            src={bunnyImg}
-            alt="avatar"
-            onClick={() => updateAvatar("Bunny")}
+            src={bunny}
+            alt="Bunny"
+            className={"Bunny" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
           />
-          {/* <img src={catImg} alt="avatar" onClick={() => updateAvatar("Cat5")} /> */}
-          <img src={cowImg} alt="avatar" onClick={() => updateAvatar("Cow")} />
-          {/* <img src={deerImg} alt="avatar" onClick={() => updateAvatar("Deer")} /> */}
-          <button alt="avatar" onClick={() => updateAvatar("Dog")}>
-            Dog
-          </button>
-          <button alt="avatar" onClick={() => updateAvatar("Duck")}>
-            Duck
-          </button>
-          <button alt="avatar" onClick={() => updateAvatar("Fox")}>
-            Fox
-          </button>
-          <button alt="avatar" onClick={() => updateAvatar("Goat")}>
-            Goat
-          </button>
-          <button alt="avatar" onClick={() => updateAvatar("Horse")}>
-            Horse
-          </button>
-          <button alt="avatar" onClick={() => updateAvatar("Lion")}>
-            Lion
-          </button>
+          <img
+            src={cow}
+            alt="Cow"
+            className={"Cow" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={dog}
+            alt="Dog"
+            className={"Dog" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={duck}
+            alt="Duck"
+            className={"Duck" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={fox}
+            alt="Fox"
+            className={"Fox" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={goat}
+            alt="Goat"
+            className={"Goat" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={horse}
+            alt="Horse"
+            className={"Horse" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
+          <img
+            src={lion}
+            alt="Lion"
+            className={"Lion" === avatar ? "selected-avatar" : ""}
+            onClick={(e) => {
+              setAvatar(e.target.alt);
+              updateAvatar(e.target.alt);
+            }}
+          />
         </section>
 
         <nav className="btn">

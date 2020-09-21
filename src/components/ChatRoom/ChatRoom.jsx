@@ -13,6 +13,8 @@ import {
 //img
 import backIcon from "../Utility/img/back.svg";
 import sendIcon from "../Utility/img/paper-plane.svg";
+//3d object
+import AvatarM from "../Canvas3D/AvatarM";
 
 export default function ChatRoom(props) {
   const matchResult = props.location.state.detail;
@@ -20,13 +22,15 @@ export default function ChatRoom(props) {
 
   const currentUserId = props.location.state.userId;
 
-  // console.log(props.location.state)
   let currentUser = matchResult.user1;
   let otherUser = matchResult.user2;
   if (currentUser.id !== currentUserId) {
     currentUser = matchResult.user2;
     otherUser = matchResult.user1;
   }
+
+  let currentUserAvatar = currentUser.avatar_url;
+  let otherUserAvatar = otherUser.avatar_url;
 
   const [chats, setChats] = useState([]);
   const [nickname, setNickname] = useState(currentUser.name);
@@ -90,34 +94,6 @@ export default function ChatRoom(props) {
               // also add message to messages array
               messages.push(welcomeMessage);
             }
-            // TODO only user1 sends bot message / not good, because user1 not loggedin or leave room, bot never response
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const from = lastMessage.nickname;
-            //   if (text.includes("kodobot") && from !== "KodoBot") {
-            //     const botReactionToName = botMessage("You've said my name human. I'm afraid I cannot answer your questions yet.I'm here just to be sure that you're not alone");
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
-
-            //encourage conversation
-            //check the last time stamp
-            //set time from last time stamp
-            //if the messages length < messages.length +1 
-            //send message
-
-            //WIP
-            // setTimeout(function () {
-            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
-            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
-            //     const botReactionToName = botMessage(answer);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }, 30000)
-
 
             //helper functions
             const answerRandomizer = (array) => {
@@ -1026,23 +1002,6 @@ export default function ChatRoom(props) {
               }
             }
 
-            //media accounts
-
-
-            // // kodobot invoked
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const lowercaseText = text.toLowerCase()
-            //   if (lowercaseText.includes("kodobot")) {
-            //     const answer = ["You said my name human", "I'm not ready to answer that yet human", "That is my name"]
-            //     const random = answerRandomizer(answer)
-            //     const botReactionToName = botMessage(answer[random]);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
-
             // change status to show messages
             setChats(messages);
           },
@@ -1123,6 +1082,8 @@ export default function ChatRoom(props) {
       name: otherUser.name,
       id: otherUser.id,
     });
+
+    exitChat();
   };
 
 
@@ -1139,6 +1100,7 @@ export default function ChatRoom(props) {
     <div className="chat-container">
       <nav className="chatnav">
         <img
+          className="img-nav"
           src={backIcon}
           alt="exit icon"
           onClick={() => {
@@ -1160,6 +1122,10 @@ export default function ChatRoom(props) {
           </Button>
         </div>
       </nav>
+      <div className="other-avatar">
+        <AvatarM avatar={otherUserAvatar} style={{width: 50}}/>
+      </div>
+
 
       <ScrollToBottom className="chat-content">
         {chats.map((item, idx) => (
@@ -1194,7 +1160,6 @@ export default function ChatRoom(props) {
       </ScrollToBottom>
 
       <form className="message-form" onSubmit={submitMessage}>
-        <p>{nickname}</p>
 
         <div className="form-group">
           <input
@@ -1211,9 +1176,12 @@ export default function ChatRoom(props) {
         <button variant="primary" type="submit">
           <img src={sendIcon} alt="send icon" />
         </button>
+
       </form>
+
+      <div className="current-avatar">
+        <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
+      </div>
     </div>
   );
 }
-
-// if users dont speak, get a common interest from both and recommend that topic to speak

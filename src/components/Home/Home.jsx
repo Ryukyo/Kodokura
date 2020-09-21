@@ -8,19 +8,21 @@ import {
   postChatQueue,
 } from "../../helpers/backend";
 
+import Planet from "../Canvas3D/Planet";
 
-import Planet from "../Canvas3D/Planet"
+//img
+import notfound from "../Utility/img/cancel.svg";
 
 export default function Home(props) {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
 
   const currentUser = getCurrentAuthUser();
 
   async function getData() {
     const user = await getUser(currentUser.email);
-    // setAvatar(user.avatar_url);
-    setUsername(user.name)
+    setUsername(user.name);
   }
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function Home(props) {
 
   async function queueUp() {
     setLoading(true);
+    setErr("");
 
     let user = await getUser(currentUser.email);
     let id = {
@@ -50,8 +53,8 @@ export default function Home(props) {
   }
 
   async function startMatchmaking(userId) {
-    let waitTime = 10000;
-    let threshold = waitTime * 60;
+    let waitTime = 1000;
+    let threshold = waitTime * 20;
     let count = 0;
     let flag = true;
     // wait until get 200
@@ -77,6 +80,7 @@ export default function Home(props) {
       count += waitTime;
       if (threshold <= count) {
         // TODO message for unmatch
+        setErr("Sorry, you were unable to match with anyone.");
         setLoading(false);
         flag = false;
       }
@@ -89,29 +93,37 @@ export default function Home(props) {
 
   return (
     <div className="home">
-
       <Header />
 
       <h3 className="welcome-user">Welcome {username}!</h3>
 
-
       <section className="look-chat">
         {loading ? (
-          <div>
 
-            <Planet />
-          Searching for matches...
-            <p> This is an anonymus application. Please, do not share personal information (addresses, phone numbers, birth date, age, bank account details, or email addresses) with others.</p>
+          <div className="match-area">
+            <Planet className="load-planet"/>
+            <div className="match-text">
+              <p className="searching-area">Searching for matches...</p>
+              <p>
+                This is an anonymus application. Please, do not share personal information.
+              </p>
+            </div>
+
           </div>
-
-
         ) : (
-            <button onClick={queueUp}>
-              Find someone <br />
+          <button onClick={queueUp}>
+            Find someone <br />
             to talk to.
-            </button>
-          )}
+          </button>
+        )}
       </section>
+      {err ? 
+      <div className="err-msg">
+        <img src={notfound} alt="not found"/>
+        <p>{err}</p>
+      </div> 
+        : 
+      <div />}
     </div>
   );
 }

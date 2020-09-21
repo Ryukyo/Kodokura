@@ -7,7 +7,7 @@ import backIcon from "../../Utility/img/back.svg";
 
 export default function InterestsMenu() {
   const currentUser = getCurrentAuthUser();
-  const [hasAvatar, setHasAvatar] = useState(getAvatar());
+  const [hasAvatar, setHasAvatar] = useState("");
 
   async function getAvatar() {
     let user = await getUser(currentUser.email);
@@ -18,9 +18,7 @@ export default function InterestsMenu() {
 
   useEffect(() => {
     getAvatar();
-  });
-
-  console.log(hasAvatar);
+  }, []);
 
   return (
     <>

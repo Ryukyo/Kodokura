@@ -1,14 +1,6 @@
 import React from "react";
 import logo from "../Utility/img/logo-wh.png";
-// import Clouds from '../Clouds/Clouds';
-
-import wave from './img/wave-color2.svg';
-
 import {
-  /*   Route,
-    BrowserRouter as Router,
-    Switch,
-    Redirect, */
   Link,
 } from "react-router-dom";
 
@@ -16,7 +8,6 @@ export default function Main()  {
   return (
     <div className="main">
       <header className="main-header">
-        {/* <img src={wave} alt=""/> */}
         <h1>
           <img className="logo" src={logo} alt="" />
         </h1>
@@ -29,7 +20,6 @@ export default function Main()  {
 
 
       <nav className="login-section">
-        {/* <div> */}
           <Link to="/signup">
             <button>Create Account</button>
           </Link>
@@ -41,7 +31,6 @@ export default function Main()  {
           <Link to="/about">
             <button className="secondary-btn">About</button>
           </Link>
-        {/* </div> */}
       </nav>
 
       <footer>

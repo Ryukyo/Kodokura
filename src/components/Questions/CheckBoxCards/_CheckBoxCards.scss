@@ -103,6 +103,17 @@ div.interest-cards {
             font-size: 20px;
             color: #ffffff;
             margin: 10px 0;
+
+            .isOn {
+                height: 50px;
+                color: blue;
+            }
+            .isOff {
+                color: red;
+            }
+            input {
+                size: 10px;
+            }
         }
     }
 
@@ -129,4 +140,23 @@ div.interest-cards {
     }
 }
 
+@media screen and (max-width: 376px) {
+    div.interests {
+        section {
+            div{
+                margin: 5px;
+            }
+        }
+    }
 
+    div.interest-cards {
+        section.selection-box {
+            margin: 5px 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    }
+
+}

@@ -5,10 +5,8 @@ import {
   getCurrentAuthUser,
   updateAnswers,
 } from "../../helpers/backend";
-
 // Components
 import Card from "./Card";
-// import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 export default function QuestionCard() {
   const [question, setQuestion] = useState(0);
@@ -124,7 +122,6 @@ export default function QuestionCard() {
             <Link to="/avatar">
               <button
                 onClick={() => {
-                  console.log("avatarrrr", hasAvatar);
                   updateAnswersUI();
                 }}
               >
@@ -135,7 +132,6 @@ export default function QuestionCard() {
             <Link to="/profile">
               <button
                 onClick={() => {
-                  console.log("avatarrrr2", hasAvatar);
                   updateAnswersUI();
                 }}
               >

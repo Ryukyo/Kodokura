@@ -30,7 +30,6 @@ import SportsCard from "./components/Questions/CheckBoxCards/06SportsCard";
 import FoodsCard from "./components/Questions/CheckBoxCards/07FoodsCard";
 import About from "./components/About/About";
 
-
 function App() {
   const [authentication, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -90,7 +89,6 @@ function App() {
           <PrivateRoute
             path="/chatroom"
             authenticated={authentication}
-            // needs to be "Home" for the real implementation
             component={ChatRoom}
           />
           <PrivateRoute
@@ -148,13 +146,11 @@ function App() {
             authenticated={authentication}
             component={LogIn}
           />
-
           <PublicRoute
             path="/about"
             authenticated={authentication}
             component={About}
           />
-
           <PrivateRoute
             path="/interestsmenu"
             authenticated={authentication}
@@ -195,9 +191,6 @@ function App() {
             authenticated={authentication}
             component={FoodsCard}
           />
-
-
-
         </Switch>
       </Router>
     );

@@ -31,14 +31,16 @@ div.home {
         justify-content: center;
         align-items: center;
         height: 10vh;
+        margin-bottom: 20px;
         color: #ffffff;
     }
 
     section.look-chat {
-        height: 65vh;
+        height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top:20px;
 
         button {
             height: 300px;
@@ -50,21 +52,56 @@ div.home {
             color: #ffffff;
             background: $primary-gradient;
             outline: none;
-        :hover {
-            background: #ffffff;
-            color: $primary-purple;
-            border: 1px solid $primary-purple;
-        }:active {
-            color: #ffffff;
-            background: $primary-purple;
-            border: none;
+            :hover {
+                background: #ffffff;
+                color: $primary-purple;
+                border: 1px solid $primary-purple;
+            }:active {
+                color: #ffffff;
+                background: $primary-purple;
+                border: none;
+            }
+
+            div {
+                font-size: 20px;
+                color: #ffffff;
+            }
+            
+            canvas {
+              outline: none;
+          }
         }
 
-        div {
-            font-size: 20px;
-            color: #ffffff;
+
+        div.match-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 25vh;
+            
+            p{
+                width: 70%;
+                color: #ffffff;
+            }
+            p.searching-area {
+                font-size: 18px;
+            }
+
         }
+
+
+        .load-planet {
+            z-index: 0;
         }
+
+    }
+    .err-msg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        margin-top: 30px;
     }
 
 }
