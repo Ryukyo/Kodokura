@@ -105,9 +105,7 @@ export default function Home(props) {
             <div className="match-text">
               <p className="searching-area">Searching for matches...</p>
               <p>
-                This is an anonymus application.<br/>Please, do not share personal
-                information such as: <br/><br/>addresses, phone numbers, birth date, age, bank
-                account details, or email addresses
+                This is an anonymus application. Please, do not share personal information.
               </p>
             </div>
 

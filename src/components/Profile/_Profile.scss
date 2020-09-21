@@ -136,9 +136,14 @@ div.language {
         background: $primary-purple;
         border: none;
     }
-
-
 }
 
+@media screen and (max-width: 376px) {
+    div.profile {
+        section.profile-pic {
+            margin: 0;
+        }
+    }
+}
 
 
