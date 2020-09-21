@@ -110,7 +110,6 @@ yarn deploy
 * [Philippe](https://github.com/pw-yuu)
 * [Edu](https://github.com/eduru)
 
-[ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## License
 
