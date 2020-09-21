@@ -8,11 +8,10 @@ import planet3D from "./lowpoly_earth.glb";
 
 function Planet({ url }) {
   const { nodes, materials } = useLoader(GLTFLoader, url, draco());
-
   const earthColor = "#228B22";
   const waterColor = "#3282b8";
-
   const mesh = useRef();
+
 
   useFrame(() => {
     mesh.current.rotation.y += 0.01;
@@ -83,3 +82,4 @@ export default function App() {
     </Canvas>
   );
 }
+

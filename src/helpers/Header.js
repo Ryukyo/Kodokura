@@ -26,9 +26,6 @@ function Header() {
                 <img src={logo} alt="home" className="logo-img" />
                 <img src={exitIcon} alt="exit" onClick={() => signOut()} />{" "}
               </nav>
-              {/* <Link to={{ pathname: "/profile", query: { avatar: avatar } }}>
-                <img className="homeavatar" src={avatar} alt="avatar" />
-              </Link> */}
             </div>
           ) : (
             <div className="navbar-nav">

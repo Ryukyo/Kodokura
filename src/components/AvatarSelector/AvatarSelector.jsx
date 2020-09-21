@@ -19,8 +19,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Avatar() {
-  const [avatar, setAvatar] = useState("");
-
+  const [avatar, setAvatar] = useState('');
   const currentUseruser = getCurrentAuthUser();
 
   async function getAvatar() {
@@ -33,8 +32,8 @@ export default function Avatar() {
     const userData = await getUser(currentUseruser.email);
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
-    // setAvatar(userData.avatar_url)
-  }
+  };
+
 
   useEffect(() => {
     getAvatar();

@@ -5,7 +5,6 @@ import AvatarM from "../Canvas3D/AvatarM";
 import { getCurrentAuthUser, getUser } from "../../helpers/backend";
 
 //img
-
 import usernameIcon from '../Utility/img/user.svg'
 import blockIcon from '../Utility/img/error.svg'
 import america from "../Profile/Flags/american_flag.png";
