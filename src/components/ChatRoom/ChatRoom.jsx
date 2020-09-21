@@ -103,7 +103,7 @@ export default function ChatRoom(props) {
               const bot = Actions();
               const botAnswer = bot.answer(text);
               if(botAnswer) {
-                const botReactionToName = botMessage(answer[random]);
+                const botReactionToName = botMessage(botAnswer);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
               }
