@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { Suspense, useState, useEffect } from 'react'
-import { Canvas, useLoader } from 'react-three-fiber'
+import { Canvas, useLoader, useFrame } from 'react-three-fiber'
 import { useTransition, a } from 'react-spring'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls, draco } from 'drei'
@@ -9,23 +9,41 @@ import { AvatarFiles } from "./AvatarFiles.js"
 
 
 
-const avatar = "Bear";
+// const avatar = "Bear";
 function Model({avatar}) {
-  console.log("avatarName", avatar)
+  // console.log("avatarName", avatar)
   const model = AvatarFiles[avatar]
   const { nodes, materials, animations } = useLoader(GLTFLoader, model.object3D, draco())
   const texture = useLoader(TextureLoader, model.texture);
   texture.flipY = false;
-  console.log("animations", animations)
+  // console.log("nodes", nodes)
+  // console.log("animations", animations)
+  
+
+  // const animator = new THREE.AnimationMixer(animations[0])
+
+  // useEffect(() => animations.forEach(clip => animator.clipAction(clip).play()), [])
+
+  // useFrame((state, delta) => animator.update(delta))
+
   return (
-    <group rotation={[0, 0, 0]} position={[0, -6, 0]} scale={[7, 7, 7]}>
+    
+    <group castShadow receiveShadow rotation={[0, 0, 0]} position={[0, -2, 0]} scale={[2, 2, 2]}>
       <ambientLight />
-        <mesh castShadow receiveShadow geometry={nodes[avatar].geometry} material={materials[model.materials]} >
-          <meshPhongMaterial attach="material" side={THREE.DoubleSide} map={texture} />
+        <mesh geometry={nodes[avatar].geometry} material={materials[model.materials]} >
+          <meshBasicMaterial  attach="material" side={THREE.DoubleSide} map={texture} />
         </mesh>
     </group>
+    
   )
 }
+
+const Plane = () => (
+  <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.001, 0]} >
+    <circleGeometry  attach="geometry" args={[2.4, 200]} color="#000000"  />
+    <meshToonMaterial  attach="material"  opacity={0.1} transparent={true} />
+  </mesh>
+);
 
 function Loading() {
   const [finished, set] = useState(false)
@@ -57,26 +75,31 @@ export default function AvatarM({avatar}) {
     <>
       <div className="bg" />
      
-      <Canvas shadowMap camera={{ position: [0, 0, 12], fov: 80 }}>
-        <ambientLight color={"lightblue"}/>
-        <pointLight intensity={0.8} position={[-10, 10, -10]} />
-        {/* <spotLight
-          castShadow
-          intensity={1}
-          angle={0.2}
-          penumbra={1}
-          position={[25, 25, 25]}
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-bias={-0.0001}
-        /> */}
-        {/* <fog attach="fog" args={['#cc7b32', 16, 20]} /> */}
+      <Canvas shadowMap camera={{position: [0, 0, 5]}}>
+        <ambientLight intensity={0.2} color="lightblue"/>
+        <spotLight 
+            intensity={0.2} 
+            position={[0, 10, 15]}
+            penumbra={1}
+            shadow-mapSize-width={20}
+            shadow-mapSize-height={20}
+            castShadow 
+            />
+        <directionalLight 
+            castShadow
+            position={[0, 10, 0]}
+            intensity={0.1}
+            penumbra={1}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            
+            />
         <Suspense fallback={null}>
-          {/* <Model url={turtle} objText={texturecolor} nodesGeo={TurtleShell.geometry} matMat={MaterialTurtle} /> */}
           {avatar ? <Model avatar={avatar}/> : <div /> }
+          <Plane />
         </Suspense>
+        
         <OrbitControls
-          autoRotate
           enablePan={false}
           enableZoom={false}
           enableDamping
@@ -87,7 +110,7 @@ export default function AvatarM({avatar}) {
         />
       </Canvas>
       <div className="layer" />
-      <Loading />
+      {/* <Loading /> */}
     </>
   )
 }

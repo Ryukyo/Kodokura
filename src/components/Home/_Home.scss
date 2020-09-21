@@ -63,6 +63,12 @@ div.home {
         div {
             font-size: 20px;
             color: #ffffff;
+            outline: none;
+        }
+        canvas {
+            outline: none;
+            z-index: -1;
+            border-radius: 25px;
         }
         }
     }
