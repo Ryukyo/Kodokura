@@ -104,11 +104,13 @@ yarn deploy
 
 ## Authors
 
-* Tomoyuki 
-* Florian
-* Vincent
-* Philippe
-* Eduardo 
+* [Tomoyuki](https://github.com/bakisunsan)
+* [Florian](https://github.com/Ryukyo)
+* [Vincent](https://github.com/TwenLeMammouth)
+* [Philippe](https://github.com/pw-yuu)
+* [Edu](https://github.com/eduru)
+
+[ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## License
 
