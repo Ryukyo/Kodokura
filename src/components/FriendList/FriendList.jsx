@@ -4,12 +4,9 @@ import { Link } from 'react-router-dom';
 //img
 import backIcon from '../Utility/img/back.svg';
 
-
 export default function FriendList() {
-
     return (
         <div className="friendlist">
-            
             <nav>
                 <Link to="/home">
                 <img src={backIcon} alt="back"/>

@@ -20,9 +20,7 @@ import { Link } from "react-router-dom";
 import { update } from "lodash";
 
 export default function Avatar() {
-
   const [avatar, setAvatar] = useState('');
-
 
   const currentUseruser = getCurrentAuthUser();
 
@@ -37,8 +35,6 @@ export default function Avatar() {
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
   };
-
-
 
   useEffect(() => {
     getAvatar();

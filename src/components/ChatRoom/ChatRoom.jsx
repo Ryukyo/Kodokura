@@ -74,7 +74,6 @@ export default function ChatRoom(props) {
   useEffect(() => {
     const fetchData = async () => {
       setNickname(currentUser.name);
-      // setAvatar(currentUser.avatar_url)
       await db
         .ref("chats")
         .orderByChild("roomname")
@@ -1231,5 +1230,3 @@ export default function ChatRoom(props) {
     </div>
   );
 }
-
-// if users dont speak, get a common interest from both and recommend that topic to speak

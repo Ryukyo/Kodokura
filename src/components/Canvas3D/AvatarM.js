@@ -65,7 +65,7 @@ export default function AvatarM({ avatar }) {
   return (
     <>
       <div className="bg" />
-     
+      
       <Canvas shadowMap camera={{position: [0, 0, 5]}}>
         <ambientLight intensity={0.2} color="lightblue"/>
         <spotLight 
