@@ -34,7 +34,7 @@ export default function MoviesCard() {
   }
 
   function renderCheckBox(...category) {
-    if (movies) {
+    if (movies && movies.movies) {
       return movies.movies.map((e, i) => {
         return (
           <div key={i}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   getCurrentAuthUser,
@@ -21,7 +21,10 @@ export default function TvShowsCard() {
     }
     return id;
   }
-  getUserId();
+
+  useEffect(() => {
+    getUserId();
+  }, []);
 
   async function updateAnswers() {
     const userId = await getUserId();
@@ -34,7 +37,7 @@ export default function TvShowsCard() {
   }
 
   function renderCheckBox(...category) {
-    if (tvshows) {
+    if (tvshows && tvshows.tvshows) {
       return tvshows.tvshows.map((e, i) => {
         return (
           <div key={i}>

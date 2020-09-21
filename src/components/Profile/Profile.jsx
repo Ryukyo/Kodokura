@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUser, getCurrentAuthUser, deleteUser } from "../../helpers/backend";
-
 import AvatarM from "../Canvas3D/AvatarM";
 
 //img
@@ -33,7 +32,9 @@ export default function Profile() {
     setUsername(userName);
   }
 
-  getData();
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -48,7 +49,7 @@ export default function Profile() {
         <h3>{username}</h3>
 
         <section className="profile-pic">
-          {myAvatar ? <AvatarM avatar={myAvatar}/> : <div />}
+          {myAvatar ? <AvatarM avatar={myAvatar} /> : <div />}
         </section>
 
         <section className="profile-nav">
