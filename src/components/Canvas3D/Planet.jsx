@@ -14,7 +14,6 @@ function Planet({ url }) {
     
     const earthColor = "#228B22";
     const waterColor = "#3282b8";
-
     
     const mesh = useRef();
 
@@ -38,7 +37,6 @@ function Planet({ url }) {
 
 export default function App() {
   return (
-
       <Canvas colorManagement style={{height: 300, marginTop: 60}}>
 
         <fog attach="fog" args={['#ffffff', 16, 20]} />

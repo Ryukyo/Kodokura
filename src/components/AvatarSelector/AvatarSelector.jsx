@@ -36,8 +36,6 @@ export default function Avatar() {
     const userData = await getUser(currentUseruser.email);
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
-    // setAvatar(userData.avatar_url)
-    console.log(userData);
   };
 
 
