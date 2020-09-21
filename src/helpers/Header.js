@@ -2,14 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { getUserFromCurrentAuthUser, updateUserStatus } from "./backend";
-
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 
 //img
 import exitIcon from "../components/Utility/img/exit.svg";
 import logo from "../components/Utility/img/logo-wh.png";
 
-function Header(props) {
+function Header() {
   const signOut = async () => {
     const user = await getUserFromCurrentAuthUser();
     updateUserStatus(user.id, "OFFLINE");

@@ -22,7 +22,6 @@ export default function Home(props) {
 
   async function getData() {
     const user = await getUser(currentUser.email);
-    // setAvatar(user.avatar_url);
     setUsername(user.name);
   }
 
@@ -100,6 +99,7 @@ export default function Home(props) {
 
       <section className="look-chat">
         {loading ? (
+
           <div className="match-area">
             <Planet className="load-planet"/>
             <div className="match-text">

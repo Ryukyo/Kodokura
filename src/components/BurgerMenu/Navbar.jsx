@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AvatarM from "../Canvas3D/AvatarM";
-import { auth } from "../../services/firebase";
 
-import {
-    getCurrentAuthUser,
-    getUser,
-} from "../../helpers/backend";
-
+import { getCurrentAuthUser, getUser } from "../../helpers/backend";
 
 //img
+
 import usernameIcon from '../Utility/img/user.svg'
 import blockIcon from '../Utility/img/error.svg'
 import america from "../Profile/Flags/american_flag.png";
