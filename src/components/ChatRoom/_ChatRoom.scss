@@ -21,7 +21,8 @@ div.chat-container {
     position: fixed;
     top: 0;
     background: $primary-gradient;
-    border-bottom: 1px solid $secondary-purple;
+    // border-bottom: 1px solid $secondary-purple;
+    z-index: 2;
 
     p {
       color: #ffffff;
@@ -29,14 +30,43 @@ div.chat-container {
     }
   }
 
+  .other-avatar {
+    position: relative;
+    top: 50px;
+    z-index: 1;
+    padding: 0px 40px 10px 0;
+    height: 110px;
+    width: 150px;
+    // background: green;
+    // border-top-left-radius: 10px;
+    background: $primary-gradient;
+    border-bottom-right-radius: 100%;
+    // border-top-right-radius: 50%;
+    // border-radius: ;
+  }
+
+  .current-avatar {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    height: 100px;
+    width: 90px;
+    padding-left: 15px;
+    // padding: 0px 0px 20px 50px;
+    background: $primary-gradient;
+    border-top-left-radius: 100%;
+    z-index: 3;
+
+  }
+
   .chat-content {
-    margin: 82px 0;
+    margin: 55px 0 120px 0;
     overflow: scroll;
-    padding: 0 10px;
+    padding: 0 20px;
+    z-index: 0;
     
     
     .MessageBox {
-
       .chat-RightBubble {
         display: flex;
         flex-direction: column;
@@ -71,7 +101,7 @@ div.chat-container {
           max-width: 80%;
           min-width: 15%;
           color: #ffffff;
-          background: linear-gradient(100deg, #383838 0%, #aaaaaa 100%) no-repeat fixed center;;
+          background: $primary-gradient;
           border-radius: 30px;
           padding: 5px;
     
@@ -115,20 +145,16 @@ div.chat-container {
   form.message-form {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: 100vw;
     height: 10vh;
-    padding: 15px;
+    padding: 15px 0 15px 20px;
     position: fixed;
     bottom: 0;
     background: $primary-gradient;
-    border-top: 1px solid $secondary-purple;
+    // border-top: 1px solid $secondary-purple;
+    z-index: 2;
 
-    p {
-      color: #ffffff;
-      font-size: 20px;
-      margin-right: 20px;
-    }
 
     input {
       height: 40px;
@@ -140,6 +166,7 @@ div.chat-container {
       outline: none;
       padding: 10px 20px;
       font-size: 16px;
+      
     }::placeholder {
       color: $secondary-purple;
     }:focus::placeholder {

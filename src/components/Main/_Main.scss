@@ -12,7 +12,7 @@ div.main {
     footer {
         height: 5vh;
         font-size: 10px;
-        color: $primary-purple;
+        color: $secondary-blue;
     }
 }
 
@@ -23,8 +23,11 @@ header.main-header {
     justify-content: center;
     height: 55vh;
     width: 100vw; 
-    background-image: url(./img/wave-color2.svg);
+    background-image: url(./img/wave-color-m.svg);
     background-repeat: no-repeat;
+    background-size: cover;
+    
+
 
     p {
         font-size: 18px;
@@ -98,7 +101,7 @@ nav.login-section {
         border-radius: 30px;
         margin: 15px;
         font-size: 20px;
-        color: $primary-purple;
+        color: $secondary-blue;
         background: #ffffff;
         
         border: solid 2px transparent;
@@ -112,7 +115,7 @@ nav.login-section {
     }
     button.secondary-btn:hover {
         background: #ffffff;
-        color: $primary-purple;
+        color: $secondary-blue;
         border: 1px solid $primary-purple;
     }
     button.secondary-btn:active {
@@ -123,3 +126,41 @@ nav.login-section {
 }
 
 
+@media screen and (max-width: 375px) {
+    header.main-header {
+        background-image: url(./img/wave-color-s.svg);
+    }
+
+    nav.login-section {
+        button{
+            margin: 5px;
+        }
+        button.secondary-btn {
+            margin: 5px;
+        }
+    }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+    header.main-header {
+        background-image: url(./img/wave-color-768.svg);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1025px) {
+    header.main-header {
+        background-image: url(./img/wave-color-1024.svg);
+    }
+}
+
+@media (min-width: 1026px) and (max-width: 1441px) {
+    header.main-header {
+        background-image: url(./img/wave-color-1024.svg);
+    }
+}
+
+@media (min-width: 1442px) and (max-width: 2561px) {
+    header.main-header {
+        background-image: url(./img/wave-color-2560.svg);
+    }
+}

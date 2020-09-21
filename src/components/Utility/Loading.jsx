@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getUser, getCurrentAuthUser } from "../../helpers/backend";
 import { Redirect } from "react-router-dom";
-
+import Spinner from "./Spinner";
 
 export default function Loading() {
   const [answersArray, setAnswersArray] = useState([]);
@@ -20,10 +20,7 @@ export default function Loading() {
   return (
     <>
       {loading ? (
-        <div>
-         
-          Loading...
-        </div>
+        <Spinner />
       ) : answersArray === true ? (
         <Redirect to={{ pathname: "/questions" }} />
       ) : (

@@ -1,3 +1,4 @@
+
 import * as THREE from 'three'
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useLoader, useFrame } from 'react-three-fiber'
@@ -26,16 +27,19 @@ function Model({avatar}) {
 
   // useFrame((state, delta) => animator.update(delta))
 
+
   return (
     
     <group castShadow receiveShadow rotation={[0, 0, 0]} position={[0, -2, 0]} scale={[2, 2, 2]}>
       <ambientLight />
+
         <mesh geometry={nodes[avatar].geometry} material={materials[model.materials]} >
           <meshBasicMaterial  attach="material" side={THREE.DoubleSide} map={texture} />
         </mesh>
     </group>
     
   )
+
 }
 
 const Plane = () => (
@@ -46,34 +50,32 @@ const Plane = () => (
 );
 
 function Loading() {
-  const [finished, set] = useState(false)
-  const [width, setWidth] = useState(0)
+  const [finished, set] = useState(false);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    THREE.DefaultLoadingManager.onLoad = () => set(true)
+    THREE.DefaultLoadingManager.onLoad = () => set(true);
     THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) =>
-      setWidth((itemsLoaded / itemsTotal) * 200)
-  }, [])
+      setWidth((itemsLoaded / itemsTotal) * 200);
+  }, []);
 
   const props = useTransition(finished, null, {
     from: { opacity: 1, width: 0 },
     leave: { opacity: 0 },
     update: { width },
-  })
+  });
 
   return props.map(
     ({ item: finished, key, props: { opacity, width } }) =>
-      !finished && (
-        
-       <></>
-      ),
-  )
+      !finished && <div key={key}></div>
+  );
 }
 
-export default function AvatarM({avatar}) {
+export default function AvatarM({ avatar }) {
   return (
     <>
       <div className="bg" />
+
      
       <Canvas shadowMap camera={{position: [0, 0, 5]}}>
         <ambientLight intensity={0.2} color="lightblue"/>
@@ -97,6 +99,7 @@ export default function AvatarM({avatar}) {
         <Suspense fallback={null}>
           {avatar ? <Model avatar={avatar}/> : <div /> }
           <Plane />
+
         </Suspense>
         
         <OrbitControls
@@ -112,5 +115,5 @@ export default function AvatarM({avatar}) {
       <div className="layer" />
       {/* <Loading /> */}
     </>
-  )
+  );
 }

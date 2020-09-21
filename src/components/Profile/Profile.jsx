@@ -28,9 +28,9 @@ export default function Profile() {
   async function getData() {
     const userData = await getUser(currentUser.email);
     let avatar = userData.avatar_url;
-    let username = userData.name;
+    let userName = userData.name;
     setMyAvatar(avatar);
-    setUsername(username);
+    setUsername(userName);
   }
 
   getData();

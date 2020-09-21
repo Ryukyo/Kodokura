@@ -38,7 +38,9 @@ function Planet({ url }) {
 
 export default function App() {
   return (
-      <Canvas colorManagement>
+
+      <Canvas colorManagement style={{height: 300, marginTop: 60}}>
+
         <fog attach="fog" args={['#ffffff', 16, 20]} />
         <ambientLight />
         <directionalLight 
