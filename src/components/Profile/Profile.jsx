@@ -48,7 +48,7 @@ export default function Profile() {
         <h3>{username}</h3>
 
         <section className="profile-pic">
-          {myAvatar ? <AvatarM avatar={myAvatar} /> : <div />}
+          {myAvatar ? <AvatarM avatar={myAvatar}/> : <div />}
         </section>
 
         <section className="profile-nav">

@@ -74,3 +74,11 @@ div.avatar-selector {
     }
 
 }
+
+@media screen and (max-width: 376px) {
+    div.avatar-selector {
+        section.avatar {
+            padding: 0 10px;
+        }
+    }
+}

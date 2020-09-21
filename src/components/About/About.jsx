@@ -26,8 +26,8 @@ export default function About () {
 
             <main>
 
-                <section>
-                    <header>
+                <section className="member-section">
+                    <header className="member-section">
                         <p>Meet the Team</p>
                     </header>
                     <MemberCard img={edu} name="Eduardo" role="Frontend Developer" git="https://github.com/eduru" linkIn="https://www.linkedin.com/in/eduru/" />

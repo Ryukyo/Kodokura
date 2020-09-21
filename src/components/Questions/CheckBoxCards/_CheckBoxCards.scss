@@ -139,3 +139,24 @@ div.interest-cards {
         border: none;
     }
 }
+
+@media screen and (max-width: 376px) {
+    div.interests {
+        section {
+            div{
+                margin: 5px;
+            }
+        }
+    }
+
+    div.interest-cards {
+        section.selection-box {
+            margin: 5px 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    }
+
+}
