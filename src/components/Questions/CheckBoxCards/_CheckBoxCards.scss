@@ -103,6 +103,17 @@ div.interest-cards {
             font-size: 20px;
             color: #ffffff;
             margin: 10px 0;
+
+            .isOn {
+                height: 50px;
+                color: blue;
+            }
+            .isOff {
+                color: red;
+            }
+            input {
+                size: 10px;
+            }
         }
     }
 
@@ -128,5 +139,3 @@ div.interest-cards {
         border: none;
     }
 }
-
-

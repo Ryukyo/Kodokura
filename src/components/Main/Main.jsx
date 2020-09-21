@@ -2,8 +2,6 @@ import React from "react";
 import logo from "../Utility/img/logo-wh.png";
 // import Clouds from '../Clouds/Clouds';
 
-import wave from './img/wave-color2.svg';
-
 import {
   /*   Route,
     BrowserRouter as Router,
