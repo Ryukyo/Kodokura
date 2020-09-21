@@ -27,7 +27,7 @@ section.member {
         p.member-name {
             font-size: 20px;
             font-weight: bold;
-            color: $primary-purple;
+            color: $secondary-blue;
         }
     }
     nav.sns-logo {
@@ -38,6 +38,9 @@ section.member {
             padding: 3px;
             border-radius: 50%;
             background: $primary-gradient;
+        }:active {
+            background: $primary-purple;
+            border-radius: 50%;
         }
     }
 }

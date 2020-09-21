@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import america from "./Flags/american_flag.png";
 import japan from "./Flags/japanese_flag.png";
 import france from "./Flags/french_flag.png";
@@ -17,11 +17,23 @@ import backIcon from "../Utility/img/back.svg";
 
 export default function LanguageSelector() {
   const currentUser = getCurrentAuthUser();
+  const [lang, setLang] = useState('');
+
+  async function getLang() {
+    const user = await getUser(currentUser.email);
+    let language = user.lang;
+    console.log(user)
+    setLang(language);
+  };
 
   async function updateLanguage(language) {
     const user = await getUser(currentUser.email);
     updateLanguageReq(user.id, language);
   }
+
+  useEffect(() => {
+    getLang();
+  }, []);
 
   return (
     <>
@@ -35,29 +47,51 @@ export default function LanguageSelector() {
         <section className="flag">
           <img
             src={america}
-            alt="american flag"
-            onClick={() => updateLanguage("en")}
-            className="noSelect"
+            alt="en"
+            className={"en" === lang ? "selected-lang" : ""}
+            onClick={(e) => {
+              setLang(e.target.alt);
+              updateLanguage("en");
+            }}
           ></img>
           <img
             src={spain}
-            alt="spanish flag"
-            onClick={() => updateLanguage("es")}
+            alt="es"
+            className={"es" === lang ? "selected-lang" : ""}
+            onClick={(e) => {
+              setLang(e.target.alt);
+              updateLanguage("es");
+            }}
           ></img>
           <img
             src={france}
-            alt="french flag"
-            onClick={() => updateLanguage("fr")}
+            alt="fr"
+            className={"fr" === lang ? "selected-lang" : ""}
+
+            onClick={(e) => {
+              setLang(e.target.alt);
+              updateLanguage("fr");
+            }}
           ></img>
           <img
             src={germany}
-            alt="german flag"
-            onClick={() => updateLanguage("de")}
+            alt="de"
+            className={"de" === lang ? "selected-lang" : ""}
+
+            onClick={(e) => {
+              setLang(e.target.alt);
+              updateLanguage("de");
+            }}
           ></img>
           <img
             src={japan}
-            alt="japanese flag"
-            onClick={() => updateLanguage("ja")}
+            alt="ja"
+            className={"ja" === lang ? "selected-lang" : ""}
+
+            onClick={(e) => {
+              setLang(e.target.alt);  
+              updateLanguage("ja");
+            }}
           ></img>
         </section>
 

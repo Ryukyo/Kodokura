@@ -10,6 +10,9 @@ import {
 
 import Planet from "../Canvas3D/Planet";
 
+//img
+import notfound from "../Utility/img/cancel.svg";
+
 export default function Home(props) {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
@@ -96,15 +99,18 @@ export default function Home(props) {
 
       <section className="look-chat">
         {loading ? (
-          <div>
-            <Planet />
-            Searching for matches...
-            <div className="attention">
-              {" "}
-              This is an anonymous application. Please, do not share personal
-              information (addresses, phone numbers, birth date, age, bank
-              account details, or email addresses) with others.
+
+          <div className="match-area">
+            <Planet className="load-planet"/>
+            <div className="match-text">
+              <p className="searching-area">Searching for matches...</p>
+              <p>
+                This is an anonymus application.<br/>Please, do not share personal
+                information such as: <br/><br/>addresses, phone numbers, birth date, age, bank
+                account details, or email addresses
+              </p>
             </div>
+
           </div>
         ) : (
           <button onClick={queueUp}>
@@ -113,7 +119,13 @@ export default function Home(props) {
           </button>
         )}
       </section>
-      {err ? <p>{err}</p> : <div />}
+      {err ? 
+      <div className="err-msg">
+        <img src={notfound} alt="not found"/>
+        <p>{err}</p>
+      </div> 
+        : 
+      <div />}
     </div>
   );
 }

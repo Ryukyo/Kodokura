@@ -66,7 +66,8 @@ export default function AvatarM({ avatar }) {
       <div className="bg" />
 
       <Canvas shadowMap camera={{ position: [0, 0, 12], fov: 80 }}>
-        <ambientLight color={"lightblue"} />
+
+        <ambientLight intensity={0.1} color={"lightblue"}/>
         <pointLight intensity={0.8} position={[-10, 10, -10]} />
         {/* <spotLight
           castShadow

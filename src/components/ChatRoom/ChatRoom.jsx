@@ -13,12 +13,16 @@ import {
 //img
 import backIcon from "../Utility/img/back.svg";
 import sendIcon from "../Utility/img/paper-plane.svg";
+//3d object
+import AvatarM from "../Canvas3D/AvatarM";
 
 export default function ChatRoom(props) {
   const matchResult = props.location.state.detail;
   const roomId = matchResult.chatroom.id;
 
   const currentUserId = props.location.state.userId;
+
+  console.log('mylog: ', props.location.state);
 
   // console.log(props.location.state)
   let currentUser = matchResult.user1;
@@ -28,16 +32,24 @@ export default function ChatRoom(props) {
     otherUser = matchResult.user1;
   }
 
+  let currentUserAvatar = currentUser.avatar_url;
+  let otherUserAvatar = otherUser.avatar_url;
+  console.log('currentUser: ', currentUser);
+  console.log('otherUser: ', otherUser);
+
   const [chats, setChats] = useState([]);
   const [nickname, setNickname] = useState(currentUser.name);
+  // const [avatar, setAvatar] = useState(currentUser.avatar_url);
   const [roomname, setRoomname] = useState(roomId);
   const [newchat, setNewchat] = useState({
     roomname: roomId,
     nickname: currentUser.name,
+    // avatar: currentUser.avatar_url,
     message: "",
     date: "",
     type: "",
   });
+  // console.log('myavatar: ', avatar);
   const history = useHistory();
   const { room } = useParams();
 
@@ -70,6 +82,7 @@ export default function ChatRoom(props) {
   useEffect(() => {
     const fetchData = async () => {
       setNickname(currentUser.name);
+      // setAvatar(currentUser.avatar_url)
       await db
         .ref("chats")
         .orderByChild("roomname")
@@ -1123,6 +1136,8 @@ export default function ChatRoom(props) {
       name: otherUser.name,
       id: otherUser.id,
     });
+
+    exitChat();
   };
 
 
@@ -1139,6 +1154,7 @@ export default function ChatRoom(props) {
     <div className="chat-container">
       <nav className="chatnav">
         <img
+          className="img-nav"
           src={backIcon}
           alt="exit icon"
           onClick={() => {
@@ -1160,6 +1176,10 @@ export default function ChatRoom(props) {
           </Button>
         </div>
       </nav>
+      <div className="other-avatar">
+        <AvatarM avatar={otherUserAvatar} style={{width: 50}}/>
+      </div>
+
 
       <ScrollToBottom className="chat-content">
         {chats.map((item, idx) => (
@@ -1194,7 +1214,6 @@ export default function ChatRoom(props) {
       </ScrollToBottom>
 
       <form className="message-form" onSubmit={submitMessage}>
-        <p>{nickname}</p>
 
         <div className="form-group">
           <input
@@ -1211,7 +1230,12 @@ export default function ChatRoom(props) {
         <button variant="primary" type="submit">
           <img src={sendIcon} alt="send icon" />
         </button>
+
       </form>
+
+      <div className="current-avatar">
+        <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
+      </div>
     </div>
   );
 }
