@@ -37,7 +37,7 @@ export default function TvShowsCard() {
   }
 
   function renderCheckBox(...category) {
-    if (tvshows) {
+    if (tvshows && tvshows.tvshows) {
       return tvshows.tvshows.map((e, i) => {
         return (
           <div key={i}>

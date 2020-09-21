@@ -34,7 +34,7 @@ export default function FoodsCard() {
   }
 
   function renderCheckBox(...category) {
-    if (foods) {
+    if (foods && foods.foods) {
       return foods.foods.map((e, i) => {
         return (
           <div key={i}>
