@@ -17,14 +17,11 @@ import ChatRoom from "../ChatRoom/ChatRoom.jsx"
 // }
 
 function hiKodobot(messages, currentUserId, matchResult) {
-    console.log("match result", matchResult.user1.id)
-    console.log("user", currentUserId)
     if (messages.length > 0 && currentUserId === matchResult.user1.id) {
         const lastMessage = messages[messages.length - 1];
         const text = lastMessage.message;
         const lowercaseText = text.toLowerCase()
         if (lowercaseText.includes("hi kodobot")) {
-            console.log("hi kodobot second if")
             const answer = ["Hi humans", "Hello humans", "Kodobot here!"]
             const random = answerRandomizer(answer)
             const botReactionToName = ChatRoom.botMessage(answer[random]);

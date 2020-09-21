@@ -22,9 +22,6 @@ export default function ChatRoom(props) {
 
   const currentUserId = props.location.state.userId;
 
-  console.log('mylog: ', props.location.state);
-
-  // console.log(props.location.state)
   let currentUser = matchResult.user1;
   let otherUser = matchResult.user2;
   if (currentUser.id !== currentUserId) {
@@ -34,22 +31,17 @@ export default function ChatRoom(props) {
 
   let currentUserAvatar = currentUser.avatar_url;
   let otherUserAvatar = otherUser.avatar_url;
-  console.log('currentUser: ', currentUser);
-  console.log('otherUser: ', otherUser);
 
   const [chats, setChats] = useState([]);
   const [nickname, setNickname] = useState(currentUser.name);
-  // const [avatar, setAvatar] = useState(currentUser.avatar_url);
   const [roomname, setRoomname] = useState(roomId);
   const [newchat, setNewchat] = useState({
     roomname: roomId,
     nickname: currentUser.name,
-    // avatar: currentUser.avatar_url,
     message: "",
     date: "",
     type: "",
   });
-  // console.log('myavatar: ', avatar);
   const history = useHistory();
   const { room } = useParams();
 

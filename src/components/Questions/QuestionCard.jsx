@@ -5,10 +5,8 @@ import {
   getCurrentAuthUser,
   updateAnswers,
 } from "../../helpers/backend";
-
 // Components
 import Card from "./Card";
-// import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 export default function QuestionCard() {
   const [question, setQuestion] = useState(0);
