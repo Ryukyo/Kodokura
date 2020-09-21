@@ -94,34 +94,6 @@ export default function ChatRoom(props) {
               // also add message to messages array
               messages.push(welcomeMessage);
             }
-            // TODO only user1 sends bot message / not good, because user1 not loggedin or leave room, bot never response
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const from = lastMessage.nickname;
-            //   if (text.includes("kodobot") && from !== "KodoBot") {
-            //     const botReactionToName = botMessage("You've said my name human. I'm afraid I cannot answer your questions yet.I'm here just to be sure that you're not alone");
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
-
-            //encourage conversation
-            //check the last time stamp
-            //set time from last time stamp
-            //if the messages length < messages.length +1 
-            //send message
-
-            //WIP
-            // setTimeout(function () {
-            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
-            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
-            //     const botReactionToName = botMessage(answer);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }, 30000)
-
 
             //helper functions
             const answerRandomizer = (array) => {
@@ -1029,23 +1001,6 @@ export default function ChatRoom(props) {
                 messages.push(botReactionToName);
               }
             }
-
-            //media accounts
-
-
-            // // kodobot invoked
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const lowercaseText = text.toLowerCase()
-            //   if (lowercaseText.includes("kodobot")) {
-            //     const answer = ["You said my name human", "I'm not ready to answer that yet human", "That is my name"]
-            //     const random = answerRandomizer(answer)
-            //     const botReactionToName = botMessage(answer[random]);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
 
             // change status to show messages
             setChats(messages);
