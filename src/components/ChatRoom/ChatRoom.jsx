@@ -84,7 +84,7 @@ export default function ChatRoom(props) {
             setChats([]);
             // create message array from DB
             const messages = snapshotToArray(resp);
-            if (messages.length < 1) {
+            if (messages.length < 1 && currentUserId === matchResult.user1.id) {
               // create bot chat message
               const welcomeMessage = botMessage(
                 `Welcome ${currentUser.name} and ${matchResult.user2.name}! Feel free to ask me anything by mention my name and enjoy your chat!`
