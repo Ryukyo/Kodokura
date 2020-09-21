@@ -9,6 +9,7 @@ import {
   deleteChatQueue,
   addToBlockList,
 } from "../../helpers/backend";
+import Actions from "./kodobot";
 
 //img
 import backIcon from "../Utility/img/back.svg";
@@ -95,85 +96,13 @@ export default function ChatRoom(props) {
               messages.push(welcomeMessage);
             }
 
-            //helper functions
-            const answerRandomizer = (array) => {
-              let multiplier = array.length;
-              if (multiplier === 0) {
-                multiplier += 1;
-              }
-              let randomNum = Math.floor(Math.random() * multiplier);
-              return randomNum;
-            };
-
-            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-              const lastMessage = messages[messages.length - 1];
-              const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (lowercaseText.includes("hi kodobot") || lowercaseText.includes("hey kodobot") || lowercaseText.includes("hello kodobot")) {
-                const answer = [
-                  "Hi humans",
-                  "Hello humans",
-                  "Kodobot here!"];
-                const random = answerRandomizer(answer);
-                const botReactionToName = botMessage(answer[random]);
-                sendBotMessage(botReactionToName);
-                messages.push(botReactionToName);
-              }
-            }
-            //riddle1
-            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-              const lastMessage = messages[messages.length - 1];
-              const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("why did the chicken cross the road")
-              ) {
-                const answer = [
-                  "Good question! Let me guess...",
-                  "Human...figure out by yourself!",
-                  "Because he has 2 legs and he can!!.... I cannot because I'm a simply bot",
-                ];
-                const random = answerRandomizer(answer);
-                const botReactionToName = botMessage(answer[random]);
-                sendBotMessage(botReactionToName);
-                messages.push(botReactionToName);
-              }
-            }
-
-            //how are you kodobot
             if (messages.length > 0 && currentUserId === matchResult.user1.id) {
               const lastMessage = messages[messages.length - 1];
               const text = lastMessage.message;
 
-              const lowercaseText = text.toLowerCase()
-              if (lowercaseText.includes("how are you kodobot") || lowercaseText.includes("how are you doing kodobot") || lowercaseText.includes("are you okay kodobot") || lowercaseText.includes("how're you doing kodobot")) {
-                const answer = ["Fine thank you",
-                  "I'm programmed to be always fine",
-                  "I'm doing great, thank you!",
-                  "I'm fine, thank you! Hope you too!"]
-                const random = answerRandomizer(answer)
-
-                const botReactionToName = botMessage(answer[random]);
-                sendBotMessage(botReactionToName);
-                messages.push(botReactionToName);
-              }
-            }
-
-            //who are you
-            if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-              const lastMessage = messages[messages.length - 1];
-              const text = lastMessage.message;
-              const lowercaseText = text.toLowerCase();
-              if (
-                lowercaseText.includes("who are you kodobot") ||
-                lowercaseText.includes("what are you kodobot")
-              ) {
-                const answer = [
-                  "I'm Kodokura's official chatbot",
-                  "I'm a bot",
-                  "I'm your friendly neighbour Kodobot",
-                ];
-                const random = answerRandomizer(answer);
+              const bot = Actions();
+              const botAnswer = bot.answer(text);
+              if(botAnswer) {
                 const botReactionToName = botMessage(answer[random]);
                 sendBotMessage(botReactionToName);
                 messages.push(botReactionToName);
