@@ -34,7 +34,7 @@ export default function BooksCard() {
   }
 
   function renderCheckBox(...category) {
-    if (books) {
+    if (books && books.books) {
       return books.books.map((e, i) => {
         return (
           <div key={i}>
