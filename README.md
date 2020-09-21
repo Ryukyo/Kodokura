@@ -6,15 +6,43 @@ CC project
 
 ## About Kodokura
 
+A desire to belong is deeply rooted in people. That's because our ancestors depended on group cohesion to survive. 
+Unfortunately we are experiencing a loneliness epidemic that is growing up every year…
+Kodokura will help you to quickly connect with others 
+so you wont feel lonely anymore.
+
 ### The goal of the application
+
+After analysing the interests of the users the matching algorithm will find the perfect partner to chat with.
 
 ### Features
 
+* Matching algorithm based on your algorithm and the languages you speak.
+* A selection of 3D avatars to select from.
+* Kodobot, our chatbot that will join your chat in case you don
+
 ### Future Features
+
+* Report Users
+* Chat emojis and GIFs
+* Friend list
+* Mini games
+* Score system to unlock new avatars
+* Globalization
+
 
 ### Tech Stack
 
-## Gettins Stated
+* Javascript 
+* React 
+* React Router
+* React Three Fiber
+* Sass
+* Node JS
+* Express
+* Firebase
+
+## Getting Stated
 
 TODO
 
@@ -76,7 +104,11 @@ yarn deploy
 
 ## Authors
 
-TODO
+* Tomoyuki 
+* Florian
+* Vincent
+* Philippe
+* Eduardo 
 
 ## License
 
