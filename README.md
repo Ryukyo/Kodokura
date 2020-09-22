@@ -9,6 +9,7 @@
 Senior project during our time at Code Chrysalis
 
 You can find a video showcase of our application here: >insert YouTube URL when available<
+</br>
 You can find a live demo of our application here: https://kodokura-eb787.web.app/
 
 ## About Kodokura
