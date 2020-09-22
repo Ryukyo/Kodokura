@@ -1,0 +1,84 @@
+@import '../../style/colors';
+
+div.avatar-selector {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background: $primary-gradient;
+
+    header {
+        display: flex;
+        justify-content: center;
+        height: 10vh;
+        padding: 30px;
+
+        p {
+            color: #ffffff;
+        }
+    }
+
+    section.avatar {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        padding: 30px;
+
+        img {
+            height: 110px;
+            cursor: pointer;
+        }:active {
+            border-radius: 10px;
+            border: 1px dashed $secondary-red;
+        }:focus {
+            outline: none !important;
+        }
+
+        .selected-avatar {
+            background: radial-gradient(circle, $secondary-red 0%, rgba(148,187,233,0) 70%);
+            transition-property: all;
+            transition-duration: 0.7s;
+            transition-timing-function: ease-in;
+            transform: rotateY(180deg);
+        }:active {
+            transform: rotateY(0deg);
+
+        }
+        
+    }
+
+    nav.btn {
+        button {
+            height: 64px;
+            width: 240px;
+            border-radius: 30px;
+            margin: 5px 0;
+            font-size: 20px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background: $primary-gradient;
+            outline: none;
+    
+        }
+        button:hover {
+            background: #ffffff;
+            color: $primary-purple;
+            border: 1px solid $primary-purple;
+        }
+        button:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
+        }
+    }
+
+}
+
+@media screen and (max-width: 376px) {
+    div.avatar-selector {
+        section.avatar {
+            padding: 0 10px;
+        }
+    }
+}

@@ -1,0 +1,197 @@
+.burger-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+
+    i.close {
+        background: #ffffff;
+        width: 24px;
+        height: 1px;
+        margin: 4px;
+        border-radius: 4px;
+        transition: all ease 0.3s;
+    }
+    i.open {
+        background: $primary-blue;
+        width: 24px;
+        height: 1px;
+        margin: 4px;
+        border-radius: 4px;
+        transition: all ease 0.3s;
+    }
+
+    .open:nth-child(1) {
+        transform: rotate(45deg) translateY(12.5px);
+    }
+    .open:nth-child(2) {
+        opacity: 0;
+    }
+    .open:nth-child(3) {
+        transform: rotate(-45deg) translateY(-12.5px);
+    }
+
+    .close:nth-child(1) {
+        transform: rotate(0) translateY(0);
+    }
+    .close:nth-child(2) {
+        opacity: 1;
+    }
+    .close:nth-child(3) {
+        transform: rotate(0) translateY(0);
+    }
+    
+}
+
+aside.close-navbar {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: $primary-purple;
+    opacity: 0.95;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    font-size: 20px;
+    padding: 0 10vw;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 8px 2px 15px -5px rgba(0,0,0,0.5);
+    z-index: 2;
+
+
+    header {
+        margin-top: 100px;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+    }
+
+    h3 {
+        margin-top: 30px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        list-style: none;
+        margin-top: 60px;
+        li {
+            display: flex;
+            align-items: center;
+            height: 64px;
+        }
+        li.lang-area {
+            margin-top: 30px;
+            border-top: 1px solid $primary-grey;
+            img.lang-pic {
+                height: 30px;
+                margin-right: 20px;
+            }
+            p {
+                font-size: 16px;
+                color: $primary-grey;
+            }
+        }
+        .text-link {
+            display: flex;
+            align-items: center;
+            color: $primary-purple;
+            text-decoration: none;
+            img {
+                margin-right: 15px;
+            }
+        }
+    }
+
+    footer {
+        height: 10vh;
+        margin-top: 100px;
+    }
+}
+
+aside.open-navbar {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: $primary-purple;
+    opacity: 0.95;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 300px;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+    font-size: 20px;
+    padding: 0 10vw;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 8px 2px 15px -5px rgba(0,0,0,0.5);
+    z-index: 2;
+
+    
+
+    header {
+        margin-top: 100px;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+    }
+
+    h3 {
+        margin-top: 30px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        list-style: none;
+        margin-top: 60px;
+        li {
+            display: flex;
+            align-items: center;
+            height: 64px;
+            padding: 0 15px;
+
+
+        }
+        li.lang-area {
+            margin-top: 30px;
+            border-top: 1px solid $primary-grey;
+            img.lang-pic {
+                height: 25px;
+                margin-right: 10px;
+            }
+            p {
+                font-size: 16px;
+                color: $primary-grey;
+            }
+        }
+        .text-link {
+            display: flex;
+            align-items: center;
+            color: $primary-purple;
+            text-decoration: none;
+            img {
+                margin-right: 15px;
+            }
+        }:active {
+            color: #ffffff;
+            background: $primary-purple;
+            border: none;
+        }
+    }
+
+    footer {
+        height: 10vh;
+        margin-top: 100px;
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "indexes": [
+        {
+            "collectionGroup": "chatqueue",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "id",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "chatqueue",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "queueStatus",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "ASCENDING"
+                }
+            ]
+        }
+    ],
+    "fieldOverrides": []
+}

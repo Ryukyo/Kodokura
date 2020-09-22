@@ -1,30 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
+//img
+import backIcon from '../Utility/img/back.svg';
 
 export default function FriendList() {
-
     return (
-        <>
-        <h1>Friend List</h1>
-        <button>back</button>
-        <div className="friend-name">
-        <img></img>
-        <p>Eduardo</p><button>Remove</button>
+        <div className="friendlist">
+            <nav>
+                <Link to="/home">
+                <img src={backIcon} alt="back"/>
+                </Link>
+                <p>Friend List</p>
+            </nav>
+
+            <header>Users Friend</header>
+
+            <section className="friended-user">
+                <div>
+                    <p>Peter</p>
+                    <button>Unfriend</button>
+                </div>
+            </section>
+            <section className="friended-user">
+                <div>
+                    <p>Norman</p>
+                    <button>Unfriend</button>
+                </div>
+            </section>
+
         </div>
-        <div className="friend-name">
-        <img></img>
-        <p>Philippe</p><button>Remove</button>
-        </div>
-        <img></img>
-        <div className="friend-name">
-        <p>Florian</p><button>Remove</button>
-        </div>   
-        <div className="friend-name">
-        <p>Vincent</p><button>Remove</button>
-        </div>  
-        <div className="friend-name">
-        <p>Tomoyuki</p><button>Remove</button>
-        </div>    
-        </>
+        
     )
 }

@@ -1,0 +1,30 @@
+@import "./components/Main/Main";
+@import "./components/Home/Home";
+@import './components/CreateAccount/CreateAccount';
+@import './components/BurgerMenu/BurgerMenu';
+@import './components/LogIn/LogIn';
+@import './components/Profile/Profile';
+@import './components/AvatarSelector/AvatarSelector';
+@import './components/Questions/Questions';
+@import './components/Questions/CheckBoxCards/CheckBoxCards';
+@import './components/BlockList/BlockList';
+@import './components/FriendList/FriendList';
+@import './components/ChatRoom/ChatRoom';
+@import './components/About/About';
+@import './components/About/MemberCard';
+
+
+
+@import './style/colors';
+
+
+
+html {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "./App.scss";
 import {
   Route,
   BrowserRouter as Router,
@@ -17,6 +17,18 @@ import Profile from "./components/Profile/Profile";
 import { auth } from "./services/firebase";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Questions from "./components/Questions/Questions";
+import QuestionCard from './components/Questions/QuestionCard';
+import LanguageSelector from './components/Profile/Languages';
+import Loading from './components/Utility/Loading';
+import InterestsMenu from "./components/Questions/CheckBoxCards/00InterestsMenu";
+import MusicCard from "./components/Questions/CheckBoxCards/01MusicCard";
+import MoviesCard from "./components/Questions/CheckBoxCards/02MoviesCard";
+import TvShowsCard from "./components/Questions/CheckBoxCards/03TvShowsCard";
+import BooksCard from "./components/Questions/CheckBoxCards/04BooksCard";
+import GamesCard from "./components/Questions/CheckBoxCards/05GamesCard";
+import SportsCard from "./components/Questions/CheckBoxCards/06SportsCard";
+import FoodsCard from "./components/Questions/CheckBoxCards/07FoodsCard";
+import About from "./components/About/About";
 
 function App() {
   const [authentication, setAuth] = useState(false);
@@ -47,7 +59,7 @@ function App() {
           authenticated === false ? (
             <Component {...props} />
           ) : (
-              <Redirect to="/home" />
+              <Redirect to="/loading" />
             )
         }
       />
@@ -77,13 +89,7 @@ function App() {
           <PrivateRoute
             path="/chatroom"
             authenticated={authentication}
-            // needs to be "Home" for the real implementation
             component={ChatRoom}
-          />
-          <PrivateRoute
-            path="/home"
-            authenticated={authentication}
-            component={Home}
           />
           <PrivateRoute
             path="/questions"
@@ -91,14 +97,44 @@ function App() {
             component={Questions}
           />
           <PrivateRoute
+            path="/home"
+            authenticated={authentication}
+            component={Home}
+          />
+          <PrivateRoute
+            path="/questioncard"
+            authenticated={authentication}
+            component={QuestionCard}
+          />
+          <PrivateRoute
             path="/profile"
             authenticated={authentication}
             component={Profile}
           />
           <PrivateRoute
+            path="/friendlist"
+            authenticated={authentication}
+            component={FriendList}
+          />
+          <PrivateRoute
+            path="/blocklist"
+            authenticated={authentication}
+            component={BlockList}
+          />
+          <PrivateRoute
             path="/avatar"
             authenticated={authentication}
             component={AvatarSelector}
+          />
+          <PrivateRoute
+            path="/language"
+            authenticated={authentication}
+            component={LanguageSelector}
+          />
+          <PrivateRoute
+            path="/loading"
+            authenticated={authentication}
+            component={Loading}
           />
           <PublicRoute
             path="/signup"
@@ -110,7 +146,51 @@ function App() {
             authenticated={authentication}
             component={LogIn}
           />
-
+          <PublicRoute
+            path="/about"
+            authenticated={authentication}
+            component={About}
+          />
+          <PrivateRoute
+            path="/interestsmenu"
+            authenticated={authentication}
+            component={InterestsMenu}
+          />
+          <PrivateRoute
+            path="/musiccard"
+            authenticated={authentication}
+            component={MusicCard}
+          />
+          <PrivateRoute
+            path="/moviescard"
+            authenticated={authentication}
+            component={MoviesCard}
+          />
+          <PrivateRoute
+            path="/tvshowscard"
+            authenticated={authentication}
+            component={TvShowsCard}
+          />
+          <PrivateRoute
+            path="/bookscard"
+            authenticated={authentication}
+            component={BooksCard}
+          />
+          <PrivateRoute
+            path="/gamescard"
+            authenticated={authentication}
+            component={GamesCard}
+          />
+          <PrivateRoute
+            path="/sportscard"
+            authenticated={authentication}
+            component={SportsCard}
+          />
+          <PrivateRoute
+            path="/foodscard"
+            authenticated={authentication}
+            component={FoodsCard}
+          />
         </Switch>
       </Router>
     );
