@@ -16,19 +16,21 @@ function Planet({ url }) {
     const waterColor = "#3282b8";
 
     
-    const mesh = useRef();
+    const earthmesh = useRef();
+    const watermesh = useRef();
 
     useFrame(() => {
-        mesh.current.rotation.y += 0.01;
+        earthmesh.current.rotation.y += 0.01;
+        watermesh.current.rotation.y -= 0.005;
     })
 
 
   return (
       <group position={[0, 0, 0]} scale={[2.8, 2.8, 2.8]} >
-        <mesh  castShadow receiveShadow geometry={nodes.low_poly_earth_0.geometry} material={materials.water} >
+        <a.mesh ref={watermesh} castShadow receiveShadow geometry={nodes.low_poly_earth_0.geometry} material={materials.water} >
             <meshPhongMaterial castShadow receiveShadow attach="material" side={THREE.DoubleSide} color={waterColor} transparent roughness={0.1} metalness={0.1} />
-        </mesh>
-        <a.mesh ref={mesh} castShadow receiveShadow geometry={nodes.low_poly_earth_1.geometry} material={materials.earth}  >
+        </a.mesh>
+        <a.mesh ref={earthmesh} castShadow receiveShadow geometry={nodes.low_poly_earth_1.geometry} material={materials.earth}  >
             <meshPhongMaterial castShadow receiveShadow attach="material" side={THREE.DoubleSide} color={earthColor} transparent roughness={0.1} metalness={0.1} />
         </a.mesh>
     </group>
@@ -56,6 +58,8 @@ export default function App() {
             shadow-camera-bottom={-2}
             />
         <pointLight position={[-10, 0, -20]} intensity={0.8} />
+        <pointLight position={[0, -10, 0]} intensity={0.8} />
+        {/* <pointLight position={[-20, 0, 20]} intensity={0.8} /> */}
         <Suspense fallback={null}>
           <Planet url={planet3D} />
           

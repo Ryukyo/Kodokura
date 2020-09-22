@@ -30,7 +30,7 @@ function Model({avatar}) {
 
   return (
     
-    <group castShadow receiveShadow rotation={[0, 0, 0]} position={[0, -2, 0]} scale={[2, 2, 2]}>
+    <group castShadow receiveShadow rotation={[0, 0, 0]} position={[0, -1.9, 0]} scale={[2.8, 2.8, 2.8]}>
       <ambientLight />
 
         <mesh geometry={nodes[avatar].geometry} material={materials[model.materials]} >
@@ -43,7 +43,7 @@ function Model({avatar}) {
 }
 
 const Plane = () => (
-  <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.001, 0]} >
+  <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.901, 0]} >
     <circleGeometry  attach="geometry" args={[2.4, 200]} color="#000000"  />
     <meshToonMaterial  attach="material"  opacity={0.1} transparent={true} />
   </mesh>
@@ -103,6 +103,7 @@ export default function AvatarM({ avatar }) {
         </Suspense>
         
         <OrbitControls
+          autoRotate
           enablePan={false}
           enableZoom={false}
           enableDamping
