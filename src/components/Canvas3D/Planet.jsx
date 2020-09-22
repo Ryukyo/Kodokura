@@ -25,10 +25,6 @@ function Planet({ url }) {
     })
 
 
-  useFrame(() => {
-    mesh.current.rotation.y += 0.01;
-  });
-
   return (
 
       <group position={[0, 0, 0]} scale={[2.8, 2.8, 2.8]} >
