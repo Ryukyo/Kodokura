@@ -85,7 +85,7 @@ export default function SportsCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>
