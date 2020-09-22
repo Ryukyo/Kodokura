@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Ryukyo/Kodokura/blob/master/showcase.PNG?raw=true" alt="screenshot-collection" width="600" height="475"/>
+  <img src="https://github.com/Ryukyo/Kodokura/blob/master/showcase2.PNG?raw=true" alt="screenshot-collection"/>
 </div>
 
 # Kodokura
