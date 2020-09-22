@@ -35,6 +35,9 @@ div.profile {
         justify-content: center;
         margin: 2vh 0;
         
+        canvas {
+            outline: none
+        }
     }
 
     section.profile-nav {
