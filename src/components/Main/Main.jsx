@@ -34,7 +34,7 @@ export default function Main()  {
       </nav>
 
       <footer>
-        Copyright &#169; 2020 Summer Memories, Inc. All rights reserved{" "}
+        Copyright &#169; 2020 Summer Memories, Inc. All rights reserved. version 1.0.1{" "}
       </footer>
     </div>
   );

@@ -9,7 +9,9 @@ div.chat-container {
   width: 100vw;
   background: #ffffff;
   background-image: url(./img/bubbles.png);
-  background-clip: content-box;  
+  background-clip: content-box;
+  max-width: 1024px;
+  box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
   nav.chatnav {
     display: flex;
@@ -23,6 +25,7 @@ div.chat-container {
     background: $primary-gradient;
     // border-bottom: 1px solid $secondary-purple;
     z-index: 2;
+    max-width: 1024px;
 
     p {
       color: #ffffff;
@@ -61,7 +64,7 @@ div.chat-container {
 
   .chat-content {
     margin: 55px 0 120px 0;
-    overflow: scroll;
+    overflow: hidden;
     padding: 0 20px;
     z-index: 0;
     
@@ -154,11 +157,12 @@ div.chat-container {
     background: $primary-gradient;
     // border-top: 1px solid $secondary-purple;
     z-index: 2;
+    max-width: 1024px;
 
 
     input {
       height: 40px;
-      width: 60vw;
+      width: 80%;
       background: #ffffff;
       border-top-left-radius: 30px;
       border-bottom-left-radius: 30px;
@@ -212,10 +216,31 @@ div.chat-container {
 
 @media screen and (max-width: 376px) {
   div.chat-container {
+    
     .current-avatar {
       height: 80px;
       width: 70px;
       padding-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  div.chat-container {
+    form.message-form {
+      input {
+        width: 58%;
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 800px) {
+  div.chat-container {
+    form.message-form {
+      input {
+        width: 70%;
+      }
     }
   }
 }

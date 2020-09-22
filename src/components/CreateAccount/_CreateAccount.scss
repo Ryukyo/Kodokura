@@ -7,6 +7,8 @@ div.createAccount {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
     
 
     nav {
@@ -48,6 +50,7 @@ div.createAccount {
         input {
             height: 50px;
             width: 65%;
+            max-width: 1024px;
             background: none;
             border: none;
             border-bottom: 1px solid #ffffff;
@@ -132,7 +135,7 @@ div.createAccount {
         height: 80px;
         input {
             font-size: 16px;
-            width: 80px;
+            min-width: 80px;
             padding: 5px 10px;
         }:focus {
             border: 1px solid $primary-red;
