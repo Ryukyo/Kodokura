@@ -6,6 +6,8 @@ div.home {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
     .header-container {
         height: 15vh;

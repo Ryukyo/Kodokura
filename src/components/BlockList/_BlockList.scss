@@ -6,6 +6,8 @@ div.blocklist {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
     
 
     nav {
@@ -30,7 +32,7 @@ div.blocklist {
         flex-direction: column;
         align-items: center;
         max-height: 70vh;
-        overflow: scroll;
+        overflow: hidden;
 
         div.blocked-user-name {
             display: flex;
@@ -38,6 +40,7 @@ div.blocklist {
             align-items: center;
             width: 50vw;
             padding-bottom: 20px;
+            max-width: 400px;
 
             p {
                 font-size: 18px;

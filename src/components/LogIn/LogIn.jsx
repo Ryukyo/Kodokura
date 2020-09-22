@@ -69,7 +69,6 @@ export default function LogIn() {
             name="email"
             type="email"
             onChange={handleEmailChange}
-            /* value={this.state.email} */
           />
         </div>
         <div className="form-group">
@@ -81,7 +80,6 @@ export default function LogIn() {
             placeholder="Password"
             name="password"
             onChange={handlePasswordChange}
-            /* value={this.state.password} */
             type="password"
           />
         </div>

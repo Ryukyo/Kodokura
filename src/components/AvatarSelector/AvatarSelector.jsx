@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import bear from './img/BearCube.png';
-import bird from './img/BirdCube.png';
-import bunny from './img/BunnyCube.png';
-import cow from './img/CowCube.png';
-import dog from './img/DogCube.png';
-import duck from './img/DuckCube.png';
-import fox from './img/FoxCube.png';
-import goat from './img/GoatCube.png';
-import horse from './img/HorseCube.png';
-import lion from './img/LionCube.png';
+import bear from "./img/BearCube.png";
+import bird from "./img/BirdCube.png";
+import bunny from "./img/BunnyCube.png";
+import cow from "./img/CowCube.png";
+import dog from "./img/DogCube.png";
+import duck from "./img/DuckCube.png";
+import fox from "./img/FoxCube.png";
+import goat from "./img/GoatCube.png";
+import horse from "./img/HorseCube.png";
+import lion from "./img/LionCube.png";
 
 import {
   getUser,
@@ -17,29 +17,25 @@ import {
 } from "../../helpers/backend";
 
 import { Link } from "react-router-dom";
-import { update } from "lodash";
+
+//img
+import backIcon from "../Utility/img/back.svg";
 
 export default function Avatar() {
-
   const [avatar, setAvatar] = useState('');
-
-
   const currentUseruser = getCurrentAuthUser();
 
   async function getAvatar() {
     const user = await getUser(currentUseruser.email);
     let avatar = user.avatar_url;
     setAvatar(avatar);
-  };
+  }
 
   async function updateAvatar(avatar) {
     const userData = await getUser(currentUseruser.email);
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
-    // setAvatar(userData.avatar_url)
-    console.log(userData);
   };
-
 
 
   useEffect(() => {
@@ -49,9 +45,14 @@ export default function Avatar() {
   return (
     <>
       <div className="avatar-selector">
-        <header>
+
+        <nav className="avatar-nav">
+          <Link to="/profile">
+            <img src={backIcon} alt="back" />
+          </Link>
           <p>Choose your avatar</p>
-        </header>
+        </nav>
+
 
         <section className="avatar">
           <img
@@ -82,8 +83,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={cow} 
-            alt="Cow" 
+            src={cow}
+            alt="Cow"
             className={"Cow" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -91,8 +92,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={dog} 
-            alt="Dog" 
+            src={dog}
+            alt="Dog"
             className={"Dog" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -100,8 +101,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={duck} 
-            alt="Duck" 
+            src={duck}
+            alt="Duck"
             className={"Duck" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -109,8 +110,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={fox} 
-            alt="Fox" 
+            src={fox}
+            alt="Fox"
             className={"Fox" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -118,8 +119,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={goat} 
-            alt="Goat" 
+            src={goat}
+            alt="Goat"
             className={"Goat" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -127,8 +128,8 @@ export default function Avatar() {
             }}
           />
           <img
-            src={horse} 
-            alt="Horse" 
+            src={horse}
+            alt="Horse"
             className={"Horse" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
@@ -136,16 +137,14 @@ export default function Avatar() {
             }}
           />
           <img
-            src={lion} 
-            alt="Lion" 
+            src={lion}
+            alt="Lion"
             className={"Lion" === avatar ? "selected-avatar" : ""}
             onClick={(e) => {
               setAvatar(e.target.alt);
               updateAvatar(e.target.alt);
             }}
           />
-
-
         </section>
 
         <nav className="btn">
@@ -154,7 +153,7 @@ export default function Avatar() {
           </Link>
 
           <Link to="/profile">
-            <button>Go to profile</button>
+            <button>Save</button>
           </Link>
         </nav>
       </div>

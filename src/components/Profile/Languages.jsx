@@ -17,14 +17,13 @@ import backIcon from "../Utility/img/back.svg";
 
 export default function LanguageSelector() {
   const currentUser = getCurrentAuthUser();
-  const [lang, setLang] = useState('');
+  const [lang, setLang] = useState("");
 
   async function getLang() {
     const user = await getUser(currentUser.email);
     let language = user.lang;
-    console.log(user)
     setLang(language);
-  };
+  }
 
   async function updateLanguage(language) {
     const user = await getUser(currentUser.email);
@@ -67,7 +66,6 @@ export default function LanguageSelector() {
             src={france}
             alt="fr"
             className={"fr" === lang ? "selected-lang" : ""}
-
             onClick={(e) => {
               setLang(e.target.alt);
               updateLanguage("fr");
@@ -77,7 +75,6 @@ export default function LanguageSelector() {
             src={germany}
             alt="de"
             className={"de" === lang ? "selected-lang" : ""}
-
             onClick={(e) => {
               setLang(e.target.alt);
               updateLanguage("de");
@@ -87,9 +84,8 @@ export default function LanguageSelector() {
             src={japan}
             alt="ja"
             className={"ja" === lang ? "selected-lang" : ""}
-
             onClick={(e) => {
-              setLang(e.target.alt);  
+              setLang(e.target.alt);
               updateLanguage("ja");
             }}
           ></img>

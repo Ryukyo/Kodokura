@@ -7,11 +7,13 @@ div.avatar-selector {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
-    header {
+    nav.avatar-nav {
         display: flex;
-        justify-content: center;
-        height: 10vh;
+        justify-content: space-between;
+        height: 15vh;
         padding: 30px;
 
         p {
@@ -23,7 +25,7 @@ div.avatar-selector {
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
-        padding: 30px;
+        padding: 0px 10px;
 
         img {
             height: 110px;
@@ -53,7 +55,7 @@ div.avatar-selector {
             height: 64px;
             width: 240px;
             border-radius: 30px;
-            margin: 5px 0;
+            margin: 5px 0px;
             font-size: 20px;
             border: 1px solid #ffffff;
             color: #ffffff;
@@ -73,4 +75,24 @@ div.avatar-selector {
         }
     }
 
+}
+
+@media screen and (min-width: 480px) {
+    div.avatar-selector {
+        section.avatar {
+            margin: 20px 30px;
+            padding: 30px;
+            img {
+                height: 150px;
+                margin: 0 10px;
+            }
+        }
+
+        nav.btn {
+            margin-top: 30px;
+            button {
+                margin: 5px 15px;
+            }
+        }
+    }
 }

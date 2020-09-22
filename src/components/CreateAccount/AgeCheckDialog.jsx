@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 
-//Modal.setAppElement("#root");
-
 export default function AppCheckDialog(props) {
   const passAge = 18;
 
@@ -29,7 +27,6 @@ export default function AppCheckDialog(props) {
     setDate(event.target.value);
   }
 
-  // TODO
   function onSubmit() {
     // current date
     const today = new Date();

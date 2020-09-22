@@ -22,9 +22,6 @@ export default function ChatRoom(props) {
 
   const currentUserId = props.location.state.userId;
 
-  console.log('mylog: ', props.location.state);
-
-  // console.log(props.location.state)
   let currentUser = matchResult.user1;
   let otherUser = matchResult.user2;
   if (currentUser.id !== currentUserId) {
@@ -34,22 +31,17 @@ export default function ChatRoom(props) {
 
   let currentUserAvatar = currentUser.avatar_url;
   let otherUserAvatar = otherUser.avatar_url;
-  console.log('currentUser: ', currentUser);
-  console.log('otherUser: ', otherUser);
 
   const [chats, setChats] = useState([]);
   const [nickname, setNickname] = useState(currentUser.name);
-  // const [avatar, setAvatar] = useState(currentUser.avatar_url);
   const [roomname, setRoomname] = useState(roomId);
   const [newchat, setNewchat] = useState({
     roomname: roomId,
     nickname: currentUser.name,
-    // avatar: currentUser.avatar_url,
     message: "",
     date: "",
     type: "",
   });
-  // console.log('myavatar: ', avatar);
   const history = useHistory();
   const { room } = useParams();
 
@@ -82,7 +74,6 @@ export default function ChatRoom(props) {
   useEffect(() => {
     const fetchData = async () => {
       setNickname(currentUser.name);
-      // setAvatar(currentUser.avatar_url)
       await db
         .ref("chats")
         .orderByChild("roomname")
@@ -93,7 +84,7 @@ export default function ChatRoom(props) {
             setChats([]);
             // create message array from DB
             const messages = snapshotToArray(resp);
-            if (messages.length < 1) {
+            if (messages.length < 1 && currentUserId === matchResult.user1.id) {
               // create bot chat message
               const welcomeMessage = botMessage(
                 `Welcome ${currentUser.name} and ${matchResult.user2.name}! Feel free to ask me anything by mention my name and enjoy your chat!`
@@ -103,34 +94,6 @@ export default function ChatRoom(props) {
               // also add message to messages array
               messages.push(welcomeMessage);
             }
-            // TODO only user1 sends bot message / not good, because user1 not loggedin or leave room, bot never response
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const from = lastMessage.nickname;
-            //   if (text.includes("kodobot") && from !== "KodoBot") {
-            //     const botReactionToName = botMessage("You've said my name human. I'm afraid I cannot answer your questions yet.I'm here just to be sure that you're not alone");
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
-
-            //encourage conversation
-            //check the last time stamp
-            //set time from last time stamp
-            //if the messages length < messages.length +1 
-            //send message
-
-            //WIP
-            // setTimeout(function () {
-            //   if (messages.length == 1 && messages.length < 2 && currentUserId === matchResult.user1.id) {
-            //     const answer = "Both of you are sharing a lot of common interets! Why don't you try to figure out which ones?"
-            //     const botReactionToName = botMessage(answer);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }, 30000)
-
 
             //helper functions
             const answerRandomizer = (array) => {
@@ -1039,23 +1002,6 @@ export default function ChatRoom(props) {
               }
             }
 
-            //media accounts
-
-
-            // // kodobot invoked
-            // if (messages.length > 0 && currentUserId === matchResult.user1.id) {
-            //   const lastMessage = messages[messages.length - 1];
-            //   const text = lastMessage.message;
-            //   const lowercaseText = text.toLowerCase()
-            //   if (lowercaseText.includes("kodobot")) {
-            //     const answer = ["You said my name human", "I'm not ready to answer that yet human", "That is my name"]
-            //     const random = answerRandomizer(answer)
-            //     const botReactionToName = botMessage(answer[random]);
-            //     sendBotMessage(botReactionToName);
-            //     messages.push(botReactionToName);
-            //   }
-            // }
-
             // change status to show messages
             setChats(messages);
           },
@@ -1215,7 +1161,7 @@ export default function ChatRoom(props) {
 
       <form className="message-form" onSubmit={submitMessage}>
 
-        <div className="form-group">
+        {/* <div className="form-group"> */}
           <input
             type="text"
             name="message"
@@ -1225,19 +1171,17 @@ export default function ChatRoom(props) {
             onChange={onChange}
             autoComplete="off"
           />
-        </div>
+        {/* </div> */}
 
         <button variant="primary" type="submit">
           <img src={sendIcon} alt="send icon" />
         </button>
 
+        <div className="current-avatar">
+          <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
+        </div>
       </form>
 
-      <div className="current-avatar">
-        <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
-      </div>
     </div>
   );
 }
-
-// if users dont speak, get a common interest from both and recommend that topic to speak

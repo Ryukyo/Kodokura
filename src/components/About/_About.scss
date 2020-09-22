@@ -3,9 +3,12 @@
 div.about {
     display: flex;
     flex-direction: column;
+    align-items: center;
     align-content: space-between;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
     
 
     nav.navbar {
@@ -16,6 +19,7 @@ div.about {
         height: 10vh;
         padding: 30px;
         position: fixed;
+        max-width: 1024px;
 
         p {
             color: #ffffff;
@@ -28,6 +32,11 @@ div.about {
             font-size: 20px;
             color: #ffffff;
             margin-bottom: 20px;
+        }
+
+        section.member-section {
+            display: flex;
+            flex-direction: column;
         }
 
         section.about-section {
@@ -50,3 +59,5 @@ div.about {
     }
 
 }
+
+

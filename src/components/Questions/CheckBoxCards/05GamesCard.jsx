@@ -34,7 +34,7 @@ export default function GamesCard() {
   }
 
   function renderCheckBox(...category) {
-    if (games) {
+    if (games && games.games) {
       return games.games.map((e, i) => {
         return (
           <div key={i}>
@@ -85,7 +85,7 @@ export default function GamesCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

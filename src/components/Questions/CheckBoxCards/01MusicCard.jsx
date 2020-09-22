@@ -33,7 +33,7 @@ export default function MusicCard() {
   }
 
   function renderCheckBox(...category) {
-    if (music) {
+    if (music && music.music) {
       return music.music.map((e, i) => {
         return (
           <div key={i}>
@@ -84,7 +84,7 @@ export default function MusicCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

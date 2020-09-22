@@ -8,6 +8,8 @@ div.main {
     justify-content: center;
     background: #ffffff;
     height: 100vh;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
     footer {
         height: 5vh;
@@ -26,7 +28,7 @@ header.main-header {
     background-image: url(./img/wave-color-m.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    
+    max-width: 1024px;
 
 
     p {
@@ -147,20 +149,20 @@ nav.login-section {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1025px) {
+@media screen and (min-width: 1024px) {
     header.main-header {
         background-image: url(./img/wave-color-1024.svg);
     }
 }
 
-@media (min-width: 1026px) and (max-width: 1441px) {
-    header.main-header {
-        background-image: url(./img/wave-color-1024.svg);
-    }
-}
+// @media (min-width: 1026px) and (max-width: 1441px) {
+//     header.main-header {
+//         background-image: url(./img/wave-color-1024.svg);
+//     }
+// }
 
-@media (min-width: 1442px) and (max-width: 2561px) {
-    header.main-header {
-        background-image: url(./img/wave-color-2560.svg);
-    }
-}
+// @media (min-width: 1442px) and (max-width: 2561px) {
+//     header.main-header {
+//         background-image: url(./img/wave-color-2560.svg);
+//     }
+// }
