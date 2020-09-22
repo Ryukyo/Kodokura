@@ -1,6 +1,8 @@
-<div align="center">
+<!-- <div align="center">
   <img src="https://github.com/Ryukyo/Kodokura/blob/development/showcase2.PNG?raw=true" alt="screenshot-collection"/>
-</div>
+</div> -->
+
+![Homepage](/showcase2.PNG?raw=true "screenshot-collection")
 
 # Kodokura
 
