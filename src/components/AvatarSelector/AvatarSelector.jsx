@@ -19,6 +19,9 @@ import {
 import { Link } from "react-router-dom";
 import { update } from "lodash";
 
+//img
+import backIcon from "../Utility/img/back.svg";
+
 export default function Avatar() {
 
   const [avatar, setAvatar] = useState('');
@@ -49,9 +52,14 @@ export default function Avatar() {
   return (
     <>
       <div className="avatar-selector">
-        <header>
+
+        <nav className="avatar-nav">
+          <Link to="/profile">
+            <img src={backIcon} alt="back" />
+          </Link>
           <p>Choose your avatar</p>
-        </header>
+        </nav>
+
 
         <section className="avatar">
           <img
@@ -154,7 +162,7 @@ export default function Avatar() {
           </Link>
 
           <Link to="/profile">
-            <button>Go to profile</button>
+            <button>Save</button>
           </Link>
         </nav>
       </div>

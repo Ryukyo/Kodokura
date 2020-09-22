@@ -85,7 +85,7 @@ export default function GamesCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

@@ -1215,7 +1215,7 @@ export default function ChatRoom(props) {
 
       <form className="message-form" onSubmit={submitMessage}>
 
-        <div className="form-group">
+        {/* <div className="form-group"> */}
           <input
             type="text"
             name="message"
@@ -1225,17 +1225,17 @@ export default function ChatRoom(props) {
             onChange={onChange}
             autoComplete="off"
           />
-        </div>
+        {/* </div> */}
 
         <button variant="primary" type="submit">
           <img src={sendIcon} alt="send icon" />
         </button>
 
+        <div className="current-avatar">
+          <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
+        </div>
       </form>
 
-      <div className="current-avatar">
-        <AvatarM avatar={currentUserAvatar} style={{width: 50}}/>
-      </div>
     </div>
   );
 }
