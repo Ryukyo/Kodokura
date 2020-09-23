@@ -8,7 +8,7 @@ You can find a video showcase of our application here: >insert YouTube URL when 
 </br>
 You can find a live demo of our application here: https://kodokura-eb787.web.app/
 
-<img src="./img/chatroom.png" width="320px"/>
+<img src="./img/chatroom.png" width="280px"/>
 
 ## About Kodokura
 
