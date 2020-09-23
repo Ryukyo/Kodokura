@@ -8,7 +8,7 @@ You can find a video showcase of our application here: >insert YouTube URL when 
 </br>
 You can find a live demo of our application here: https://kodokura-eb787.web.app/
 
-<img src="./img/chatroom.png"/>
+<img src="./img/chatroom.png" width="640px/>
 
 ## About Kodokura
 
@@ -30,7 +30,7 @@ After analysing the interests of the users the matching algorithm will find the 
 
 App supports mobile and desktop layouts.
 
-<img src="./img/desktop.png" height="640px" />
+![desktop](./img/desktop.png "desktop")
 
 ### Future Features
 
