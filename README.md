@@ -1,9 +1,3 @@
-<!-- <div align="center">
-  <img src="https://github.com/Ryukyo/Kodokura/blob/development/showcase2.PNG?raw=true" alt="screenshot-collection"/>
-</div> -->
-
-![Homepage](/showcase2.PNG?raw=true "screenshot-collection")
-
 # Kodokura
 
 Senior project during our time at Code Chrysalis
@@ -27,6 +21,8 @@ After analysing the interests of the users the matching algorithm will find the 
 - Matching algorithm based on your interests and the languages you speak.
 - A selection of 3D avatars to choose from.
 - Kodobot, our chatbot that will join your chat and help engaging in conversation
+
+![features](./img/showcase2.PNG?raw=true "screenshot-collection")
 
 ### Future Features
 
