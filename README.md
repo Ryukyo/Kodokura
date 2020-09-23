@@ -1,10 +1,14 @@
 # Kodokura
 
+<img src="./img/logo.png" width="180px">
+
 Senior project during our time at Code Chrysalis
 
 You can find a video showcase of our application here: >insert YouTube URL when available<
 </br>
 You can find a live demo of our application here: https://kodokura-eb787.web.app/
+
+<img src="./img/chatroom.PNG"/>
 
 ## About Kodokura
 
@@ -23,6 +27,10 @@ After analysing the interests of the users the matching algorithm will find the 
 - Kodobot, our chatbot that will join your chat and help engaging in conversation
 
 ![features](./img/showcase2.PNG?raw=true "screenshot-collection")
+
+App supports mobile and desktop layouts.
+
+<img src="./img/desktop.PNG" />
 
 ### Future Features
 
