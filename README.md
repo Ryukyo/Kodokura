@@ -1,6 +1,6 @@
 # Kodokura
 
-<img src="./img/logo.png" width="180px">
+<img src="./img/logo.png" width="180px" />
 
 Senior project during our time at Code Chrysalis
 
