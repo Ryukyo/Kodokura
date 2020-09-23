@@ -1,16 +1,14 @@
-<!-- <div align="center">
-  <img src="https://github.com/Ryukyo/Kodokura/blob/development/showcase2.PNG?raw=true" alt="screenshot-collection"/>
-</div> -->
-
-![Homepage](/showcase2.PNG?raw=true "screenshot-collection")
-
 # Kodokura
+
+<img src="./img/logo.png" width="180px" />
 
 Senior project during our time at Code Chrysalis
 
 You can find a video showcase of our application here: >insert YouTube URL when available<
 </br>
 You can find a live demo of our application here: https://kodokura-eb787.web.app/
+
+<img src="./img/chatroom.png" width="280px"/>
 
 ## About Kodokura
 
@@ -27,6 +25,12 @@ After analysing the interests of the users the matching algorithm will find the 
 - Matching algorithm based on your interests and the languages you speak.
 - A selection of 3D avatars to choose from.
 - Kodobot, our chatbot that will join your chat and help engaging in conversation
+
+![features](./img/showcase2.PNG?raw=true "screenshot-collection")
+
+App supports mobile and desktop layouts.
+
+![desktop](./img/desktop.png "desktop")
 
 ### Future Features
 
