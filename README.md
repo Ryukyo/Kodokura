@@ -30,7 +30,7 @@ After analysing the interests of the users the matching algorithm will find the 
 
 App supports mobile and desktop layouts.
 
-<img src="./img/desktop.png" />
+<img src="./img/desktop.png" height="640px" />
 
 ### Future Features
 
