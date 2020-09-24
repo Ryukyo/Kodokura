@@ -6,7 +6,7 @@ Senior project during our time at Code Chrysalis
 
 You can find a video showcase of our application here: >insert YouTube URL when available<
 </br>
-You can find a live demo of our application here: https://kodokura-eb787.web.app/
+You can find a live demo of our application here: https://youtu.be/8WSQdy1MN-c
 
 <img src="./img/chatroom.png" width="280px"/>
 
