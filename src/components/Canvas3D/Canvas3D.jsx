@@ -12,7 +12,6 @@ export default function Canvas3D() {
         {[-6, -3, 0, 3, 6].map((x) =>
           [-6, -3, 0, 3, 6].map((z) => <Cubes position={[x, 0, z]} />)
         )}
-        {/* <OrbitControls autoRotate rotateSpeed={1} /> */}
      </Canvas>
     )
 }

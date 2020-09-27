@@ -85,7 +85,7 @@ export default function FoodsCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

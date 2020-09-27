@@ -7,6 +7,8 @@ div.interests {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
     nav {
         display: flex;
@@ -31,6 +33,7 @@ div.interests {
             height: 48px;
             width: 60vw;
             margin: 10px;
+            max-width: 350px;
             border-bottom: 1px solid #ffffff;
         }:active {
             background: $primary-purple;
@@ -74,6 +77,8 @@ div.interest-cards {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
     nav {
         display: flex;
@@ -95,11 +100,13 @@ div.interest-cards {
         flex-direction: column;
         align-items: center;
         margin: 20px;
+
         div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 50%;
+            max-width: 350px;
             font-size: 20px;
             color: #ffffff;
             margin: 10px 0;
@@ -158,5 +165,4 @@ div.interest-cards {
             margin-top: 10px;
         }
     }
-
 }

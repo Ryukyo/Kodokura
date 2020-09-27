@@ -88,7 +88,7 @@ export default function TvShowsCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

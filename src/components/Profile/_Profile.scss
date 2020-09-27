@@ -7,6 +7,8 @@ div.profile {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
     
 
     nav {
@@ -33,6 +35,9 @@ div.profile {
         justify-content: center;
         margin: 2vh 0;
         
+        canvas {
+            outline: none
+        }
     }
 
     section.profile-nav {
@@ -73,6 +78,8 @@ div.language {
     height: 100vh;
     width: 100vw;
     background: $primary-gradient;
+    max-width: 1024px;
+    box-shadow: 3px 2px 20px -1px rgba(61,58,74,1);
 
     nav {
         display: flex;
@@ -119,7 +126,8 @@ div.language {
         width: 240px;
         border-radius: 30px;
         margin: 5px 0;
-        font-size: 20px;
+        padding: 5px 30px;
+        font-size: 16px;
         border: 1px solid #ffffff;
         color: #ffffff;
         background: $primary-gradient;
@@ -143,6 +151,19 @@ div.language {
         section.profile-pic {
             margin: 0;
         }
+    }
+}
+
+@media screen and (min-width: 480px) {
+    div.language {
+
+        section.flag {
+            height: 30vh;
+        }
+        button {
+            margin: 5px 15px;
+        }   
+
     }
 }
 

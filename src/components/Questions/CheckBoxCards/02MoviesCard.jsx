@@ -85,7 +85,7 @@ export default function MoviesCard() {
               updateAnswers();
             }}
           >
-            Done!
+            Save
           </button>
         </Link>
       </div>

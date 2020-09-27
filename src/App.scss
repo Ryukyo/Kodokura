@@ -21,10 +21,40 @@
 
 html {
   height: 100vh;
-  width: 100vw;
+  width: 100vw;  // margin: auto;
   text-align: center;
   -webkit-tap-highlight-color:transparent;
-
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  
+  
+}
 
+#root::after {
+  content: "";
+  background-image: url(./components/AvatarSelector/img/LionCube.png);
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+@media screen and (min-width: 1024px) {
+  #root::after {
+    content: "";
+    background-image: url(./components/AvatarSelector/img/BirdCube.png);
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+}
