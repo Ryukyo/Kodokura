@@ -17,22 +17,20 @@ import {
 } from "../../helpers/backend";
 
 import { Link } from "react-router-dom";
-
-//img
 import backIcon from "../Utility/img/back.svg";
 
 export default function Avatar() {
   const [avatar, setAvatar] = useState('');
-  const currentUseruser = getCurrentAuthUser();
+  const currentUser = getCurrentAuthUser();
 
   async function getAvatar() {
-    const user = await getUser(currentUseruser.email);
+    const user = await getUser(currentUser.email);
     let avatar = user.avatar_url;
     setAvatar(avatar);
   }
 
   async function updateAvatar(avatar) {
-    const userData = await getUser(currentUseruser.email);
+    const userData = await getUser(currentUser.email);
     const userId = userData.id;
     updateAvatarReq(userId, avatar);
   };
