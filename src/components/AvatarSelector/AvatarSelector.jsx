@@ -25,15 +25,15 @@ export default function Avatar() {
 
   async function getAvatar() {
     const user = await getUser(currentUser.email);
-    let avatar = user.avatar_url;
-    setAvatar(avatar);
+    let avatarURL = user.avatar_url;
+    setAvatar(avatarURL);
   }
 
-  async function updateAvatar(avatar) {
+  async function updateAvatar(selectedAvatar) {
     const userData = await getUser(currentUser.email);
     const userId = userData.id;
-    updateAvatarReq(userId, avatar);
-  };
+    updateAvatarReq(userId, selectedAvatar);
+  }
 
 
   useEffect(() => {
